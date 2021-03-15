@@ -9,7 +9,6 @@ public class Oracle {
     public String getOracleID() { return this.oracleID; }
 
     public String getOracleStatus() { return this.oracleStatus; }
-
     public void setOracleStatus(String status) {
         this.oracleStatus = status;
     }
