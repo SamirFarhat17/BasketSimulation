@@ -1,4 +1,5 @@
 public class BufferOracle extends Oracle{
+
     // Attributes of buffer oracle
     public double bufferHoldings;
     public double totalDebtCeiling;
