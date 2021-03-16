@@ -1,12 +1,7 @@
 import json
 import os
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-import sklearn
-import plotly.graph_objects as go
-from plotly.colors import n_colors
 import main
 
 data_path = "../../Data/CPI-Data/"
@@ -39,7 +34,7 @@ plt.xlabel('Time')
 plt.ylabel('CPI')
 
 plt.show()
-# plt.savefig('MonthlyCPI.png')
+#plt.savefig('MonthlyCPI.png')
 
 index = 0
 json_cpi = {}

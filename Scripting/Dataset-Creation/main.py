@@ -12,4 +12,5 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
-    exec(compile(open('CpiToJson.py', "rb").read(), 'CpiToJson.py', 'exec'))
+    #exec(compile(open('CpiToJson.py', "rb").read(), 'CpiToJson.py', 'exec'))
+    exec(compile(open('CollateralToJson.py', "rb").read(), 'CollateralToJson.pyToJson.py', 'exec'))
