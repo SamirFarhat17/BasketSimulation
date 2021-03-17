@@ -38,17 +38,16 @@ plt.show()
 
 index = 0
 json_cpi = {}
-json_cpi['entries'] = []
 for year in range(1988, 2021):
+    json_cpi[year] = []
     for month in main.months:
-        json_cpi['entries'].append(
+        json_cpi[year].append(
             {
-                'Year': year,
                 'Month': month,
                 'Value': cpi_monthly[index]
             }
         )
         index = index + 1
 
-with open(os.getcwd() + '/' + data_path + "cpi_monthly.json", "w") as write_file:
+with open(os.getcwd() + '/' + data_path + "cpi_Monthly.json", "w") as write_file:
     json.dump(json_cpi, write_file)
