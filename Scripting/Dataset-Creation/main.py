@@ -4,12 +4,8 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    exec(compile(open('CpiToJson.py', "rb").read(), 'CpiToJson.py', 'exec'))
-    exec(compile(open('CollateralToJson.py', "rb").read(), 'CollateralToJson.py', 'exec'))
+    '''exec(compile(open('CpiToJson.py', "rb").read(), 'CpiToJson.py', 'exec'))
+    exec(compile(open('CollateralToJson.py', "rb").read(), 'CollateralToJson.py', 'exec'))'''
+    exec(compile(open('NormalDistributionCreation.py', "rb").read(), 'NormalDistributionCreation.py', 'exec'))

@@ -1,6 +1,6 @@
 
 public class Simulation {
-    public double basketVal = 100.000000;
+    public double basketVal;
     public int totalBasket;
     public int totalGovernance;
 
