@@ -1,12 +1,4 @@
 #!/bin/bash
-# Simple line count example, using bash
-#
-# Bash tutorial: http://linuxconfig.org/Bash_scripting_Tutorial#8-2-read-file-into-bash-array
-# My scripting link: http://www.macs.hw.ac.uk/~hwloidl/docs/index.html#scripting
-#
-# Usage: ./line_count.sh file
-# -----------------------------------------------------------------------------
-
 # Link filedescriptor 10 with stdin
 exec 10<&0
 # stdin replaced with a file supplied as a first argument
@@ -42,10 +34,6 @@ echo "Expected number of lines: `wc -l $in`"
 exec 0<&10 10<&-
 
 
-#!/bin/bash
-# Counting the number of lines in a list of files
-# for loop over arguments
-
 if [ $# -lt 1 ]
 then
   echo "Usage: $0 file ..."
@@ -65,11 +53,6 @@ do
 done
 
 echo "$n files in total, with $s lines in total"
-
-
-#!/bin/bash
-# Counting the number of lines in a list of files
-# function version
 
 count_lines () {
   local f=$1
@@ -103,12 +86,6 @@ get_files () {
 
 echo "$n files in total, with $s lines in total"
 
-#!/bin/bash
-# Counting the number of lines in a list of files
-# function version using return code
-# WRONG version: the return code is limited to 0-255
-#  so this script will run, but print wrong values for
-#  files with more than 255 lines
 
 count_lines () {
   local f=$1
@@ -139,11 +116,7 @@ done
 
 echo "$n files in total, with $s lines in total"
 
-#!/bin/bash
-# Counting the number of lines in a list of files
-# function version
 
-# function storing list of all files in variable files
 get_files () {
   files="`ls *.[ch]`"
 }
@@ -184,12 +157,6 @@ do
 done
 
 echo "$n files in total, with $s lines in total"
-
-#!/bin/bash
-# Counting the number of lines in a list of files
-# function version
-
-
 
 # function counting the number of lines in a file
 count_lines () {
@@ -234,13 +201,6 @@ echo "$n files in total, with $s lines in total"
 i=5
 echo "The $i-th file was ${file[$i]} with ${lines[$i]} lines"
 
-
-
-#!/bin/bash
-# Counting the number of lines in a list of files
-# for loop over arguments
-# count only those files I am owner of
-
 if [ $# -lt 1 ]
 then
   echo "Usage: $0 file ..."
@@ -266,23 +226,6 @@ done
 
 echo "$n files in total, with $s lines in total"
 
-#!/bin/bash
-############################################################################
-#
-# Usage: loc7.sh [options] file ...
-#
-# Count the number of lines in a given list of files.
-# Uses a for loop over all arguments.
-#
-# Options:
-#  -h     ... help message
-#  -d n ... consider only files modified within the last n days
-#  -w n ... consider only files modified within the last n weeks
-#
-# Limitations:
-#  . only one option should be given; a second one overrides
-#
-############################################################################
 
 help=0
 verb=0
