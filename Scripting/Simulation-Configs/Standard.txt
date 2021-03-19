@@ -1,7 +1,0 @@
-"CPI": 100
-"BasketPrice": 10.00000
-"User-base Size": 100000
-"User Generation Seed": Standard
-"Keeper generation Seed": 6
-"Collateral Generation Seed": 500
-"BSR Generation Seed": 4

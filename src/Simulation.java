@@ -12,6 +12,8 @@ public class Simulation {
             System.exit(0);
         }
 
-        System.out.println("Hello World");
+        for(String s : args) {
+            System.out.println(s);
+        }
     }
 }
