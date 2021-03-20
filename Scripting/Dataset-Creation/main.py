@@ -6,6 +6,6 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct',
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    '''exec(compile(open('CpiToJson.py', "rb").read(), 'CpiToJson.py', 'exec'))
-    exec(compile(open('CollateralToJson.py', "rb").read(), 'CollateralToJson.py', 'exec'))'''
+    #exec(compile(open('CpiToJson.py', "rb").read(), 'CpiToJson.py', 'exec'))
+    #exec(compile(open('CollateralToJson.py', "rb").read(), 'CollateralToJson.py', 'exec'))
     exec(compile(open('NormalDistributionCreation.py', "rb").read(), 'NormalDistributionCreation.py', 'exec'))
