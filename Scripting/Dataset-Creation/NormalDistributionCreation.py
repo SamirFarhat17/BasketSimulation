@@ -69,7 +69,7 @@ for user in user_basket:
         user_basket[index] = user_basket[index] * -1
     index = index + 1
 for user in user_basket:
-    user_names.append(''.join(choice(ascii_uppercase) for i in range(12)))
+    user_names.append(''.join(choice(ascii_uppercase) for i in range(15)))
 
 
 # Collateral exchange rates
@@ -118,14 +118,6 @@ user_btc = []
 user_usdt = []
 user_ltc = []
 
-print(exchange_usdt)
-print(exchange_ltc)
-print(exchange_btc)
-print(exchange_eth)
-print(exchange_xrp)
-print(exchange_usdt)
-print(exchange_usdt)
-
 for user in user_basket:
     user_xrp.append(generate_colat(exchange_xrp, collaterals_distribution))
     user_eth.append(generate_colat(exchange_eth, collaterals_distribution))
@@ -159,15 +151,77 @@ for user in user_basket:
 with open(os.getcwd() + data_path + "Users_Initial.json", "w") as write_file:
     json.dump(user_data, write_file)
 
+data_path = "/../../Data/Keeper-Data/"
+
 # Keepers
 total_user_basket = 0
 for user in user_basket:
     total_user_basket = total_user_basket + user
 keepers_holdings = total_user_basket * keeper_gen_seed/100
 
+keeper_data = {}
+keeper_data['Info'] = []
+keeper_data['Info'].append(
+    {
+        "Basket Holdings": keepers_holdings,
+        "W-BTC Holdings": 0,
+        "ETH Holdings": 0,
+        "P-LTC Holdings": 0,
+        "USDT Holdings": 0,
+        "LNK Holdings": 0,
+        "A-XRP Holdings": 0,
+    }
+)
+
+with open(os.getcwd() + data_path + "Keeper_Initial.json", "w") as write_file:
+    json.dump(keeper_data, write_file)
+
+data_path = "/../../Data/Vault-Data/"
 
 # Complete basket
 total_basket = total_user_basket + keepers_holdings
+placeholder = total_basket
+bskt_minted_distro = np.random.normal(user_gen_seed, user_gen_seed/5, 2000)
+minted_index = 0
+for minted in bskt_minted_distro:
+    if minted < 0:
+        bskt_minted_distro[minted_index] = 0
+    minted_index = minted_index + 1
 
-# BSR
-bsr = bsr_gen_seed
+vault_data = {}
+
+while placeholder > 0:
+    vault_id = ''.join(choice(ascii_uppercase) for i in range(16))
+    owner = user_names[random.randint(0, len(user_names)-1)]
+    bskt_minted = bskt_minted_distro[random.randint(0, bskt_minted_distro.size-1)]
+    placeholder = placeholder - bskt_minted
+    vault_colat_type = collaterals[random.randint(0, len(collaterals)-1)]
+    vault_colat_quant = bskt_minted*random.uniform(1.3, 1.6)
+    vault_data[vault_id] = []
+    vault_data[vault_id].append(
+        {
+            "owner": owner,
+            "Minted": bskt_minted,
+            "Colatteral Type": vault_colat_type,
+            "Collateral Amount": vault_colat_quant
+        }
+    )
+
+with open(os.getcwd() + data_path + "Vault_Initial.json", "w") as write_file:
+    json.dump(vault_data, write_file)
+
+
+# BSR and Total Basket
+data_path = "/../../Data/BSR-Data/"
+
+bsr_data = {}
+bsr_data['Info'] = []
+bsr_data['Info'].append(
+    {
+        "Value": total_basket,
+        "BSR": bsr_gen_seed
+    }
+)
+
+with open(os.getcwd() + data_path + "Governance_Initial.json", "w") as write_file:
+    json.dump(bsr_data, write_file)

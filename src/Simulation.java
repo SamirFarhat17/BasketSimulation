@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import oracles.*;
 
 public class Simulation {
     public double basketVal;
@@ -25,10 +26,21 @@ public class Simulation {
         double bsrSeed = Double.parseDouble(args[6]);
 
         double basketValue = cpiValue/10;
+        String date = "";
 
-        // Create text file and geojson file
+        // Create text file
         String textfile = "../Scripting/Simulation-Raw/"+ args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5] + ".txt";
         PrintWriter writer = new PrintWriter(textfile, "UTF-8");
+
+        writer.println("Initial Conditions");
+        writer.println("Date: " + date);
+        writer.println("Consumer Price Index: " + cpiValue);
+        writer.println("BSKT Value: " + basketValue);
+        writer.println("User Base Population: " + userBaseSize);
+
+
+
+
 
         while(days > 0) {
 
@@ -36,7 +48,7 @@ public class Simulation {
             days--;
         }
 
-        writer.println("test");
+        writer.println(args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5]);
 
         writer.close();
     }

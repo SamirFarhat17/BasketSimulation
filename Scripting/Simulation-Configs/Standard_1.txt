@@ -1,4 +1,4 @@
-"CPI":100.0
+"CPI":99.5
 "Days in Sim":1828
 "User-base Size":100000
 "User Generation Seed":2000

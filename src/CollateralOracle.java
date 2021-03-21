@@ -1,4 +1,8 @@
+
+
 public class CollateralOracle extends Oracle {
+
+    public String[] collateraltypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
 
     // Attributes of Collateral Oracles
     public String collateralType;

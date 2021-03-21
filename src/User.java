@@ -10,15 +10,19 @@ public class User {
     public HashMap<String, Double> collaterals;
     public double bsktHoldings;
     public HashMap<String,Double> feesOwed;
+    public double desiredBasket;
+    public HashMap<String, Double> colatWanted;
 
     // Constructor
     public User(String userID, ArrayList<Vault> vaults, HashMap<String,Double> collaterals,
-                double bsktHoldings, HashMap<String,Double> feesOwed) {
+                double bsktHoldings, HashMap<String,Double> feesOwed, double desiredBasket, HashMap<String,Double> colatWanted) {
         this.userID = userID;
         this.vaults = vaults;
         this.collaterals = collaterals;
         this.bsktHoldings = bsktHoldings;
         this.feesOwed = feesOwed;
+        this.desiredBasket = desiredBasket;
+        this.colatWanted = colatWanted;
     }
 
     // Getters and Setters
@@ -61,5 +65,11 @@ public class User {
         }
         return this.collaterals;
     }
+
+    public double getDesiredBasket() { return this.desiredBasket; }
+    public void setDesiredBasket(double desiredBasket) { this.desiredBasket = desiredBasket; }
+
+    public HashMap<String,Double> getColatWanted() { return this.colatWanted; }
+    public void setColatWanted(HashMap<String,Double> colatWanted) { this.colatWanted = colatWanted; }
 
 }
