@@ -1,7 +1,12 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+
 import oracles.*;
+import stakeholders.*;
+import json.*;
 
 public class Simulation {
     public double basketVal;
@@ -9,7 +14,9 @@ public class Simulation {
     public int totalGovernance;
     public int auctionCount = 0;
 
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void main(String[] args) throws IOException {
+
+        HashMap<String,Double> s = DataExtraction.getCpiDataFromJson();
 
         if(args.length != 7) {
             System.out.println("Incorrect or missing run.sh configurations");
@@ -26,6 +33,7 @@ public class Simulation {
         double bsrSeed = Double.parseDouble(args[6]);
 
         double basketValue = cpiValue/10;
+
         String date = "";
 
         // Create text file
@@ -36,7 +44,7 @@ public class Simulation {
         writer.println("Date: " + date);
         writer.println("Consumer Price Index: " + cpiValue);
         writer.println("BSKT Value: " + basketValue);
-        writer.println("User Base Population: " + userBaseSize);
+        writer.println("stakeholders.User Base Population: " + userBaseSize);
 
 
 

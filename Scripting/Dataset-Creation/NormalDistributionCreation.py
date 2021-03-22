@@ -83,13 +83,12 @@ for col in collaterals_distribution:
 with open(os.getcwd() + colat_data_path + 'oracle_A_XRP.json') as json_file:
     data = json.load(json_file)
     non_decimal = re.compile(r'[^\d.]+')
-    exchange_xrp = float(non_decimal.sub('',str(data[date])))
-    print(exchange_xrp)
+    exchange_xrp = float(non_decimal.sub('', str(data[date])))
 
 with open(os.getcwd() + colat_data_path + 'oracle_ETH.json') as json_file:
     data = json.load(json_file)
     non_decimal = re.compile(r'[^\d.]+')
-    exchange_eth = float(non_decimal.sub('',str(data[date])))
+    exchange_eth = float(non_decimal.sub('', str(data[date])))
 
 with open(os.getcwd() + colat_data_path + 'oracle_BTC.json') as json_file:
     data = json.load(json_file)
@@ -127,7 +126,7 @@ for user in user_basket:
     user_ltc.append(generate_colat(exchange_ltc, collaterals_distribution))
 
 
-# User data creation
+# stakeholders.User data creation
 data_path = "/../../Data/User-Data/"
 
 user_data = {}
@@ -143,7 +142,7 @@ for user in user_basket:
             "USDT Holdings": user_usdt[user_index],
             "LNK Holdings": user_link[user_index],
             "A-XRP Holdings": user_xrp[user_index],
-            "Vault Info": user_vault_creation(user, collaterals)
+            "stakeholders.Vault Info": user_vault_creation(user, collaterals)
         }
     )
     user_index = user_index + 1
@@ -212,7 +211,7 @@ with open(os.getcwd() + data_path + "Vault_Initial.json", "w") as write_file:
 
 
 # BSR and Total Basket
-data_path = "/../../Data/BSR-Data/"
+data_path = "/../../Data/Governance-Data/"
 
 bsr_data = {}
 bsr_data['Info'] = []

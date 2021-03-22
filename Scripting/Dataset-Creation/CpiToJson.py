@@ -52,7 +52,7 @@ for year in range(1988, 2021):
 with open(os.getcwd() + '/' + data_path + "cpi_Monthly.json", "w") as write_file:
     json.dump(json_cpi, write_file)
 
-alt_data_path = "/../../Data/Oracle-Data/"
+alt_data_path = "/../../Data/oracles.Oracle-Data/"
 
 gbp_data_path = os.path.join(os.getcwd() + alt_data_path + 'GBP-USD.csv')
 gbp = pd.read_csv(gbp_data_path)

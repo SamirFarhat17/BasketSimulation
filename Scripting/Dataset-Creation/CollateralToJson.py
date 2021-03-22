@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 
-data_path = "/../../Data/Oracle-Data/"
+data_path = "/../../Data/oracles.Oracle-Data/"
 
 gbp_data_path = os.path.join(os.getcwd() + data_path + 'GBP-USD.csv')
 gbp = pd.read_csv(gbp_data_path)
