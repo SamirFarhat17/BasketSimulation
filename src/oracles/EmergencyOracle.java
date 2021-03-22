@@ -1,5 +1,3 @@
-package oracles;
-
 public class EmergencyOracle extends Oracle {
     // Attributes
     public String healthStatus;

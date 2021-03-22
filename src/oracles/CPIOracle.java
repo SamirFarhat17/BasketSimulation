@@ -1,7 +1,3 @@
-package oracles;
-
-import java.util.HashMap;
-
 public class CPIOracle extends Oracle{
     // Attributes for Module
     String date;

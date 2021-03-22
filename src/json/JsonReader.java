@@ -18,18 +18,13 @@ public class JsonReader {
 
     public static JsonObject readJsonFromFile(String file) throws IOException {
         File initialFile = new File(file);
-        InputStream stream = new FileInputStream(initialFile);
 
-        try {
+        try (InputStream stream = new FileInputStream(initialFile)) {
             BufferedReader bfRead = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
             String jsonString = readAll(bfRead);
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(jsonString);
-            JsonObject obj = element.getAsJsonObject();
-            return obj;
-        }
-        finally {
-            stream.close();
+            return element.getAsJsonObject();
         }
 
     }

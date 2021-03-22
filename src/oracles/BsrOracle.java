@@ -1,5 +1,3 @@
-package oracles;
-
 public class BsrOracle extends Oracle {
 
     // Attributes

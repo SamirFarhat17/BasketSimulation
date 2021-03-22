@@ -1,6 +1,6 @@
 package json;
 
-import com.google.gson.*;
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Set;

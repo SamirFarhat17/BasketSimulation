@@ -41,8 +41,10 @@ for filename in *; do
 
   # shellcheck disable=SC2164
   cd ../../src
-  javac -cp "dependencies" Simulation.java
+
+  javac Simulation.java
   java Simulation "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
+
   # shellcheck disable=SC2164
   cd ../Scripting/Simulation-Configs
 

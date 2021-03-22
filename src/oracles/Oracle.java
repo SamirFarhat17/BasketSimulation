@@ -1,5 +1,3 @@
-package oracles;
-
 import java.lang.reflect.Constructor;
 
 public class Oracle {

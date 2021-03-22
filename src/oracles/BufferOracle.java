@@ -1,5 +1,3 @@
-package oracles;
-
 public class BufferOracle extends Oracle{
 
     // Attributes of buffer oracle
@@ -8,7 +6,7 @@ public class BufferOracle extends Oracle{
 
     // Constructors
     public BufferOracle(String oracleStatus, double bufferHoldings, double totalDebtCeiling) {
-        this.oracleID = "oracles.BufferOracle";
+        this.oracleID = "BufferOracle";
         this.oracleStatus = oracleStatus;
         this.bufferHoldings = bufferHoldings;
         this.totalDebtCeiling = totalDebtCeiling;
