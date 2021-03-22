@@ -1,15 +1,14 @@
 import json.DataExtraction;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-
+import java.util.Date;
+import java.util.Queue;
 
 public class Simulation {
-    public double basketVal;
-    public int totalBasket;
-    public int totalGovernance;
-    public int auctionCount = 0;
 
     public static void main(String[] args) throws IOException {
 
@@ -30,8 +29,11 @@ public class Simulation {
         double bsrSeed = Double.parseDouble(args[6]);
 
         double basketValue = cpiValue/10;
-
-        String date = "";
+        double basketTargetValue = basketValue;
+        String date = "2016-01-01";
+        int totalBasket;
+        int totalGovernance;
+        int auctionCount = 0;
 
         // Create text file
         String textfile = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"+ args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5] + ".txt";

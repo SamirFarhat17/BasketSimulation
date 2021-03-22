@@ -1,5 +1,5 @@
 Initial Conditions
-Date: 
+Date: 2016-01-01
 Consumer Price Index: 99.5
 BSKT Value: 9.95
 stakeholders.User Base Population: 120000

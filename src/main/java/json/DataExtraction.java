@@ -3,7 +3,11 @@ package json;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
+import com.opencsv.exceptions.CsvException;
 
 
 public class DataExtraction {
@@ -22,5 +26,13 @@ public class DataExtraction {
         }
 
         return cpiData;
+    }
+
+    public static ArrayList<String> makeDates() {
+        String dataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Oracle-Data/GBP-USD.csv";
+
+        ArrayList<String> dates = new ArrayList<String>();
+
+        return dates;
     }
 }
