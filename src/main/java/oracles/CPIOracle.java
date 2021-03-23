@@ -1,11 +1,15 @@
 package oracles;
 
 import json.DataExtraction;
+import json.JsonReader;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 public class CPIOracle extends Oracle {
+    public HashMap<String,Double> totalCPI = getCpiDataFromJson();
     // Attributes for Module
     String date;
     double cpi;
@@ -25,6 +29,24 @@ public class CPIOracle extends Oracle {
     public double getCpi() { return cpi; }
     public void setCpi(double cpi) {this.cpi = cpi; }
 
-    HashMap<String,Double> totalCPI = DataExtraction.getCpiDataFromJson();
+
+    // Methods
+    // CPI data date-by-date
+    public static HashMap<String, Double> getCpiDataFromJson() throws IOException {
+        HashMap<String, Double> cpiData = new HashMap<>();
+        String path = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/CPI-Data/cpi_Daily.json";
+
+        JSONObject fullJson = JsonReader.readJsonFromFile(path);
+
+        for(String key : fullJson.keySet()) {
+            // JSON operations
+            JSONArray result = fullJson.getJSONArray(key);
+            JSONObject value = result.getJSONObject(0);
+            double v = value.getDouble("Value");
+            cpiData.put(key, v);
+        }
+
+        return cpiData;
+    }
 
 }

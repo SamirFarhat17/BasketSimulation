@@ -1,8 +1,13 @@
 package oracles;
 
-public class CollateralOracle extends Oracle {
+import json.JsonReader;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-    public String[] collateraltypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
+import java.io.IOException;
+import java.util.HashMap;
+
+public class CollateralOracle extends Oracle {
 
     // Attributes of Collateral Oracles
     public String collateralType;
@@ -13,7 +18,7 @@ public class CollateralOracle extends Oracle {
 
     //  Constructor
     public CollateralOracle(String oracleID, String oracleStatus, String collateralType, double exchangeRate,
-                            double stabilityFee, double liquidationRatio, double debtCeiling) {
+                            double stabilityFee, double liquidationRatio, double debtCeiling) throws IOException {
         this.oracleID = oracleID;
         this.oracleStatus = oracleStatus;
         this.collateralType = collateralType;
@@ -42,5 +47,36 @@ public class CollateralOracle extends Oracle {
     public double getCollateralEquivalent(double minted) {
         return this.exchangeRate * minted;
     }
+
+    // Variables of Interest
+    public String[] collateraltypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
+    public HashMap<String,Double> fullExchangeXRP = getExchangeDataFromJson("A_XRP") ;
+    public HashMap<String,Double> fullExchangeETH = getExchangeDataFromJson("ETH") ;
+    public HashMap<String,Double> fullExchangeLINK = getExchangeDataFromJson("LNK") ;
+    public HashMap<String,Double> fullExchangeLTC = getExchangeDataFromJson("P_LTC") ;
+    public HashMap<String,Double> fullExchangeUSDT = getExchangeDataFromJson("USDT") ;
+    public HashMap<String,Double> fullExchangeBTC = getExchangeDataFromJson("BTC") ;
+    
+
+    // Methods
+    // Get exchange rate date-by-date
+    public static HashMap<String, Double> getExchangeDataFromJson(String dataset) throws IOException {
+        HashMap<String, Double> exchangeData = new HashMap<>();
+        String path = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Oracle-Data/oracle_" + dataset + ".json";
+
+        JSONObject fullJson = JsonReader.readJsonFromFile(path);
+
+        for(String key : fullJson.keySet()) {
+            // JSON operations
+            JSONArray result = fullJson.getJSONArray(key);
+            JSONObject value = result.getJSONObject(0);
+            double v = value.getDouble("Value");
+            System.out.println(key + ": " + v);
+            exchangeData.put(key, v);
+        }
+
+        return exchangeData;
+    }
+
 
 }

@@ -1,4 +1,5 @@
 import json.DataExtraction;
+import oracles.CollateralOracle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,16 +14,17 @@ public class Simulation {
 
     public static void main(String[] args) throws IOException {
 
-        ArrayList<String> dates = DataExtraction.makeDates();
-
         if(args.length != 7) {
             System.out.println("Incorrect or missing run.sh configurations");
             System.exit(0);
         }
 
+        // Dates
+        ArrayList<String> dates = DataExtraction.makeDates();
+
         // initialise arguments
         double cpiValue = Double.parseDouble(args[0]);
-        double days = Integer.parseInt(args[1]);
+        int days = Integer.parseInt(args[1]);
         int userBaseSize = Integer.parseInt(args[2]);
         int userSeed = Integer.parseInt(args[3]);
         int keeperSeed = Integer.parseInt(args[4]);
@@ -31,10 +33,14 @@ public class Simulation {
 
         double basketValue = cpiValue/10;
         double basketTargetValue = basketValue;
-        String date = "2016-01-01";
+        String date = dates.get(1828-days);
         int totalBasket;
         int totalGovernance;
         int auctionCount = 0;
+
+
+        // Initialize Oracles
+
 
         // Create text file
         String textfile = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"+ args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5] + ".txt";
@@ -44,7 +50,7 @@ public class Simulation {
         writer.println("Date: " + date);
         writer.println("Consumer Price Index: " + cpiValue);
         writer.println("BSKT Value: " + basketValue);
-        writer.println("stakeholders.User Base Population: " + userBaseSize);
+        writer.println("User Base Population: " + userBaseSize);
 
 
 
