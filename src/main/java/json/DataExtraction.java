@@ -24,9 +24,10 @@ public class DataExtraction {
         while ((nextLine = reader.readNext()) != null) {
             lineNumber++;
 
-            // nextLine[] is an array of values from the line
             dates.add(nextLine[0]);
         }
+
+        dates.remove(0);
 
         return dates;
     }

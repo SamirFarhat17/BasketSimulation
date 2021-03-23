@@ -1,5 +1,9 @@
 package stakeholders;
 
+import oracles.CollateralOracle;
+
+import java.util.HashMap;
+
 public class Governor {
 
     // Individual stakeholders.Governor Attributes
@@ -33,6 +37,10 @@ public class Governor {
     public String getVoteDecision() { return this.voteDecision; }
     public void setVoteDecision(String decision) { this.voteDecision = decision; }
 
+    // Variables
+
+
+    // Methods
 
 
 }

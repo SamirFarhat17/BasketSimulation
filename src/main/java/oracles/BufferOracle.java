@@ -7,8 +7,8 @@ public class BufferOracle extends Oracle {
     public double totalDebtCeiling;
 
     // Constructors
-    public BufferOracle(String oracleStatus, double bufferHoldings, double totalDebtCeiling) {
-        this.oracleID = "oracles.BufferOracle";
+    public BufferOracle(String bufferOracle, String oracleStatus, double bufferHoldings, double totalDebtCeiling) {
+        this.oracleID = bufferOracle;
         this.oracleStatus = oracleStatus;
         this.bufferHoldings = bufferHoldings;
         this.totalDebtCeiling = totalDebtCeiling;

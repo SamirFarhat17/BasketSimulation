@@ -43,8 +43,8 @@ for filename in *; do
   # shellcheck disable=SC2164
   cd ../../src/main/java
 
-  javac -cp /home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/json-20210307.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-beanutils-1.9.3.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-collections-3.2.2.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-lang3-3.6.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-logging-1.2.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-text-1.1.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/opencsv-4.1.jar:. Simulation.java
-  java -cp /home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/json-20210307.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-beanutils-1.9.3.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-collections-3.2.2.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-lang3-3.6.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-logging-1.2.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/commons-text-1.1.jar:/home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/opencsv-4.1.jar:. Simulation "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
+  javac -cp /home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/*:. Simulation.java
+  java -cp /home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/*:. Simulation "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
 
   # shellcheck disable=SC2164
   cd /home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Configs

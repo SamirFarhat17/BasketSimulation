@@ -50,13 +50,22 @@ public class CollateralOracle extends Oracle {
 
     // Variables of Interest
     public String[] collateraltypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
-    public HashMap<String,Double> fullExchangeXRP = getExchangeDataFromJson("A_XRP") ;
+    public static HashMap<String,Double> fullExchangeXRP;
+
+    static {
+        try {
+            fullExchangeXRP = getExchangeDataFromJson("A_XRP");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public HashMap<String,Double> fullExchangeETH = getExchangeDataFromJson("ETH") ;
     public HashMap<String,Double> fullExchangeLINK = getExchangeDataFromJson("LNK") ;
     public HashMap<String,Double> fullExchangeLTC = getExchangeDataFromJson("P_LTC") ;
     public HashMap<String,Double> fullExchangeUSDT = getExchangeDataFromJson("USDT") ;
     public HashMap<String,Double> fullExchangeBTC = getExchangeDataFromJson("BTC") ;
-    
+
 
     // Methods
     // Get exchange rate date-by-date
@@ -71,7 +80,6 @@ public class CollateralOracle extends Oracle {
             JSONArray result = fullJson.getJSONArray(key);
             JSONObject value = result.getJSONObject(0);
             double v = value.getDouble("Value");
-            System.out.println(key + ": " + v);
             exchangeData.put(key, v);
         }
 
