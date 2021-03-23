@@ -60,11 +60,55 @@ public class CollateralOracle extends Oracle {
         }
     }
 
-    public HashMap<String,Double> fullExchangeETH = getExchangeDataFromJson("ETH") ;
-    public HashMap<String,Double> fullExchangeLINK = getExchangeDataFromJson("LNK") ;
-    public HashMap<String,Double> fullExchangeLTC = getExchangeDataFromJson("P_LTC") ;
-    public HashMap<String,Double> fullExchangeUSDT = getExchangeDataFromJson("USDT") ;
-    public HashMap<String,Double> fullExchangeBTC = getExchangeDataFromJson("BTC") ;
+    public static HashMap<String,Double> fullExchangeETH;
+
+    static {
+        try {
+            fullExchangeETH = getExchangeDataFromJson("ETH");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static HashMap<String,Double> fullExchangeLINK;
+
+    static {
+        try {
+            fullExchangeLINK = getExchangeDataFromJson("LNK");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static HashMap<String,Double> fullExchangeLTC;
+
+    static {
+        try {
+            fullExchangeLTC = getExchangeDataFromJson("P_LTC");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static HashMap<String,Double> fullExchangeUSDT;
+
+    static {
+        try {
+            fullExchangeUSDT = getExchangeDataFromJson("USDT");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static HashMap<String,Double> fullExchangeBTC;
+
+    static {
+        try {
+            fullExchangeBTC = getExchangeDataFromJson("BTC");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     // Methods
