@@ -1,5 +1,6 @@
 import json.DataExtraction;
 import oracles.*;
+import stakeholders.Vault;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -35,7 +36,6 @@ public class Simulation {
         double basketTargetValue = basketValue;
         String date = dates.get(1828-days);
         double totalBasket = 285860313.95431495;
-        int totalGovernance;
         int auctionCount = 0;
 
 
@@ -44,13 +44,25 @@ public class Simulation {
         BsrOracle bsrOracle = new BsrOracle("BSROracle", "Active", bsrSeed);
         EmergencyOracle emergencyOracle = new EmergencyOracle("EmergencyOracle", "Active", "Healthy");
         BufferOracle bufferOracle = new BufferOracle("BufferOracle", "Active", totalBasket, totalBasket * 1.3);
-        // Collateral oracles
+        // Collateral Oracles
         CollateralOracle xrpOracle = new CollateralOracle("A-XRP-Oracle", "Active", "A-XRP", CollateralOracle.fullExchangeXRP.get(date), 3.5, 140.0, 0.0);
         CollateralOracle ethOracle = new CollateralOracle("ETH-Oracle", "Active", "ETH", CollateralOracle.fullExchangeETH.get(date), 5.5, 110.0, 0);
         CollateralOracle btcOracle = new CollateralOracle("W-BTC-Oracle", "Active", "W-BTC", CollateralOracle.fullExchangeBTC.get(date), 4.5, 130.0, 0.0);
         CollateralOracle linkOracle = new CollateralOracle("LINK-Oracle", "Active", "LINK", CollateralOracle.fullExchangeLINK.get(date), 5.5, 120.0, 0);
         CollateralOracle ltcOracle = new CollateralOracle("P-LTC-Oracle", "Active", "P-LTC", CollateralOracle.fullExchangeLTC.get(date), 2.0, 150.0, 0.0);
         CollateralOracle usdtOracle = new CollateralOracle("USDT-Oracle", "Active", "USDT", CollateralOracle.fullExchangeUSDT.get(date), 0.0, 165, 0);
+        // Vault Oracle
+        double vaultTotalBasket = 0.0;
+        double vaultTotalXRP = 0.0;
+        double vaultTotalBTC = 0.0;
+        double vaultTotalETH= 0.0;
+        double vaultTotalLINK = 0.0;
+        double vaultTotalLTC = 0.0;
+        double vaultTotalUSDT = 0.0;
+        for(Vault v : Vault.allActiveVaults) {
+            vaultTotalBasket += v.bsktMinted;
+        }
+
 
         // Create text file
         String textfile = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"+ args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5] + ".txt";
@@ -60,6 +72,7 @@ public class Simulation {
         writer.println("Date: " + date);
         writer.println("Consumer Price Index: " + cpiValue);
         writer.println("BSKT Value: " + basketValue);
+        writer.println("BSKT Target Peg: " + basketTargetValue);
         writer.println("Total Basket in Market" + totalBasket/basketValue);
         writer.println("User Base Population: " + userBaseSize);
         writer.println("-------------------------------------------------------------------------------------------------");

@@ -118,12 +118,12 @@ user_usdt = []
 user_ltc = []
 
 for user in user_basket:
-    user_xrp.append(generate_colat(exchange_xrp, collaterals_distribution))
-    user_eth.append(generate_colat(exchange_eth, collaterals_distribution))
-    user_link.append(generate_colat(exchange_link, collaterals_distribution))
-    user_btc.append(generate_colat(exchange_btc, collaterals_distribution))
-    user_usdt.append(generate_colat(exchange_usdt, collaterals_distribution))
-    user_ltc.append(generate_colat(exchange_ltc, collaterals_distribution))
+    user_xrp.append(generate_colat(1, collaterals_distribution))
+    user_eth.append(generate_colat(1, collaterals_distribution))
+    user_link.append(generate_colat(1, collaterals_distribution))
+    user_btc.append(generate_colat(1, collaterals_distribution))
+    user_usdt.append(generate_colat(1, collaterals_distribution))
+    user_ltc.append(generate_colat(1, collaterals_distribution))
 
 
 # stakeholders.User data creation

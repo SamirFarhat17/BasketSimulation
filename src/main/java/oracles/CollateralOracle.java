@@ -113,7 +113,7 @@ public class CollateralOracle extends Oracle {
 
     // Methods
     // Get exchange rate date-by-date
-    public static HashMap<String, Double> getExchangeDataFromJson(String dataset) throws IOException {
+    private static HashMap<String, Double> getExchangeDataFromJson(String dataset) throws IOException {
         HashMap<String, Double> exchangeData = new HashMap<>();
         String path = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Oracle-Data/oracle_" + dataset + ".json";
 

@@ -1,5 +1,9 @@
 package oracles;
 
+import stakeholders.Vault;
+
+import java.util.ArrayList;
+
 public class VaultManagerOracle {
     // Attributes of vault system
     public double mintedBasket;
@@ -9,6 +13,22 @@ public class VaultManagerOracle {
     public double lockedLINK;
     public double lockedLTC;
     public double lockedUSDT;
+    public ArrayList<Vault> activeVaults;
+    public ArrayList<Vault> auctionVaults;
+
+    // Constructor
+    public VaultManagerOracle(double mintedBasket, double lockedXRP, double lockedBTC, double lockedETH,
+                                          double lockedLINK, double lockedLTC, double lockedUSDT, ArrayList<Vault> activeVaults) {
+        this.mintedBasket = mintedBasket;
+        this.lockedXRP = lockedXRP;
+        this.lockedBTC = lockedBTC;
+        this.lockedETH = lockedETH;
+        this.lockedLINK = lockedLINK;
+        this.lockedLTC = lockedLTC;
+        this.lockedUSDT = lockedUSDT;
+        this.activeVaults = activeVaults;
+        this.auctionVaults = new ArrayList<Vault>();
+    }
 
     // Getters and Setters
     public double getMintedBasket() { return this.mintedBasket; }
@@ -32,11 +52,13 @@ public class VaultManagerOracle {
     public double getLockedUSDT() { return this.lockedUSDT; }
     public void setLockedUSDT(double locked) { this.lockedUSDT = locked; }
 
+    public ArrayList<Vault> getActiveVaults() { return this.activeVaults; }
 
-    // Variables
-    public double totalInitialBasket;
+    public ArrayList<Vault> getAuctionVaults() { return this.auctionVaults; }
 
-    // Methods
+    public void addVault(ArrayList<Vault> vaults, Vault vault) { vaults.remove(vault); }
+    public void removeAVault(ArrayList<Vault> vaults, Vault vault) { vaults.remove(vault); }
+
 
 
 }

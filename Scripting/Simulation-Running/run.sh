@@ -38,7 +38,7 @@ for filename in *; do
 
   done < "$filename"
 
-  #python3 /home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Dataset-Creation/NormalDistributionCreation.py "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
+  python3 /home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Dataset-Creation/NormalDistributionCreation.py "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
 
   # shellcheck disable=SC2164
   cd ../../src/main/java
