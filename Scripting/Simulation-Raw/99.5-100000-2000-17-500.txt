@@ -2,6 +2,7 @@ Initial Conditions
 Date: 2016-01-01
 Consumer Price Index: 99.5
 BSKT Value: 9.95
+BSKT Target Peg: 9.95
 Total Basket in Market2.8729679794403516E7
 User Base Population: 100000
 -------------------------------------------------------------------------------------------------

@@ -83,7 +83,7 @@ public class Vault {
             JSONArray result = fullJson.getJSONArray(key);
             JSONObject value = result.getJSONObject(0);
             vaultID = key;
-            ownerID = value.getString("owner");
+            ownerID = value.getString("Owner");
             minted = value.getDouble("Minted");
             colatType = value.getString("Collateral Type");
             colatAmount = value.getDouble("Collateral Amount");

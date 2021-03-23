@@ -52,7 +52,15 @@ public class Simulation {
         CollateralOracle ltcOracle = new CollateralOracle("P-LTC-Oracle", "Active", "P-LTC", CollateralOracle.fullExchangeLTC.get(date), 2.0, 150.0, 0.0);
         CollateralOracle usdtOracle = new CollateralOracle("USDT-Oracle", "Active", "USDT", CollateralOracle.fullExchangeUSDT.get(date), 0.0, 165, 0);
         // Vault Oracle
+        ArrayList<Vault> vaults = new ArrayList<Vault>();
+        VaultManagerOracle vaultManagerOracle = new VaultManagerOracle("VaultManagerOracle", "Active", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, vaults);
         double vaultTotalBasket = 0.0;
+        String vaultID;
+        String ownerID;
+        boolean status;
+        double minted;
+        String colatType;
+        double colatAmount;
         double vaultTotalXRP = 0.0;
         double vaultTotalBTC = 0.0;
         double vaultTotalETH= 0.0;
@@ -61,8 +69,25 @@ public class Simulation {
         double vaultTotalUSDT = 0.0;
         for(Vault v : Vault.allActiveVaults) {
             vaultTotalBasket += v.bsktMinted;
+            colatType = v.collateralType;
+            colatAmount = v.collateralAmount;
+            if(colatType.equals("A-XRP")) vaultTotalXRP += v.collateralAmount;
+            if(colatType.equals("W-BTC")) vaultTotalBTC += v.collateralAmount;
+            if(colatType.equals("ETH")) vaultTotalETH += v.collateralAmount;
+            if(colatType.equals("LINK")) vaultTotalLINK += v.collateralAmount;
+            if(colatType.equals("P-LTC")) vaultTotalLTC += v.collateralAmount;
+            if(colatType.equals("USDT")) vaultTotalUSDT += v.collateralAmount;
+            vaultManagerOracle.addActiveVault(v);
         }
+        vaultManagerOracle.setMintedBasket(vaultTotalBasket);
+        vaultManagerOracle.setLockedXRP(vaultTotalXRP);
+        vaultManagerOracle.setLockedBTC(vaultTotalBTC);
+        vaultManagerOracle.setLockedETH(vaultTotalETH);
+        vaultManagerOracle.setLockedLINK(vaultTotalLINK);
+        vaultManagerOracle.setLockedLTC(vaultTotalLTC);
+        vaultManagerOracle.setLockedUSDT(vaultTotalUSDT);
 
+        System.out.println(vaultManagerOracle.getMintedBasket() + " vs " + totalBasket);
 
         // Create text file
         String textfile = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"+ args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5] + ".txt";

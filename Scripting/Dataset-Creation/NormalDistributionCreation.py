@@ -140,7 +140,7 @@ for user in user_basket:
             "ETH Holdings": user_eth[user_index],
             "P-LTC Holdings": user_ltc[user_index],
             "USDT Holdings": user_usdt[user_index],
-            "LNK Holdings": user_link[user_index],
+            "LINK Holdings": user_link[user_index],
             "A-XRP Holdings": user_xrp[user_index],
             "stakeholders.Vault Info": user_vault_creation(user, collaterals)
         }
@@ -199,9 +199,9 @@ while placeholder > 0:
     vault_data[vault_id] = []
     vault_data[vault_id].append(
         {
-            "owner": owner,
+            "Owner": owner,
             "Minted": bskt_minted,
-            "Colatteral Type": vault_colat_type,
+            "Collateral Type": vault_colat_type,
             "Collateral Amount": vault_colat_quant
         }
     )

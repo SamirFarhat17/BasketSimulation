@@ -4,7 +4,7 @@ import stakeholders.Vault;
 
 import java.util.ArrayList;
 
-public class VaultManagerOracle {
+public class VaultManagerOracle extends Oracle {
     // Attributes of vault system
     public double mintedBasket;
     public double lockedXRP;
@@ -17,8 +17,10 @@ public class VaultManagerOracle {
     public ArrayList<Vault> auctionVaults;
 
     // Constructor
-    public VaultManagerOracle(double mintedBasket, double lockedXRP, double lockedBTC, double lockedETH,
-                                          double lockedLINK, double lockedLTC, double lockedUSDT, ArrayList<Vault> activeVaults) {
+    public VaultManagerOracle(String oracleID, String oracleStatus, double mintedBasket, double lockedXRP, double lockedBTC,
+                              double lockedETH, double lockedLINK, double lockedLTC, double lockedUSDT, ArrayList<Vault> activeVaults) {
+        this.oracleID = oracleID;
+        this.oracleStatus = oracleStatus;
         this.mintedBasket = mintedBasket;
         this.lockedXRP = lockedXRP;
         this.lockedBTC = lockedBTC;
@@ -56,9 +58,10 @@ public class VaultManagerOracle {
 
     public ArrayList<Vault> getAuctionVaults() { return this.auctionVaults; }
 
-    public void addVault(ArrayList<Vault> vaults, Vault vault) { vaults.remove(vault); }
-    public void removeAVault(ArrayList<Vault> vaults, Vault vault) { vaults.remove(vault); }
+    public void addAuctionVault(Vault vault) { this.auctionVaults.add(vault); }
+    public void removeAuctionVault(Vault vault) { this.auctionVaults.remove(vault); }
 
-
+    public void addActiveVault(Vault vault) { this.activeVaults.add(vault); }
+    public void removeActiveVault(Vault vault) { this.activeVaults.remove(vault); }
 
 }
