@@ -1,5 +1,6 @@
 import json.DataExtraction;
 import oracles.*;
+import stakeholders.Keeper;
 import stakeholders.User;
 import stakeholders.Vault;
 
@@ -45,16 +46,6 @@ public class Simulation {
         CPIOracle cpiOracle = new CPIOracle("CPIOracle", "Active", date, cpiValue);
         BsrOracle bsrOracle = new BsrOracle("BSROracle", "Active", bsrSeed);
         EmergencyOracle emergencyOracle = new EmergencyOracle("EmergencyOracle", "Active", "Healthy");
-        BufferOracle bufferOracle = new BufferOracle("BufferOracle", "Active", totalBasket, totalBasket * 1.3);
-
-
-        // Collateral Oracles
-        CollateralOracle xrpOracle = new CollateralOracle("A-XRP-Oracle", "Active", "A-XRP", CollateralOracle.fullExchangeXRP.get(date), 3.5, 140.0, 0.0);
-        CollateralOracle ethOracle = new CollateralOracle("ETH-Oracle", "Active", "ETH", CollateralOracle.fullExchangeETH.get(date), 5.5, 110.0, 0);
-        CollateralOracle btcOracle = new CollateralOracle("W-BTC-Oracle", "Active", "W-BTC", CollateralOracle.fullExchangeBTC.get(date), 4.5, 130.0, 0.0);
-        CollateralOracle linkOracle = new CollateralOracle("LINK-Oracle", "Active", "LINK", CollateralOracle.fullExchangeLINK.get(date), 5.5, 120.0, 0);
-        CollateralOracle ltcOracle = new CollateralOracle("P-LTC-Oracle", "Active", "P-LTC", CollateralOracle.fullExchangeLTC.get(date), 2.0, 150.0, 0.0);
-        CollateralOracle usdtOracle = new CollateralOracle("USDT-Oracle", "Active", "USDT", CollateralOracle.fullExchangeUSDT.get(date), 0.0, 165, 0);
 
 
         // Vault Oracle
@@ -87,6 +78,17 @@ public class Simulation {
         vaultManagerOracle.setLockedLTC(vaultTotalLTC);
         vaultManagerOracle.setLockedUSDT(vaultTotalUSDT);
 
+        // Collateral Oracles
+        CollateralOracle xrpOracle = new CollateralOracle("A-XRP-Oracle", "Active", "A-XRP", CollateralOracle.fullExchangeXRP.get(date), 3.5, 140.0, 0.0);
+        CollateralOracle ethOracle = new CollateralOracle("ETH-Oracle", "Active", "ETH", CollateralOracle.fullExchangeETH.get(date), 5.5, 110.0, 0);
+        CollateralOracle btcOracle = new CollateralOracle("W-BTC-Oracle", "Active", "W-BTC", CollateralOracle.fullExchangeBTC.get(date), 4.5, 130.0, 0.0);
+        CollateralOracle linkOracle = new CollateralOracle("LINK-Oracle", "Active", "LINK", CollateralOracle.fullExchangeLINK.get(date), 5.5, 120.0, 0);
+        CollateralOracle ltcOracle = new CollateralOracle("P-LTC-Oracle", "Active", "P-LTC", CollateralOracle.fullExchangeLTC.get(date), 2.0, 150.0, 0.0);
+        CollateralOracle usdtOracle = new CollateralOracle("USDT-Oracle", "Active", "USDT", CollateralOracle.fullExchangeUSDT.get(date), 0.0, 165, 0);
+
+        // Keeper Initial
+        Keeper keeper = new Keeper("Keeper", Keeper.initialKeeper, keeperSeed);
+
         // Users Initial
         ArrayList<User> initialUsers = User.userList;
         double userTotalBasket = 0.0;
@@ -94,35 +96,44 @@ public class Simulation {
             userTotalBasket += user.getBsktHoldings();
         }
 
-        System.out.println(vaultManagerOracle.getMintedBasket() + " vs " + userTotalBasket);
+        System.out.println(vaultManagerOracle.getMintedBasket() + " vs " + (userTotalBasket + keeper.getKeeperBskt()));
+
+        // Buffer Oracle
+        BufferOracle bufferOracle = new BufferOracle("BufferOracle", "Active", vaultManagerOracle.getMintedBasket()-userTotalBasket+keeper.getKeeperBskt(), 0.0);
 
         // Create text file
         String textfile = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"+ args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5] + ".txt";
         PrintWriter writer = new PrintWriter(textfile, "UTF-8");
 
         writer.println("Initial Conditions");
+        writer.println("-------------------------------------------------------------------------------------------------");
         writer.println("Date: " + date);
         writer.println("Consumer Price Index: " + cpiValue);
         writer.println("BSKT Value: " + basketValue);
         writer.println("BSKT Target Peg: " + basketTargetValue);
         writer.println("Total Basket in Market" + totalBasket/basketValue);
         writer.println("User Base Population: " + userBaseSize);
+        writer.println("User Base Basket Holdings: " + userTotalBasket);
+        writer.println("Keeper Total Basket: " + keeper.getKeeperBskt());
         writer.println("-------------------------------------------------------------------------------------------------");
-        writer.println("Collateral holdings in vaults:");
-        writer.println("A-XRP: ");
-        writer.println("W-BTC: ");
-        writer.println("ETH: ");
-        writer.println("LINK: ");
-        writer.println("P-LTC: ");
-        writer.println("USDT: ");
+        writer.println("Number of Vaults: " + vaultManagerOracle.getActiveVaults().size());
+        writer.println("Collateral holdings in vaults along with exchange rates, stability fees and liquidation ratios:");
+        writer.println("A-XRP: " + vaultTotalXRP + " Exchange Rate: " + xrpOracle.getExchangeRate() + " Stability Fee: " + xrpOracle.getStabilityFee() + " Liquidation Ratio " + xrpOracle.getLiquidationRatio() + "%");
+        writer.println("W-BTC: " + vaultTotalBTC + " Exchange Rate: " + btcOracle.getExchangeRate() + " Stability Fee: " + btcOracle.getStabilityFee() + " Liquidation Ratio " + btcOracle.getLiquidationRatio() + "%");
+        writer.println("ETH: " + vaultTotalETH + " Exchange Rate: " + ethOracle.getExchangeRate() + " Stability Fee: " + ethOracle.getStabilityFee() + " Liquidation Ratio " + ethOracle.getLiquidationRatio() + "%");
+        writer.println("LINK: " + vaultTotalLINK + " Exchange Rate: " + linkOracle.getExchangeRate() + " Stability Fee: " + linkOracle.getStabilityFee() + " Liquidation Ratio " + linkOracle.getLiquidationRatio() + "%");
+        writer.println("P-LTC: " + vaultTotalLTC + " Exchange Rate: " + ltcOracle.getExchangeRate() + " Stability Fee: " + ltcOracle.getStabilityFee() + " Liquidation Ratio " + ltcOracle.getLiquidationRatio() + "%");
+        writer.println("USDT: " + vaultTotalUSDT + " Exchange Rate: " + usdtOracle.getExchangeRate() + " Stability Fee: " + usdtOracle.getStabilityFee() + " Liquidation Ratio " + usdtOracle.getLiquidationRatio() + "%");
         writer.println("--------------------------------------------------------------------------------------------------");
 
 
 
-
-
         while(days > 0) {
-
+            date = dates.get(1828-days);
+            writer.println("Emergeny Oracle Status Report: " + emergencyOracle.getHealthStatus());
+            writer.println("Date: " + date);
+            writer.println("Oracles Status: ");
+            writer.println();
 
             days--;
         }

@@ -41,6 +41,16 @@ public class Governor {
 
 
     // Methods
+    public static void analyzeSituation() {
 
+    }
+
+    public static void changeBSR() {
+
+    }
+
+    public static void changeCollateralStats() {
+        
+    }
 
 }

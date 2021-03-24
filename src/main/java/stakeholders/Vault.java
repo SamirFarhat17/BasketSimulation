@@ -98,4 +98,8 @@ public class Vault {
         vs.add(v);
     }
 
+    public static void liquidateVault() {
+
+    }
+
 }

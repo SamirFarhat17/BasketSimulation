@@ -153,4 +153,12 @@ public class User {
         return users;
     }
 
+    public static void generateUserWants(User user) {
+
+    }
+
+    public static void payFee() {
+
+    }
+
 }

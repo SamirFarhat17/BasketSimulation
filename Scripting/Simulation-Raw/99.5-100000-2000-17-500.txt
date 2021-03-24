@@ -1,17 +1,21 @@
 Initial Conditions
+-------------------------------------------------------------------------------------------------
 Date: 2016-01-01
 Consumer Price Index: 99.5
 BSKT Value: 9.95
 BSKT Target Peg: 9.95
 Total Basket in Market2.8729679794403516E7
 User Base Population: 100000
+User Base Basket Holdings: 2.397907425473981E8
+Keeper Total Basket: 4.556024108400568E7
 -------------------------------------------------------------------------------------------------
-Collateral holdings in vaults:
-A-XRP: 
-W-BTC: 
-ETH: 
-LINK: 
-P-LTC: 
-USDT: 
+Number of Vaults: 142633
+Collateral holdings in vaults along with exchange rates, stability fees and liquidation ratios:
+A-XRP: 6.905115841023217E7 Exchange Rate: 0.004433352906635349 Stability Fee: 3.5 Liquidation Ratio 140.0%
+W-BTC: 6.898546345663631E7 Exchange Rate: 316.14871403405755 Stability Fee: 4.5 Liquidation Ratio 130.0%
+ETH: 6.903422279776333E7 Exchange Rate: 0.6853435114503817 Stability Fee: 5.5 Liquidation Ratio 110.0%
+LINK: 6.855646181439358E7 Exchange Rate: 0.13882266588373457 Stability Fee: 5.5 Liquidation Ratio 120.0%
+P-LTC: 6.93057093417757E7 Exchange Rate: 2.5539635936582497 Stability Fee: 2.0 Liquidation Ratio 150.0%
+USDT: 6.870413677923575E7 Exchange Rate: 0.733998825601879 Stability Fee: 0.0 Liquidation Ratio 165.0%
 --------------------------------------------------------------------------------------------------
 99.5-100000-2000-17-500
