@@ -59,14 +59,14 @@ public class Vault {
 
     static {
         try {
-            allActiveVaults = getAllActiveVaults();
+            allActiveVaults = getInitialActiveVaults();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     // Methods
-    private static ArrayList<Vault> getAllActiveVaults() throws IOException {
+    private static ArrayList<Vault> getInitialActiveVaults() throws IOException {
         String vaultDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Vault-Data/Vault_Initial.json";
         JSONObject fullJson = JsonReader.readJsonFromFile(vaultDataPath);
         ArrayList<Vault> allVaults = new ArrayList<Vault>();

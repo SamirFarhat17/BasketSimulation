@@ -1,5 +1,10 @@
 package stakeholders;
 
+import json.JsonReader;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,7 +21,7 @@ public class User {
 
     // Constructor
     public User(String userID, ArrayList<Vault> vaults, HashMap<String,Double> collaterals,
-                double bsktHoldings, HashMap<String,Double> feesOwed, double desiredBasket, HashMap<String,Double> colatWanted) {
+                double bsktHoldings, HashMap<String,Double> feesOwed, double desiredBasket, HashMap<String,Double> colatWanted) throws IOException {
         this.userID = userID;
         this.vaults = vaults;
         this.collaterals = collaterals;
@@ -72,5 +77,80 @@ public class User {
 
     public HashMap<String,Double> getColatWanted() { return this.colatWanted; }
     public void setColatWanted(HashMap<String,Double> colatWanted) { this.colatWanted = colatWanted; }
+
+
+    // Variables
+    public static ArrayList<User> userList;
+
+    static {
+        try {
+            userList = getInitialUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Methods
+    private static ArrayList<User> getInitialUsers() throws IOException {
+        String usersDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/User-Data/Users_Initial.json";
+        JSONObject fullJson = JsonReader.readJsonFromFile(usersDataPath);
+        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<Vault> vaults = Vault.allActiveVaults;
+
+        User currUser;
+        String currUserID;
+        ArrayList<Vault> currVaults = new ArrayList<Vault>();
+        double currBasketHoldings;
+        HashMap<String,Double> currCollaterals = new HashMap<String,Double>();
+        HashMap<String, Double> currFeesOwed = new HashMap<String, Double>();
+        double currDesiredBasket;
+        HashMap<String,Double> currColatWanted = new HashMap<String,Double>();
+
+        for(String key: fullJson.keySet()) {
+            JSONArray result = fullJson.getJSONArray(key);
+            JSONObject value = result.getJSONObject(0);
+            currUserID = key;
+
+            for(Vault vault : vaults) {
+                if(vault.ownerID.equals(key)) currVaults.add(vault);
+            }
+
+            currBasketHoldings = value.getDouble("Basket Holdings");
+            currCollaterals.put("W-BTC", value.getDouble("W-BTC Holdings"));
+            currCollaterals.put("ETH", value.getDouble("ETH Holdings"));
+            currCollaterals.put("P-LTC", value.getDouble("P-LTC Holdings"));
+            currCollaterals.put("USDT", value.getDouble("USDT Holdings"));
+            currCollaterals.put("LINK", value.getDouble("LINK Holdings"));
+            currCollaterals.put("A-XRP", value.getDouble("A-XRP Holdings"));
+
+            currFeesOwed.put("W-BTC", 0.0);
+            currFeesOwed.put("ETH", 0.0);
+            currFeesOwed.put("P-LTC", 0.0);
+            currFeesOwed.put("USDT", 0.0);
+            currFeesOwed.put("LINK", 0.0);
+            currFeesOwed.put("A-XRP", 0.0);
+
+
+            currDesiredBasket = 0.0;
+
+            currColatWanted.put("W-BTC", 0.0);
+            currColatWanted.put("ETH", 0.0);
+            currColatWanted.put("P-LTC", 0.0);
+            currColatWanted.put("USDT", 0.0);
+            currColatWanted.put("LINK", 0.0);
+            currColatWanted.put("A-XRP", 0.0);
+
+            currUser = new User(currUserID, currVaults, currCollaterals, currBasketHoldings, currFeesOwed, currDesiredBasket, currColatWanted);
+
+            users.add(currUser);
+            currColatWanted.clear();
+            currFeesOwed.clear();
+            currCollaterals.clear();
+            currVaults.clear();
+
+        }
+
+        return users;
+    }
 
 }

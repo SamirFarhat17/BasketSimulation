@@ -1,5 +1,6 @@
 import json.DataExtraction;
 import oracles.*;
+import stakeholders.User;
 import stakeholders.Vault;
 
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ public class Simulation {
 
     public static void main(String[] args) throws IOException {
 
+        // Check arguments
         if(args.length != 7) {
             System.out.println("Incorrect or missing run.sh configurations");
             System.exit(0);
@@ -23,7 +25,7 @@ public class Simulation {
         // Datasets
         ArrayList<String> dates = DataExtraction.makeDates();
 
-        // initialise arguments
+        // Initialise arguments
         double cpiValue = Double.parseDouble(args[0]);
         int days = Integer.parseInt(args[1]);
         int userBaseSize = Integer.parseInt(args[2]);
@@ -44,6 +46,8 @@ public class Simulation {
         BsrOracle bsrOracle = new BsrOracle("BSROracle", "Active", bsrSeed);
         EmergencyOracle emergencyOracle = new EmergencyOracle("EmergencyOracle", "Active", "Healthy");
         BufferOracle bufferOracle = new BufferOracle("BufferOracle", "Active", totalBasket, totalBasket * 1.3);
+
+
         // Collateral Oracles
         CollateralOracle xrpOracle = new CollateralOracle("A-XRP-Oracle", "Active", "A-XRP", CollateralOracle.fullExchangeXRP.get(date), 3.5, 140.0, 0.0);
         CollateralOracle ethOracle = new CollateralOracle("ETH-Oracle", "Active", "ETH", CollateralOracle.fullExchangeETH.get(date), 5.5, 110.0, 0);
@@ -51,16 +55,13 @@ public class Simulation {
         CollateralOracle linkOracle = new CollateralOracle("LINK-Oracle", "Active", "LINK", CollateralOracle.fullExchangeLINK.get(date), 5.5, 120.0, 0);
         CollateralOracle ltcOracle = new CollateralOracle("P-LTC-Oracle", "Active", "P-LTC", CollateralOracle.fullExchangeLTC.get(date), 2.0, 150.0, 0.0);
         CollateralOracle usdtOracle = new CollateralOracle("USDT-Oracle", "Active", "USDT", CollateralOracle.fullExchangeUSDT.get(date), 0.0, 165, 0);
+
+
         // Vault Oracle
         ArrayList<Vault> vaults = new ArrayList<Vault>();
         VaultManagerOracle vaultManagerOracle = new VaultManagerOracle("VaultManagerOracle", "Active", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, vaults);
         double vaultTotalBasket = 0.0;
-        String vaultID;
-        String ownerID;
-        boolean status;
-        double minted;
         String colatType;
-        double colatAmount;
         double vaultTotalXRP = 0.0;
         double vaultTotalBTC = 0.0;
         double vaultTotalETH= 0.0;
@@ -70,7 +71,6 @@ public class Simulation {
         for(Vault v : Vault.allActiveVaults) {
             vaultTotalBasket += v.bsktMinted;
             colatType = v.collateralType;
-            colatAmount = v.collateralAmount;
             if(colatType.equals("A-XRP")) vaultTotalXRP += v.collateralAmount;
             if(colatType.equals("W-BTC")) vaultTotalBTC += v.collateralAmount;
             if(colatType.equals("ETH")) vaultTotalETH += v.collateralAmount;
@@ -87,7 +87,14 @@ public class Simulation {
         vaultManagerOracle.setLockedLTC(vaultTotalLTC);
         vaultManagerOracle.setLockedUSDT(vaultTotalUSDT);
 
-        System.out.println(vaultManagerOracle.getMintedBasket() + " vs " + totalBasket);
+        // Users Initial
+        ArrayList<User> initialUsers = User.userList;
+        double userTotalBasket = 0.0;
+        for(User user : initialUsers) {
+            userTotalBasket += user.getBsktHoldings();
+        }
+
+        System.out.println(vaultManagerOracle.getMintedBasket() + " vs " + userTotalBasket);
 
         // Create text file
         String textfile = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"+ args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5] + ".txt";

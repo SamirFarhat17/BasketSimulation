@@ -1,5 +1,9 @@
 package oracles;
 
+import stakeholders.User;
+
+import java.util.ArrayList;
+
 public class BufferOracle extends Oracle {
 
     // Attributes of buffer oracle
