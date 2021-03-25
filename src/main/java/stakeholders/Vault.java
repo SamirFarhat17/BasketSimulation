@@ -46,62 +46,10 @@ public class Vault {
 
     public String getCollateralType() { return this.collateralType; }
 
-    public double getCollateralAmount() {
-        return this.collateralAmount;
-    }
+    public double getCollateralAmount() { return this.collateralAmount; }
 
     public double getBsktMinted() {
         return this.bsktMinted;
-    }
-
-
-    // Variables
-    public static ArrayList<Vault> initialActiveVaults;
-
-    static {
-        try {
-            initialActiveVaults = getInitialActiveVaults();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    // Methods
-    private static ArrayList<Vault> getInitialActiveVaults() throws IOException {
-        String vaultDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Vault-Data/Vault_Initial.json";
-        JSONObject fullJson = JsonReader.readJsonFromFile(vaultDataPath);
-        ArrayList<Vault> allVaults = new ArrayList<Vault>();
-
-        Vault currVault;
-        String vaultID;
-        String ownerID;
-        double minted;
-        String colatType;
-        double colatAmount;
-
-        for(String key : fullJson.keySet()) {
-            // JSON operations
-            JSONArray result = fullJson.getJSONArray(key);
-            JSONObject value = result.getJSONObject(0);
-            vaultID = key;
-            ownerID = value.getString("Owner");
-            minted = value.getDouble("Minted");
-            colatType = value.getString("Collateral Type");
-            colatAmount = value.getDouble("Collateral Amount");
-            currVault = new Vault(vaultID, ownerID,true, minted, colatType, colatAmount);
-            allVaults.add(currVault);
-        }
-
-        return allVaults;
-    }
-
-    public static void addActiveVault(ArrayList<Vault> vs, Vault v) {
-        vs.add(v);
-    }
-
-    public static void liquidateVault() {
-
     }
 
 }

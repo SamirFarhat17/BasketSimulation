@@ -3,6 +3,7 @@ package stakeholders;
 import json.JsonReader;
 import oracles.CollateralOracle;
 import oracles.Oracle;
+import oracles.VaultManagerOracle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -97,7 +98,7 @@ public class User {
         String usersDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/User-Data/Users_Initial.json";
         JSONObject fullJson = JsonReader.readJsonFromFile(usersDataPath);
         ArrayList<User> users = new ArrayList<User>();
-        ArrayList<Vault> vaults = Vault.initialActiveVaults;
+        ArrayList<Vault> vaults = VaultManagerOracle.initialActiveVaults;
 
         User currUser;
         String currUserID;

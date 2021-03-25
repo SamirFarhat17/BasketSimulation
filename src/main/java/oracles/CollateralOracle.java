@@ -130,5 +130,7 @@ public class CollateralOracle extends Oracle {
         return exchangeData;
     }
 
+    public static void updateOracles() {
 
+    }
 }

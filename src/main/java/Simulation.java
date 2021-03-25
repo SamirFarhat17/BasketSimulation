@@ -5,19 +5,19 @@ import stakeholders.Keeper;
 import stakeholders.User;
 import stakeholders.Vault;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Date;
-import java.util.Queue;
+
+
+
 
 public class Simulation {
 
     private static void runSimDay() {
-
+        CollateralOracle.updateOracles();
+        VaultManagerOracle.updateVaults();
     }
 
     public static void main(String[] args) throws IOException {
@@ -64,7 +64,7 @@ public class Simulation {
         double vaultTotalLINK = 0.0;
         double vaultTotalLTC = 0.0;
         double vaultTotalUSDT = 0.0;
-        for(Vault v : Vault.initialActiveVaults) {
+        for(Vault v : VaultManagerOracle.initialActiveVaults) {
             vaultTotalBasket += v.bsktMinted;
             colatType = v.collateralType;
             if(colatType.equals("A-XRP")) vaultTotalXRP += v.collateralAmount;
@@ -84,12 +84,19 @@ public class Simulation {
         vaultManagerOracle.setLockedUSDT(vaultTotalUSDT);
 
         // Collateral Oracles
+        ArrayList<CollateralOracle> collateralOracles= new ArrayList<CollateralOracle>();
         CollateralOracle xrpOracle = new CollateralOracle("A-XRP-Oracle", "Active", "A-XRP", CollateralOracle.fullExchangeXRP.get(date), 3.5, 140.0, vaultTotalXRP*1.5);
+        collateralOracles.add(xrpOracle);
         CollateralOracle ethOracle = new CollateralOracle("ETH-Oracle", "Active", "ETH", CollateralOracle.fullExchangeETH.get(date), 5.5, 110.0, vaultTotalETH*3);
+        collateralOracles.add(ethOracle);
         CollateralOracle btcOracle = new CollateralOracle("W-BTC-Oracle", "Active", "W-BTC", CollateralOracle.fullExchangeBTC.get(date), 4.5, 130.0, vaultTotalBTC*2);
+        collateralOracles.add(btcOracle);
         CollateralOracle linkOracle = new CollateralOracle("LINK-Oracle", "Active", "LINK", CollateralOracle.fullExchangeLINK.get(date), 5.5, 120.0, vaultTotalLINK*1.5);
+        collateralOracles.add(linkOracle);
         CollateralOracle ltcOracle = new CollateralOracle("P-LTC-Oracle", "Active", "P-LTC", CollateralOracle.fullExchangeLTC.get(date), 2.0, 150.0, vaultTotalLTC*1.5);
+        collateralOracles.add(ltcOracle);
         CollateralOracle usdtOracle = new CollateralOracle("USDT-Oracle", "Active", "USDT", CollateralOracle.fullExchangeUSDT.get(date), 0.0, 165, vaultTotalETH*3);
+        collateralOracles.add(usdtOracle);
 
         System.out.println("Initializing keeper and users...");
         // Keeper Initial
@@ -150,14 +157,34 @@ public class Simulation {
 
 
         // Tracking statistics
+        // Basket
         ArrayList<Double> basketMinted = new ArrayList<>();
         basketMinted.add(totalBasket);
         ArrayList<Double> basketPrices = new ArrayList<>();
         basketPrices.add(basketValue);
+        ArrayList<Integer> userPopulations = new ArrayList<>();
+        userPopulations.add(userBaseSize);
+        ArrayList<Double> keeperTradeVolumes = new ArrayList<>();
+        ArrayList<Integer> keeperPercentageHoldings = new ArrayList<>();
+        keeperPercentageHoldings.add(keeperSeed);
+        // Basket target
         ArrayList<Double> targetPrices = new ArrayList<>();
         targetPrices.add(basketTargetValue);
-        ArrayList<Double> debtCeilings = new ArrayList<>();
-        int auctionCount = 0;
+        // Collateral Health
+        double totalDebtCeiling = 0;
+        HashMap<String,Double> debtCeilings = new HashMap<String,Double>();
+        HashMap<String,Double> exchangeRates = new HashMap<String,Double>();
+        for(CollateralOracle o : collateralOracles ) {
+            totalDebtCeiling += o.getDebtCeiling();
+            debtCeilings.put(o.collateralType, o.getDebtCeiling());
+            exchangeRates.put(o.collateralType, o.getExchangeRate());
+        }
+        // Auctions
+        int flipAuctionCount = 0;
+        int flopAuctionCount = 0;
+        // BSR
+        ArrayList<Double> bsrTrack = new ArrayList<>();
+        bsrTrack.add(bsrSeed);
 
 
         System.out.println("Going into day loops...");
