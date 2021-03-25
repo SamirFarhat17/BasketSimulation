@@ -54,16 +54,18 @@ public class Vault {
         return this.bsktMinted;
     }
 
+
     // Variables
-    public static ArrayList<Vault> allActiveVaults;
+    public static ArrayList<Vault> initialActiveVaults;
 
     static {
         try {
-            allActiveVaults = getInitialActiveVaults();
+            initialActiveVaults = getInitialActiveVaults();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     // Methods
     private static ArrayList<Vault> getInitialActiveVaults() throws IOException {

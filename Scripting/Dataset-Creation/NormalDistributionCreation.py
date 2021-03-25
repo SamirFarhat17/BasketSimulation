@@ -195,7 +195,7 @@ while placeholder > 0:
     bskt_minted = bskt_minted_distro[random.randint(0, bskt_minted_distro.size-1)]
     placeholder = placeholder - bskt_minted
     vault_colat_type = collaterals[random.randint(0, len(collaterals)-1)]
-    vault_colat_quant = bskt_minted*random.uniform(1.3, 1.6)
+    vault_colat_quant = bskt_minted*random.uniform(1.5, 1.9)
     vault_data[vault_id] = []
     vault_data[vault_id].append(
         {

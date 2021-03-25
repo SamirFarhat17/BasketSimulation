@@ -1,6 +1,8 @@
 package stakeholders;
 
 import json.JsonReader;
+import oracles.CollateralOracle;
+import oracles.Oracle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -95,7 +97,7 @@ public class User {
         String usersDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/User-Data/Users_Initial.json";
         JSONObject fullJson = JsonReader.readJsonFromFile(usersDataPath);
         ArrayList<User> users = new ArrayList<User>();
-        ArrayList<Vault> vaults = Vault.allActiveVaults;
+        ArrayList<Vault> vaults = Vault.initialActiveVaults;
 
         User currUser;
         String currUserID;
@@ -105,16 +107,20 @@ public class User {
         HashMap<String, Double> currFeesOwed = new HashMap<String, Double>();
         double currDesiredBasket;
         HashMap<String,Double> currColatWanted = new HashMap<String,Double>();
+        int count = 0;
 
         for(String key: fullJson.keySet()) {
             JSONArray result = fullJson.getJSONArray(key);
             JSONObject value = result.getJSONObject(0);
             currUserID = key;
 
+            // Tracking
+            count++;
+            if(count % 1000 == 0) System.out.println("User number: " + count);
+
             for(Vault vault : vaults) {
                 if(vault.ownerID.equals(key)) currVaults.add(vault);
             }
-
             currBasketHoldings = value.getDouble("Basket Holdings");
             currCollaterals.put("W-BTC", value.getDouble("W-BTC Holdings"));
             currCollaterals.put("ETH", value.getDouble("ETH Holdings"));
@@ -123,13 +129,8 @@ public class User {
             currCollaterals.put("LINK", value.getDouble("LINK Holdings"));
             currCollaterals.put("A-XRP", value.getDouble("A-XRP Holdings"));
 
-            currFeesOwed.put("W-BTC", 0.0);
-            currFeesOwed.put("ETH", 0.0);
-            currFeesOwed.put("P-LTC", 0.0);
-            currFeesOwed.put("USDT", 0.0);
-            currFeesOwed.put("LINK", 0.0);
-            currFeesOwed.put("A-XRP", 0.0);
-
+            currFeesOwed.put("Stability Fee", 0.0);
+            currFeesOwed.put("Liquidation Fee", 0.0);
 
             currDesiredBasket = 0.0;
 
@@ -151,6 +152,21 @@ public class User {
         }
 
         return users;
+    }
+
+    public static void generateStabilityFees(User user, ArrayList<CollateralOracle> oracles) {
+        String type;
+        double amount;
+        double multiplier = 0.0;
+        Oracle oracle;
+        for(Vault v : user.getVaults()) {
+            type = v.getCollateralType();
+            for( CollateralOracle o : oracles) {
+                if(o.getCollateralType().equals(type)) multiplier = o.stabilityFee;
+            }
+            amount = v.getCollateralAmount();
+            user.addFees("Stability Fee", amount*multiplier/(100*365));
+        }
     }
 
     public static void generateUserWants(User user) {

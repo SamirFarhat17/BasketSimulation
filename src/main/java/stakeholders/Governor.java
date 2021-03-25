@@ -1,7 +1,12 @@
 package stakeholders;
 
+import json.JsonReader;
 import oracles.CollateralOracle;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Governor {
@@ -41,6 +46,15 @@ public class Governor {
 
 
     // Methods
+    public static double getInitialBasket() throws IOException {
+        String govDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Governance-Data/Governance_Initial.json";
+        JSONObject fullJson = JsonReader.readJsonFromFile(govDataPath);
+        JSONArray result = fullJson.getJSONArray("Info");
+        JSONObject value = result.getJSONObject(0);
+
+        return value.getDouble("Value");
+    }
+
     public static void analyzeSituation() {
 
     }
@@ -50,7 +64,7 @@ public class Governor {
     }
 
     public static void changeCollateralStats() {
-        
+
     }
 
 }
