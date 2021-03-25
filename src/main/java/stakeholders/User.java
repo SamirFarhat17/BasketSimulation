@@ -170,7 +170,11 @@ public class User {
         }
     }
 
-    public static void generateUserWants(User user) {
+    public static void generateUserWants() {
+
+    }
+
+    public static void generateNewUsers() {
 
     }
 

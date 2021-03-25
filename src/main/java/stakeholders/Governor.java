@@ -67,4 +67,8 @@ public class Governor {
 
     }
 
+    public static void updateGovernanceParameters() {
+
+    }
+
 }

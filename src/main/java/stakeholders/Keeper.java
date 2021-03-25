@@ -52,6 +52,11 @@ public class Keeper {
         return basketHoldings;
     }
 
+    public static void generateKeeperWants() {
+
+    }
+
+
     public static void bidAuctions() {
 
     }

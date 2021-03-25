@@ -118,6 +118,10 @@ public class VaultManagerOracle extends Oracle {
 
     }
 
+    public static void checkLiquidations() {
+
+    }
+
     public static void liquidateVault() {
 
     }

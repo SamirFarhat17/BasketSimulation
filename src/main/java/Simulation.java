@@ -15,10 +15,6 @@ import java.util.HashMap;
 
 public class Simulation {
 
-    private static void runSimDay() {
-        CollateralOracle.updateOracles();
-        VaultManagerOracle.updateVaults();
-    }
 
     public static void main(String[] args) throws IOException {
 
@@ -200,4 +196,23 @@ public class Simulation {
 
         writer.close();
     }
+
+    private static void runSimDay(BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle,  EmergencyOracle emergencyOracle,
+                                  CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,
+                                  CollateralOracle linkOracle, CollateralOracle ltcOracle, CollateralOracle usdtOracle,
+                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ) {
+        CollateralOracle.updateOracles();
+        VaultManagerOracle.updateVaults();
+        VaultManagerOracle.checkLiquidations();
+        User.generateUserWants();
+        Keeper.generateKeeperWants();
+        User.generateNewUsers();
+        Governor.analyzeSituation();
+        Governor.updateGovernanceParameters();
+    }
+
+    private static void updateTrackingStatistics() {
+        
+    }
+
 }
