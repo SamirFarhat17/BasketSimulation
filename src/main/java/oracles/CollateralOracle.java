@@ -49,7 +49,7 @@ public class CollateralOracle extends Oracle {
     }
 
     // Variables of Interest
-    public String[] collateraltypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
+    public static String[] collateralTypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
     public static HashMap<String,Double> fullExchangeXRP;
 
     static {
@@ -130,7 +130,7 @@ public class CollateralOracle extends Oracle {
         return exchangeData;
     }
 
-    public static void updateOracles() {
+    public static void updateOracle(String date) {
 
     }
 }

@@ -52,4 +52,9 @@ public class Vault {
         return this.bsktMinted;
     }
 
+    // Methods
+    public static void openVault(String vaultID, String userID, Boolean status, String colatType, double colatAmount, double basketMinted) {
+
+    }
+
 }

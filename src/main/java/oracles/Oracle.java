@@ -14,4 +14,6 @@ public class Oracle {
     public void setOracleStatus(String status) {
         this.oracleStatus = status;
     }
+
+    public void updateOracle() {}
 }

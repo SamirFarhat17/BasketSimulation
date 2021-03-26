@@ -99,9 +99,9 @@ public class Simulation {
         Keeper keeper = new Keeper("Keeper", Keeper.initialKeeper, keeperSeed);
 
         // Users Initial
-        ArrayList<User> initialUsers = User.userList;
+        ArrayList<User> userBase = User.userList;
         double userTotalBasket = 0.0;
-        for(User user : initialUsers) {
+        for(User user : userBase) {
             userTotalBasket += user.getBsktHoldings();
         }
 
@@ -187,7 +187,7 @@ public class Simulation {
 
         while(days > 1) {
             date = dates.get(1828-days);
-            runSimDay();
+            runSimDay(date, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle);
 
             days--;
         }
@@ -197,14 +197,14 @@ public class Simulation {
         writer.close();
     }
 
-    private static void runSimDay(BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle,  EmergencyOracle emergencyOracle,
-                                  CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,
-                                  CollateralOracle linkOracle, CollateralOracle ltcOracle, CollateralOracle usdtOracle,
-                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ) {
-        CollateralOracle.updateOracles();
+    private static void runSimDay(String date, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
+             BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle /*xrpOracle,
+    btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase */) {
+        bsrOracle.updateOracle(date);
+        bufferOracle.updateOracle(date);
         VaultManagerOracle.updateVaults();
         VaultManagerOracle.checkLiquidations();
-        User.generateUserWants();
+        User.generateUserWants(User.userList, userSeed, collateralSeed, colatOracles);
         Keeper.generateKeeperWants();
         User.generateNewUsers();
         Governor.analyzeSituation();
@@ -212,7 +212,7 @@ public class Simulation {
     }
 
     private static void updateTrackingStatistics() {
-        
+
     }
 
 }

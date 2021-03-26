@@ -25,4 +25,9 @@ public class BufferOracle extends Oracle {
     public double getTotalDebtCeiling() { return this.totalDebtCeiling; }
     public void setTotalDebtCeiling(double totalDebtCeiling) { this.totalDebtCeiling = totalDebtCeiling; }
 
+
+    // Methods
+    public static void updateOracle(String date) {
+
+    }
 }

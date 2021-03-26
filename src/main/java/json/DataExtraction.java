@@ -6,13 +6,19 @@ import org.json.JSONArray;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvException;
 
 public class DataExtraction {
+
+    public static final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public static ArrayList<String> makeDates() throws IOException {
         String dataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Oracle-Data/GBP-USD.csv";
@@ -30,6 +36,37 @@ public class DataExtraction {
         dates.remove(0);
 
         return dates;
+    }
+
+    public static String[] shuffleArray(String[] ar) {
+        // If running on Java 6 or older, use `new Random()` on RHS here
+        String[] output = new String[ar.length];
+        Random rnd = ThreadLocalRandom.current();
+        for (int i = output.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            String a = output[index];
+            output[index] = output[i];
+            output[i] = a;
+        }
+        return output;
+    }
+
+    public static String generateUserID() {
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder sb = new StringBuilder(15);
+        for(int i = 0; i < 15; i++)
+            sb.append(alphabet.charAt(rnd.nextInt(alphabet.length())));
+        return sb.toString();
+    }
+
+    public static String generateVaultID() {
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder sb = new StringBuilder(16);
+        for(int i = 0; i < 16; i++)
+            sb.append(alphabet.charAt(rnd.nextInt(alphabet.length())));
+        return sb.toString();
     }
 
 }

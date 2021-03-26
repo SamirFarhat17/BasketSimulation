@@ -12,7 +12,13 @@ public class BsrOracle extends Oracle {
         this.bsr = bsr;
     }
 
+    // Getters and setters
     public double getBsr() { return this.bsr; }
 
     public void setBsr(double bsr) { this.bsr = bsr; }
+
+    // Methods
+    public static void updateOracle(String date) {
+
+    }
 }

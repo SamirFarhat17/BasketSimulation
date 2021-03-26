@@ -1,5 +1,6 @@
 package stakeholders;
 
+import json.DataExtraction;
 import json.JsonReader;
 import oracles.CollateralOracle;
 import oracles.Oracle;
@@ -10,6 +11,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class User {
 
@@ -80,7 +82,15 @@ public class User {
 
     public HashMap<String,Double> getColatWanted() { return this.colatWanted; }
     public void setColatWanted(HashMap<String,Double> colatWanted) { this.colatWanted = colatWanted; }
-
+    public HashMap<String,Double> addCollateralWanted(String collateralType, double amount) {
+        if(!this.colatWanted.containsKey(collateralType)) {
+            this.colatWanted.put(collateralType, amount);
+        }
+        else {
+            this.colatWanted.replace(collateralType, this.colatWanted.get(collateralType)+amount);
+        }
+        return this.colatWanted;
+    }
 
     // Variables
     public static ArrayList<User> userList;
@@ -170,8 +180,44 @@ public class User {
         }
     }
 
-    public static void generateUserWants() {
+    public static void generateUserWants(ArrayList<User> userList, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles) {
+        boolean entered;
 
+        for(User u : userList) {
+
+            entered = false;
+            Random rn = new Random();
+            int status = rn.nextInt(15) + 1;
+            int vaultDescision = rn.nextInt(3);
+            HashMap<String,Double> userColats = new HashMap<>();
+
+            if(u.bsktHoldings > 0 && status == 12 && !entered) {
+                u.setDesiredBasket(u.getDesiredBasket() * (0 + Math.random() * (2)));
+                entered = true;
+                if(vaultDescision == 2) {
+                    userColats = u.getCollaterals();
+                    for(String colat : DataExtraction.shuffleArray(CollateralOracle.collateralTypes)) {
+                        if(userColats.get(colat) > u.getDesiredBasket() * 1.5) {
+                            Vault.openVault(DataExtraction.generateVaultID(), u.userID, true, colat, u.getDesiredBasket() * 1.5, u.getDesiredBasket());
+                        }
+                    }
+                }
+            }
+
+            else if((status == 11 || status == 10) && !entered) {
+                u.setDesiredBasket(userSeed * (0 + Math.random() * (2)));
+                entered = true;
+            }
+
+            if(u.bsktHoldings > 0 && status == 13 && !entered) {
+                u.addCollaterals(CollateralOracle.collateralTypes[rn.nextInt(6)], collateralSeed* (0 + Math.random() * (2)));
+                entered = true;
+            }
+
+            else if(u.bsktHoldings > 0 && (status == 4 || status == 5) && !entered) {
+
+            }
+        }
     }
 
     public static void generateNewUsers() {
