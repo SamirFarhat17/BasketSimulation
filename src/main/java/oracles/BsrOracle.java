@@ -19,6 +19,6 @@ public class BsrOracle extends Oracle {
 
     // Methods
     public static void updateOracle(String date) {
-
+        int a = 0;
     }
 }
