@@ -18,7 +18,7 @@ public class BsrOracle extends Oracle {
     public void setBsr(double bsr) { this.bsr = bsr; }
 
     // Methods
-    public static void updateOracle(String date) {
-        int a = 0;
+    public void updateOracle(String date) {
+        setOracleStatus("Healthy");
     }
 }

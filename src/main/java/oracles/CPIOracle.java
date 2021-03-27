@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class CPIOracle extends Oracle {
-    public HashMap<String,Double> totalCPI = getCpiDataFromJson();
     // Attributes for Module
     String date;
     double cpi;
@@ -28,6 +27,9 @@ public class CPIOracle extends Oracle {
 
     public double getCpi() { return cpi; }
     public void setCpi(double cpi) {this.cpi = cpi; }
+
+    // Variables
+    public HashMap<String,Double> totalCPI = getCpiDataFromJson();
 
 
     // Methods
@@ -49,4 +51,7 @@ public class CPIOracle extends Oracle {
         return cpiData;
     }
 
+    public void updateOracle(String date) {
+        setCpi(totalCPI.get(date));
+    }
 }

@@ -15,5 +15,5 @@ public class Oracle {
         this.oracleStatus = status;
     }
 
-    public void updateOracle() {}
+    public void updateOracle(String date) {}
 }

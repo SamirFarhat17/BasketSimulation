@@ -32,6 +32,7 @@ public class CollateralOracle extends Oracle {
     public String getCollateralType() { return this.collateralType; }
 
     public double getExchangeRate() { return this.exchangeRate; }
+    public void setExchangeRate(double exchangeRate) { this.exchangeRate = exchangeRate; }
 
     public double getStabilityFee() { return  this.stabilityFee; }
 
@@ -130,7 +131,7 @@ public class CollateralOracle extends Oracle {
         return exchangeData;
     }
 
-    public static void updateOracle(String date) {
-
+    public void updateOracle(String date) {
+        setExchangeRate(fullExchangeBTC.get(date)) ;
     }
 }

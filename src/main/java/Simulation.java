@@ -5,6 +5,8 @@ import stakeholders.Keeper;
 import stakeholders.User;
 import stakeholders.Vault;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,7 +16,6 @@ import java.util.HashMap;
 
 
 public class Simulation {
-
 
     public static void main(String[] args) throws IOException {
 
@@ -184,35 +185,88 @@ public class Simulation {
 
 
         System.out.println("Going into day loops...");
-
+        String previousDate = "";
         while(days > 1) {
-            date = dates.get(1828-days);
-            runSimDay(date, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle);
+            runSimDay(date, previousDate, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
+                    btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, debtCeilings);
 
             days--;
+            previousDate = date;
+            date = dates.get(1828-days);
         }
 
         writer.println(args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5]);
 
         writer.close();
+        //generateFinalCSV();
     }
 
-    private static void runSimDay(String date, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
-             BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle /*xrpOracle,
-    btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase */) {
+    private static void runSimDay(String date, String previousDate, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
+             BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle,
+          CollateralOracle btcOracle, CollateralOracle ethOracle, CollateralOracle linkOracle, CollateralOracle ltcOracle, CollateralOracle usdtOracle,
+                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, HashMap<String,Double> debtCeilings)
+    {
         bsrOracle.updateOracle(date);
-        bufferOracle.updateOracle(date);
-        VaultManagerOracle.updateVaults();
-        VaultManagerOracle.checkLiquidations();
+        bufferOracle.updateOracle(date, debtCeilings);
+        cpiOracle.updateOracle(date);
+        System.out.println(cpiOracle.getCpi());
+        emergencyOracle.updateOracle(date);
+
+        xrpOracle.updateOracle(date);
+        btcOracle.updateOracle(date);
+        linkOracle.updateOracle(date);
+        ethOracle.updateOracle(date);
+        ltcOracle.updateOracle(date);
+        usdtOracle.updateOracle(date);
+
+        vaultManagerOracle.updateOracle(date);
+
+        vaultManagerOracle.updateVaults();
+        vaultManagerOracle.checkLiquidations();
+        
         User.generateUserWants(User.userList, userSeed, collateralSeed, colatOracles);
-        Keeper.generateKeeperWants();
+        keeper.generateKeeperWants();
         User.generateNewUsers();
         Governor.analyzeSituation();
         Governor.updateGovernanceParameters();
+
+        // updateTrackingStatistics();
     }
 
-    private static void updateTrackingStatistics() {
+    private static void updateTrackingStatistics(ArrayList<Double> basketMinted, ArrayList<Double> basketPrices, ArrayList<Integer> userPopulations,
+                                                 ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> targetPrices,
+                                                 double totalDebtCeiling, HashMap<String,Double> debtCeilings, HashMap<String,Double> exchangeRates,
+                                                 String[] args, int flipAuctionCount, int flopAuctionCount, ArrayList<Double> bsrTrack)
+    {
+        System.out.println("Placeholder");
+    }
 
+    private static void generateFinalCSV(ArrayList<Double> basketMinted, ArrayList<Double> basketPrices, ArrayList<Integer> userPopulations,
+                                         ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> targetPrices,
+                                         double totalDebtCeiling, HashMap<String,Double> debtCeilings, HashMap<String,Double> exchangeRates,
+                                         String[] args, int flipAuctionCount, int flopAuctionCount, ArrayList<Double> bsrTrack)
+    {
+        try (PrintWriter writer = new PrintWriter(new File("/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"
+                + args[0] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5]+ ".csv"))) {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("id,");
+            sb.append(',');
+            sb.append("Name");
+            sb.append('\n');
+
+            sb.append("1");
+            sb.append(',');
+            sb.append("Prashant Ghimire");
+            sb.append('\n');
+
+            writer.write(sb.toString());
+
+            System.out.println("done!");
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

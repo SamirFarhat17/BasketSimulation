@@ -114,11 +114,15 @@ public class VaultManagerOracle extends Oracle {
         vs.add(v);
     }
 
-    public static void updateVaults() {
+    public  void updateOracle(String date) {
 
     }
 
-    public static void checkLiquidations() {
+    public void updateVaults() {
+
+    }
+
+    public void checkLiquidations() {
 
     }
 

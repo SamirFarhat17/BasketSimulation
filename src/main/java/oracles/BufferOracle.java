@@ -3,6 +3,7 @@ package oracles;
 import stakeholders.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BufferOracle extends Oracle {
 
@@ -27,7 +28,12 @@ public class BufferOracle extends Oracle {
 
 
     // Methods
-    public static void updateOracle(String date) {
+    public void updateOracle(String date, HashMap<String,Double> debtCeilings) {
+        double totalDebtCeiling = 0;
+        for(String key : debtCeilings.keySet()) {
+            totalDebtCeiling += debtCeilings.get(key);
+        }
 
+        setTotalDebtCeiling(totalDebtCeiling);
     }
 }

@@ -52,7 +52,7 @@ public class Keeper {
         return basketHoldings;
     }
 
-    public static void generateKeeperWants() {
+    public  void generateKeeperWants() {
 
     }
 

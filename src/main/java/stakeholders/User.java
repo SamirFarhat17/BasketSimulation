@@ -192,11 +192,12 @@ public class User {
             HashMap<String,Double> userColats = new HashMap<>();
 
             if(u.bsktHoldings > 0 && status == 12 && !entered) {
-                u.setDesiredBasket(u.getDesiredBasket() * (0 + Math.random() * (2)));
+                u.setDesiredBasket(userSeed * (0 + Math.random() * (1)));
                 entered = true;
                 if(vaultDescision == 2) {
                     userColats = u.getCollaterals();
                     for(String colat : DataExtraction.shuffleArray(CollateralOracle.collateralTypes)) {
+                        System.out.println(userColats.keySet());
                         if(userColats.get(colat) > u.getDesiredBasket() * 1.5) {
                             Vault.openVault(DataExtraction.generateVaultID(), u.userID, true, colat, u.getDesiredBasket() * 1.5, u.getDesiredBasket());
                         }
