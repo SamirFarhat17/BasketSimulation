@@ -191,12 +191,27 @@ public class Simulation {
         ArrayList<Double> debtCeilingsLTC= new ArrayList<>();
         ArrayList<Double> debtCeilingsUSDT = new ArrayList<>();
         ArrayList<Double> totalDebtCeilings = new ArrayList<>();
+
         ArrayList<Double> exchangeRatesXRP = new ArrayList<>();
         ArrayList<Double> exchangeRatesBTC = new ArrayList<>();
         ArrayList<Double> exchangeRatesETH = new ArrayList<>();
         ArrayList<Double> exchangeRatesLINK = new ArrayList<>();
         ArrayList<Double> exchangeRatesLTC = new ArrayList<>();
         ArrayList<Double> exchangeRatesUSDT = new ArrayList<>();
+
+        ArrayList<Double> liquidationRatiosXRP = new ArrayList<>();
+        ArrayList<Double> liquidationRatiosBTC = new ArrayList<>();
+        ArrayList<Double> liquidationRatiosETH = new ArrayList<>();
+        ArrayList<Double> liquidationRatiosLINK = new ArrayList<>();
+        ArrayList<Double> liquidationRatiosLTC = new ArrayList<>();
+        ArrayList<Double> liquidationRatiosUSDT = new ArrayList<>();
+
+        ArrayList<Double> stabilityFeesXRP = new ArrayList<>();
+        ArrayList<Double> stabilityFeesBTC = new ArrayList<>();
+        ArrayList<Double> stabilityFeesETH = new ArrayList<>();
+        ArrayList<Double> stabilityFeesLINK = new ArrayList<>();
+        ArrayList<Double> stabilityFeesLTC = new ArrayList<>();
+        ArrayList<Double> stabilityFeesUSDT = new ArrayList<>();
 
         // Auctions
         int flipAuctionCount = 0;
@@ -211,16 +226,15 @@ public class Simulation {
         String previousDate = date;
         while(days > 0) {
 
-            System.out.println(date);
-
             date = dates.get(1827-days);
 
             runSimDay(date, basketValue, previousDate, vaultManagerOracle.getMintedBasketTokens(), userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
                     btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaultManagerOracle.getActiveVaults(), totalDebtCeiling);
 
-            updateTrackingStatistics(basketMinted, basketTokensMinted, basketPrices, userPopulations, keeperTradeVolumes, keeperPercentageHoldings, targetPrices, totalDebtCeilings, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH,
-                    debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, args, flipAuctionCount,
-                    flopAuctionCount, bsrTrack);
+            updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpiOracle,
+                    targetPrices, totalDebtCeilings, collateralOracles, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC,
+                    exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC,
+                    liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT, bsrOracle, bsrTrack);
 
             previousDate = date;
             days--;
@@ -280,15 +294,47 @@ public class Simulation {
 
 
 
-    private static void updateTrackingStatistics(ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted, ArrayList<Double> basketPrices,
-                                                 ArrayList<Integer> userPopulations, ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings,
-                                                 ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC,
-                                                 ArrayList<Double> debtCeilingETH, ArrayList<Double> debtCeilingLINK, ArrayList<Double> debtCeilingLTC,
-                                                 ArrayList<Double> debtCeilingUSDT, ArrayList<Double> exchangeRateXRP, ArrayList<Double> exchangeRateBTC,
-                                                 ArrayList<Double> exchangeRateETH, ArrayList<Double> exchangeRateLINK, ArrayList<Double> exchangeRateLTC,
-                                                 ArrayList<Double> exchangeRateUSDT, String[] args, int flipAuctionCount, int flopAuctionCount, ArrayList<Double> bsrTrack)
+    private static void updateTrackingStatistics(VaultManagerOracle vaultManagerOracle, ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted,
+                                                 double basketPrice, ArrayList<Double> basketPrices, ArrayList<User> userBase, ArrayList<Integer> userPopulations,
+                                                 Keeper keeper, ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, CPIOracle cpiOracle,
+                                                 ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles,
+                                                 ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC, ArrayList<Double> debtCeilingETH,
+                                                 ArrayList<Double> debtCeilingLINK, ArrayList<Double> debtCeilingLTC, ArrayList<Double> debtCeilingUSDT,
+                                                 ArrayList<Double> exchangeRateXRP, ArrayList<Double> exchangeRateBTC, ArrayList<Double> exchangeRateETH,
+                                                 ArrayList<Double> exchangeRateLINK, ArrayList<Double> exchangeRateLTC, ArrayList<Double> exchangeRateUSDT,
+                                                 ArrayList<Double> liquidationRatiosXRP, ArrayList<Double> liquidationRatiosBTC, ArrayList<Double> liquidationRatiosETH,
+                                                 ArrayList<Double> liquidationRatiosLINK, ArrayList<Double> liquidationRatiosLTC, ArrayList<Double> liquidationRatiosUSDT,
+                                                 ArrayList<Double> stabilityFeesXRP, ArrayList<Double> stabilityFeesBTC, ArrayList<Double> stabilityFeesETH,
+                                                 ArrayList<Double> stabilityFeesLINK, ArrayList<Double> stabilityFeesLTC, ArrayList<Double> stabilityFeesUSDT,
+                                                 BsrOracle bsrOracle, ArrayList<Double> bsrTrack)
     {
+        basketMinted.add(vaultManagerOracle.getMintedBasket());
+        basketTokensMinted.add(vaultManagerOracle.getMintedBasketTokens());
+        basketPrices.add(basketPrice);
+        userPopulations.add(userBase.size());
+        keeperTradeVolumes.add(keeper.getPercentTrading());
+        keeperPercentageHoldings.add((int) Math.round(keeper.getKeeperBskt()/vaultManagerOracle.getMintedBasket()));
+        targetPrices.add(cpiOracle.getCpi());
 
+        debtCeilingXRP.add(collateralOracles.get(0).getDebtCeiling());
+        debtCeilingBTC.add(collateralOracles.get(1).getDebtCeiling());
+        debtCeilingETH.add(collateralOracles.get(2).getDebtCeiling());
+        debtCeilingLINK.add(collateralOracles.get(3).getDebtCeiling());
+        debtCeilingLTC.add(collateralOracles.get(4).getDebtCeiling());
+        debtCeilingUSDT.add(collateralOracles.get(5).getDebtCeiling());
+        totalDebtCeilings.add(collateralOracles.get(0).getDebtCeiling() + collateralOracles.get(1).getDebtCeiling() + collateralOracles.get(2).getDebtCeiling() +
+                                collateralOracles.get(3).getDebtCeiling() + collateralOracles.get(4).getDebtCeiling() + collateralOracles.get(5).getDebtCeiling());
+
+        exchangeRateXRP.add(collateralOracles.get(0).getExchangeRate());
+        exchangeRateBTC.add(collateralOracles.get(1).getExchangeRate());
+        exchangeRateETH.add(collateralOracles.get(2).getExchangeRate());
+        exchangeRateLINK.add(collateralOracles.get(3).getExchangeRate());
+        exchangeRateLTC.add(collateralOracles.get(4).getExchangeRate());
+        exchangeRateUSDT.add(collateralOracles.get(5).getExchangeRate());
+
+        
+
+        bsrTrack.add(bsrOracle.getBsr());
     }
 
 

@@ -234,7 +234,6 @@ public class User {
         int userBaseSize = userBase.size();
         Random rn = new Random();
         int newUsers = (int)Math.log(rn.nextInt(userBaseSize/10) + userBaseSize/30);
-        System.out.println(newUsers);
         int selector;
         User user;
 
