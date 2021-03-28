@@ -75,6 +75,14 @@ public class Vault {
 
         vaultManagerOracle.setMintedBasketTokens(vaultManagerOracle.getMintedBasketTokens() + bsktTokensMinted);
         vaultManagerOracle.setMintedBasket(vaultManagerOracle.getMintedBasket() + basketMinted);
+        vaultManagerOracle.addActiveVault(vault);
+
+        if(colatType.equals("A-XRP")) vaultManagerOracle.setLockedXRP(vaultManagerOracle.getLockedXRP() + colatAmount);
+        if(colatType.equals("W-BTC")) vaultManagerOracle.setLockedBTC(vaultManagerOracle.getLockedBTC() + colatAmount);
+        if(colatType.equals("ETH")) vaultManagerOracle.setLockedETH(vaultManagerOracle.getLockedETH() + colatAmount);
+        if(colatType.equals("LINK")) vaultManagerOracle.setLockedLINK(vaultManagerOracle.getLockedLINK() + colatAmount);
+        if(colatType.equals("P-LTC")) vaultManagerOracle.setLockedLTC(vaultManagerOracle.getLockedLTC() + colatAmount);
+        if(colatType.equals("USDT")) vaultManagerOracle.setLockedUSDT(vaultManagerOracle.getLockedUSDT() + colatAmount);
 
         user.addVault(vault);
     }

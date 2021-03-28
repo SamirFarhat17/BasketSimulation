@@ -100,7 +100,7 @@ public class User {
     // Variables
     ArrayList<User> buyerList = new ArrayList<>();
     ArrayList<User> sellerList = new ArrayList<>();
-
+    public static String[] collateralTypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
 
     // Methods
     public static ArrayList<User> getInitialUsers(double basketPrice, ArrayList<Vault> vaults) throws IOException {
@@ -228,23 +228,26 @@ public class User {
         }
     }
 
-    public static void generateNewUsers(ArrayList<User> userBase, double userSeed, double collateralSeed, double totalBSKTTokensMinted) {
+    public static void generateNewUsers(ArrayList<User> userBase, double userSeed, double collateralSeed, double basketPrice, VaultManagerOracle vaultManagerOracle) throws IOException {
+        String[] collaterals = CollateralOracle.collateralTypes;
+
         int userBaseSize = userBase.size();
         Random rn = new Random();
         int newUsers = rn.nextInt(userBaseSize/100) + userBaseSize/300;
         int selector;
         User user;
-        Vault vault;
+
+        Random userSeedRandom = new Random();
 
         String userID;
         ArrayList<Vault> userVaults = new ArrayList<>();
         HashMap<String,Double> userCollaterals = new HashMap<>();
         double userBsktTokens;
         double userBsktMinted;
-        HashMap<String, Double> feesOwed= new HashMap<String, Double>();
+        HashMap<String, Double> feesOwed = new HashMap<String, Double>();
         feesOwed.put("Stability Fee", 0.0);
         feesOwed.put("Liquidation Fee", 0.0);
-        double desiredBasket;
+        double desiredBasket = 0.0;
         HashMap<String, Double> collateralsWanted = new HashMap<>();
         collateralsWanted.put("W-BTC", 0.0);
         collateralsWanted.put("ETH", 0.0);
@@ -256,14 +259,28 @@ public class User {
 
         for(int i = 0; i < newUsers; i++) {
             userID = DataExtraction.generateUserID();
+
+            userBsktMinted = userSeedRandom.nextGaussian() * (userSeed/5) + userSeed;
+            userBsktTokens = userBsktMinted/basketPrice;
+
+            for(String colat : collaterals) {
+                if(userSeedRandom.nextInt(4) == 2) userCollaterals.put(colat, userSeedRandom.nextGaussian() * collateralSeed/5 + collateralSeed);
+                else userCollaterals.put(colat, 0.0);
+            }
+
             rn = new Random();
             selector = rn.nextInt(5);
-            if(selector == 3) {
 
+            user = new User(userID, userVaults, userCollaterals, userBsktMinted, userBsktTokens, feesOwed, desiredBasket, collateralsWanted);
+
+            if(selector == 3) {
+                Vault.openVault(user, userID,  userBsktMinted, userBsktTokens, collaterals[userSeedRandom.nextInt(5)], userBsktMinted * 1.5, vaultManagerOracle);
             }
             else {
-
+                user.setDesiredBasket(userBsktMinted);
             }
+
+            userBase.add(user);
         }
 
     }
@@ -280,6 +297,23 @@ public class User {
         seller.addCollaterals(collateralType, seller.getCollaterals().get(collateralType) + payment);
 
     }
+
+    public static void generateUserCollaterals(ArrayList<User> userBase, double collateralSeed) {
+        String[] collaterals = CollateralOracle.collateralTypes;
+        HashMap<String,Double> userCollaterals;
+        Random userSeedRandom = new Random();
+
+        for(User u : userBase) {
+            userCollaterals = u.getCollaterals();
+            for(String colat : collaterals) {
+                if(userSeedRandom.nextInt(20) == 2) userCollaterals.put(colat, userCollaterals.get(colat) + userSeedRandom.nextGaussian() * collateralSeed/20 + collateralSeed/5);
+                else userCollaterals.put(colat, 0.0);
+            }
+            u.setCollaterals(userCollaterals);
+        }
+
+    }
+
 
     public static void payFee() {
 
