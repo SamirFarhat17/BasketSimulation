@@ -118,7 +118,7 @@ public class Simulation {
         BufferOracle bufferOracle = new BufferOracle("BufferOracle", "Active", vaultManagerOracle.getMintedBasket()-userTotalBasket+keeper.getKeeperBskt(), 0.0);
 
         // Create text file
-        String textfile = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"+ args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5] + ".txt";
+        String textfile = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"+ args[0] + "_" + args[1] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5] + ".txt";
         PrintWriter writer = new PrintWriter(textfile, "UTF-8");
 
         writer.println("-------------------------------------------------------------------------------------------------");
@@ -204,13 +204,11 @@ public class Simulation {
             date = dates.get(1827-days);
 
             runSimDay(date, previousDate, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
-                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaults, debtCeilings);
+                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaultManagerOracle.getActiveVaults(), debtCeilings);
 
             previousDate = date;
             days--;
         }
-
-        writer.println(args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5]);
 
         writer.close();
         //generateFinalCSV();

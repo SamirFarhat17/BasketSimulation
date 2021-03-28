@@ -115,11 +115,6 @@ public class VaultManagerOracle extends Oracle {
         vs.add(v);
     }
 
-    public  void updateOracle(String date) {
-
-
-    }
-
     public void updateVaults(String previousDate, String date, ArrayList<Vault> vaults, HashMap<String,Double> fullExchangeXRP,
                              HashMap<String,Double> fullExchangeBTC, HashMap<String,Double> fullExchangeETH, HashMap<String,Double> fullExchangeLINK,
                              HashMap<String,Double> fullExchangeLTC, HashMap<String,Double> fullExchangeUSDT)
@@ -130,38 +125,44 @@ public class VaultManagerOracle extends Oracle {
             if(lockedColat.equals("A-XRP")) {
                 exchangeOld = fullExchangeXRP.get(previousDate);
                 exchange = fullExchangeXRP.get(date);
-                System.out.println("og: " + getLockedXRP());
                 setLockedXRP(getLockedXRP() - vault.getCollateralAmount());
-                System.out.println("to add to: " + getLockedXRP());
                 colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
-                System.out.println("to add: " + colatAmount);
                 setLockedXRP(getLockedXRP() + colatAmount);
-                System.out.println("updated: " + getLockedXRP());
             }
             if(lockedColat.equals("W-BTC")) {
                 exchangeOld = fullExchangeBTC.get(previousDate);
                 exchange = fullExchangeBTC.get(date);
+                setLockedBTC(getLockedBTC() - vault.getCollateralAmount());
                 colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+                setLockedBTC(getLockedBTC() + colatAmount);
             }
             if(lockedColat.equals("ETH")) {
                 exchangeOld = fullExchangeETH.get(previousDate);
                 exchange = fullExchangeETH.get(date);
+                setLockedETH(getLockedETH() - vault.getCollateralAmount());
                 colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+                setLockedETH(getLockedETH() + colatAmount);
             }
             if(lockedColat.equals("LINK")) {
                 exchangeOld = fullExchangeLINK.get(previousDate);
                 exchange = fullExchangeLINK.get(date);
+                setLockedLINK(getLockedLINK() - vault.getCollateralAmount());
                 colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+                setLockedLINK(getLockedLINK() + colatAmount);
             }
             if(lockedColat.equals("P-LTC")) {
                 exchangeOld = fullExchangeLTC.get(previousDate);
                 exchange = fullExchangeLTC.get(date);
+                setLockedLTC(getLockedLTC() - vault.getCollateralAmount());
                 colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+                setLockedLTC(getLockedLTC() + colatAmount);
             }
             if(lockedColat.equals("USDT")) {
                 exchangeOld = fullExchangeUSDT.get(previousDate);
                 exchange = fullExchangeUSDT.get(date);
+                setLockedUSDT(getLockedUSDT() - vault.getCollateralAmount());
                 colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+                setLockedUSDT(getLockedUSDT() + colatAmount);
             }
             vault.setCollateralAmount(colatAmount);
         }
@@ -169,15 +170,23 @@ public class VaultManagerOracle extends Oracle {
 
     public void checkLiquidations(ArrayList<Vault> vaults, ArrayList<CollateralOracle> collateralOracles) {
         String colatType;
+        double colatAmount;
+        CollateralOracle collateralOracle = collateralOracles.get(0);
         for(Vault vault : vaults) {
             colatType = vault.getCollateralType();
-
+            colatAmount = vault.getCollateralAmount();
+            for(CollateralOracle colatOracle: collateralOracles) {
+                if(colatOracle.getCollateralType().equals(colatType)) collateralOracle = colatOracle; break;
+            }
+            if(colatAmount < vault.getBsktMinted()*collateralOracle.getLiquidationRatio()) {
+                liquidateVault(vault);
+            }
         }
 
     }
 
-    public static void liquidateVault() {
-
+    public static void liquidateVault(Vault vault) {
+        vault.setStatus(false);
     }
 
 }

@@ -165,10 +165,18 @@ public class User {
     public static void generateUserWants(ArrayList<User> userList, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles) {
         boolean entered;
 
+
         for(User u : userList) {
+            /*
+            System.out.println("ID: " + u.getUserID() + "\nBasket Holdings: " + u.getBsktHoldings() + "\nDesired Basket: " + u.getDesiredBasket()
+                    + "\nCollateral Holdings: " + u.getCollaterals().get("A-XRP") + " " + u.getCollaterals().get("W-BTC")  + " " + u.getCollaterals().get("ETH") + " "
+                    + u.getCollaterals().get("LINK") + " " + u.getCollaterals().get("P-LTC") + " " + u.getCollaterals().get("USDT")  + "\nWanted Collateral: "
+                    + u.getColatWanted().get("A-XRP") + " " + u.getColatWanted().get("W-BTC")  + " " + u.getColatWanted().get("ETH") + " " + u.getColatWanted().get("LINK")
+                    + " " + u.getColatWanted().get("P-LTC") + " " + u.getColatWanted().get("USDT"));
+            */
             entered = false;
             Random rn = new Random();
-            int status = rn.nextInt(15) + 1;
+            int status = rn.nextInt(50) + 1;
             int vaultDescision = rn.nextInt(3);
             HashMap<String,Double> userColats = new HashMap<>();
 
@@ -191,13 +199,22 @@ public class User {
             }
 
             if(u.bsktHoldings > 0 && status == 13 && !entered) {
-                u.addCollaterals(CollateralOracle.collateralTypes[rn.nextInt(6)], collateralSeed* (0 + Math.random() * (2)));
+                u.addCollateralWanted(CollateralOracle.collateralTypes[rn.nextInt(6)], collateralSeed * (0 + Math.random() * (2)));
                 entered = true;
             }
 
             else if(u.bsktHoldings > 0 && (status == 4 || status == 5) && !entered) {
-
+                u.addCollateralWanted(CollateralOracle.collateralTypes[rn.nextInt(6)], u.bsktHoldings* (0 + Math.random() * (1)));
+                entered = true;
             }
+
+            /*
+            System.out.println("Basket Holdings: " + u.getBsktHoldings() + "\nDesired Basket: " + u.getDesiredBasket()
+                    + "\nCollateral Holdings: " + u.getCollaterals().get("A-XRP") + " " + u.getCollaterals().get("W-BTC")  + " " + u.getCollaterals().get("ETH") + " "
+                    + u.getCollaterals().get("LINK") + " " + u.getCollaterals().get("P-LTC") + " " + u.getCollaterals().get("USDT")  + "\nWanted Collateral: "
+                    + u.getColatWanted().get("A-XRP") + " " + u.getColatWanted().get("W-BTC")  + " " + u.getColatWanted().get("ETH") + " " + u.getColatWanted().get("LINK")
+                    + " " + u.getColatWanted().get("P-LTC") + " " + u.getColatWanted().get("USDT"));
+            */
         }
     }
 
