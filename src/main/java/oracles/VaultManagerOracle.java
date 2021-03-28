@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class VaultManagerOracle extends Oracle {
     // Attributes of vault system
     public double mintedBasket;
+    public double mintedBasketTokens;
     public double lockedXRP;
     public double lockedBTC;
     public double lockedETH;
@@ -22,11 +23,12 @@ public class VaultManagerOracle extends Oracle {
     public ArrayList<Vault> auctionVaults;
 
     // Constructor
-    public VaultManagerOracle(String oracleID, String oracleStatus, double mintedBasket, double lockedXRP, double lockedBTC,
+    public VaultManagerOracle(String oracleID, String oracleStatus, double mintedBasket, double mintedBasketTokens, double lockedXRP, double lockedBTC,
                               double lockedETH, double lockedLINK, double lockedLTC, double lockedUSDT, ArrayList<Vault> activeVaults) {
         this.oracleID = oracleID;
         this.oracleStatus = oracleStatus;
         this.mintedBasket = mintedBasket;
+        this.mintedBasketTokens = mintedBasketTokens;
         this.lockedXRP = lockedXRP;
         this.lockedBTC = lockedBTC;
         this.lockedETH = lockedETH;
@@ -40,6 +42,9 @@ public class VaultManagerOracle extends Oracle {
     // Getters and Setters
     public double getMintedBasket() { return this.mintedBasket; }
     public void setMintedBasket(double mintedBasket) { this.mintedBasket = mintedBasket; }
+
+    public double getMintedBasketTokens() { return this.mintedBasketTokens; }
+    public void setMintedBasketTokens(double mintedBasketTokens) { this.mintedBasketTokens = mintedBasketTokens; }
 
     public double getLockedXRP() { return this.lockedXRP; }
     public void setLockedXRP(double locked) { this.lockedXRP = locked; }

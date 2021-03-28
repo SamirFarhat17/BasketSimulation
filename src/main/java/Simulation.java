@@ -57,7 +57,7 @@ public class Simulation {
         System.out.println("Initializing vault oracles...");
         // Vault Oracle
         ArrayList<Vault> vaults = new ArrayList<Vault>();
-        VaultManagerOracle vaultManagerOracle = new VaultManagerOracle("VaultManagerOracle", "Active", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, vaults);
+        VaultManagerOracle vaultManagerOracle = new VaultManagerOracle("VaultManagerOracle", "Active", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, vaults);
         double vaultTotalBasket = 0.0;
         String colatType;
         double vaultTotalXRP = 0.0;
@@ -86,6 +86,7 @@ public class Simulation {
         vaultManagerOracle.setLockedLTC(vaultTotalLTC);
         vaultManagerOracle.setLockedUSDT(vaultTotalUSDT);
         double totalBSKTTokensMinted = vaultManagerOracle.getMintedBasket() / basketValue;
+        vaultManagerOracle.setMintedBasketTokens(totalBSKTTokensMinted);
         
         // Collateral Oracles
         ArrayList<CollateralOracle> collateralOracles= new ArrayList<CollateralOracle>();
@@ -206,7 +207,7 @@ public class Simulation {
 
             date = dates.get(1827-days);
 
-            runSimDay(date, basketValue, previousDate, totalBSKTTokensMinted, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
+            runSimDay(date, basketValue, previousDate, vaultManagerOracle.getMintedBasketTokens(), userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
                     btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaultManagerOracle.getActiveVaults(), debtCeilings);
 
             previousDate = date;
@@ -251,9 +252,9 @@ public class Simulation {
 
         vaultManagerOracle.checkLiquidations(vaults, colatOracles, basketPrice);
 
+        User.generateNewUsers(userBase, userSeed, collateralSeed,totalBSKTTokensMinted);
         User.generateUserWants(userBase, userSeed, basketPrice, collateralSeed, colatOracles, vaultManagerOracle);
         keeper.generateKeeperWants(date);
-        User.generateNewUsers(userBase, userSeed);
         Governor.analyzeSituation();
         Governor.updateGovernanceParameters();
 

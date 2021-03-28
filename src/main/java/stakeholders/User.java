@@ -43,6 +43,7 @@ public class User {
 
     public ArrayList<Vault> getVaults() { return this.vaults; }
     public void setVaults(ArrayList<Vault> vaults) { this.vaults = vaults; }
+    public void addVault(Vault vault) { this.vaults.add(vault); }
 
     public ArrayList<Vault> appendVault(Vault v) {
         this.vaults.add(v);
@@ -196,7 +197,7 @@ public class User {
                     userColats = u.getCollaterals();
                     for(String colat : DataExtraction.shuffleArray(CollateralOracle.collateralTypes)) {
                         if(userColats.get(colat) > u.getDesiredBasket() * 1.5) {
-                            Vault.openVault(DataExtraction.generateVaultID(), u.userID, true, u.getDesiredBasket(), u.getDesiredBasket()/basketPrice, colat, u.getDesiredBasket() * 1.5, vaultManagerOracle);
+                            Vault.openVault(u, u.userID, u.getDesiredBasket(), u.getDesiredBasket()/basketPrice, colat, u.getDesiredBasket() * 1.5, vaultManagerOracle);
                         }
                     }
                 }
@@ -227,7 +228,7 @@ public class User {
         }
     }
 
-    public static void generateNewUsers(ArrayList<User> userBase, double userSeed) {
+    public static void generateNewUsers(ArrayList<User> userBase, double userSeed, double collateralSeed, double totalBSKTTokensMinted) {
         int userBaseSize = userBase.size();
         Random rn = new Random();
         int newUsers = rn.nextInt(userBaseSize/100) + userBaseSize/300;
@@ -254,6 +255,7 @@ public class User {
 
 
         for(int i = 0; i < newUsers; i++) {
+            userID = DataExtraction.generateUserID();
             rn = new Random();
             selector = rn.nextInt(5);
             if(selector == 3) {

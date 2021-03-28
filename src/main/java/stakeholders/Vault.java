@@ -1,5 +1,6 @@
 package stakeholders;
 
+import json.DataExtraction;
 import json.JsonReader;
 import oracles.VaultManagerOracle;
 import org.json.JSONArray;
@@ -60,8 +61,22 @@ public class Vault {
     public double getBsktTokensMinted() { return this.bsktTokensMinted; }
 
     // Methods
-    public static void openVault(String vaultID, String userID, Boolean status, double basketMinted, double bsktTokensMinted, String colatType, double colatAmount, VaultManagerOracle vaultManagerOracle) {
+    public static void openVault(User user, String userID, double basketMinted, double bsktTokensMinted, String colatType, double colatAmount, VaultManagerOracle vaultManagerOracle) {
+        String vaultID = DataExtraction.generateVaultID();
+        boolean status = true;
 
+        Vault vault = new Vault(vaultID, userID, status, basketMinted, bsktTokensMinted, colatType, colatAmount);
+
+        user.setDesiredBasket(user.getDesiredBasket() - basketMinted);
+        user.setBsktTokens(user.getBsktTokens() + bsktTokensMinted);
+        user.setBsktHoldings(user.getBsktHoldings() + basketMinted);
+
+        user.addCollaterals(colatType, user.getCollaterals().get(colatType) - colatAmount);
+
+        vaultManagerOracle.setMintedBasketTokens(vaultManagerOracle.getMintedBasketTokens() + bsktTokensMinted);
+        vaultManagerOracle.setMintedBasket(vaultManagerOracle.getMintedBasket() + basketMinted);
+
+        user.addVault(vault);
     }
 
 }
