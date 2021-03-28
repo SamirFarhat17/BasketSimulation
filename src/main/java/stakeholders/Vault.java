@@ -1,6 +1,7 @@
 package stakeholders;
 
 import json.JsonReader;
+import oracles.VaultManagerOracle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,22 +13,24 @@ import java.util.List;
 public class Vault {
 
     // Attribute of Vaults
-    public String vaultID;
-    public String ownerID;
+    public final String vaultID;
+    public final String ownerID;
     public Boolean status;
+    public double bsktMinted;
+    public final double bsktTokensMinted;
     public String collateralType;
     public double collateralAmount;
-    public double bsktMinted;
 
     // Constructor
-    public Vault(String vaultID, String ownerID, Boolean status,  double minted, String collateralType,
-                 double collateralAmount) {
+    public Vault(String vaultID, String ownerID, Boolean status, double minted, double mintedTokens, String collateralType, double collateralAmount) {
         this.vaultID = vaultID;
         this.ownerID = ownerID;
         this.status = status;
         this.bsktMinted = minted;
+        this.bsktTokensMinted = mintedTokens;
         this.collateralType = collateralType;
         this.collateralAmount = collateralAmount;
+
     }
 
     // Getters and Setters
@@ -52,9 +55,12 @@ public class Vault {
     public double getBsktMinted() {
         return this.bsktMinted;
     }
+    public void setBsktMinted(double bsktMinted) { this.bsktMinted = bsktMinted; }
+
+    public double getBsktTokensMinted() { return this.bsktTokensMinted; }
 
     // Methods
-    public static void openVault(String vaultID, String userID, Boolean status, String colatType, double colatAmount, double basketMinted) {
+    public static void openVault(String vaultID, String userID, Boolean status, double basketMinted, double bsktTokensMinted, String colatType, double colatAmount, VaultManagerOracle vaultManagerOracle) {
 
     }
 

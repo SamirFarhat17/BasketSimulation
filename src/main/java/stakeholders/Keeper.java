@@ -27,6 +27,9 @@ public class Keeper {
     public double getKeeperBskt() { return this.basketPossessed; }
     public void setKeeperBskt(int bskt) { this.basketPossessed = bskt; }
 
+    public double getPercentTrading() { return this.percentTrading; }
+    public void setPercentTrading(double percentTrading) { this.percentTrading = percentTrading; }
+
     // Variables
     public static double initialKeeper;
 
@@ -52,7 +55,7 @@ public class Keeper {
         return basketHoldings;
     }
 
-    public  void generateKeeperWants() {
+    public  void generateKeeperWants(String date) {
 
     }
 

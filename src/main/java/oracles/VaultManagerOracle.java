@@ -71,19 +71,9 @@ public class VaultManagerOracle extends Oracle {
 
 
     // Variables
-    public static ArrayList<Vault> initialActiveVaults;
-
-    static {
-        try {
-            initialActiveVaults = getInitialActiveVaults();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     // Methods
-    private static ArrayList<Vault> getInitialActiveVaults() throws IOException {
+    public static ArrayList<Vault> getInitialActiveVaults(double basketPrice) throws IOException {
         String vaultDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Vault-Data/Vault_Initial.json";
         JSONObject fullJson = JsonReader.readJsonFromFile(vaultDataPath);
         ArrayList<Vault> allVaults = new ArrayList<Vault>();
@@ -104,7 +94,7 @@ public class VaultManagerOracle extends Oracle {
             minted = value.getDouble("Minted");
             colatType = value.getString("Collateral Type");
             colatAmount = value.getDouble("Collateral Amount");
-            currVault = new Vault(vaultID, ownerID,true, minted, colatType, colatAmount);
+            currVault = new Vault(vaultID, ownerID,true, minted, minted/basketPrice, colatType, colatAmount);
             allVaults.add(currVault);
         }
 
@@ -115,7 +105,7 @@ public class VaultManagerOracle extends Oracle {
         vs.add(v);
     }
 
-    public void updateVaults(String previousDate, String date, ArrayList<Vault> vaults, HashMap<String,Double> fullExchangeXRP,
+    public void updateVaults(String previousDate, String date, ArrayList<Vault> vaults, double basketPrice, HashMap<String,Double> fullExchangeXRP,
                              HashMap<String,Double> fullExchangeBTC, HashMap<String,Double> fullExchangeETH, HashMap<String,Double> fullExchangeLINK,
                              HashMap<String,Double> fullExchangeLTC, HashMap<String,Double> fullExchangeUSDT)
     {
@@ -165,10 +155,11 @@ public class VaultManagerOracle extends Oracle {
                 setLockedUSDT(getLockedUSDT() + colatAmount);
             }
             vault.setCollateralAmount(colatAmount);
+            vault.setBsktMinted(vault.getBsktTokensMinted()/basketPrice);
         }
     }
 
-    public void checkLiquidations(ArrayList<Vault> vaults, ArrayList<CollateralOracle> collateralOracles) {
+    public void checkLiquidations(ArrayList<Vault> vaults, ArrayList<CollateralOracle> collateralOracles, double basketPrice) {
         String colatType;
         double colatAmount;
         CollateralOracle collateralOracle = collateralOracles.get(0);
@@ -178,7 +169,7 @@ public class VaultManagerOracle extends Oracle {
             for(CollateralOracle colatOracle: collateralOracles) {
                 if(colatOracle.getCollateralType().equals(colatType)) collateralOracle = colatOracle; break;
             }
-            if(colatAmount < vault.getBsktMinted()*collateralOracle.getLiquidationRatio()) {
+            if(colatAmount < vault.getBsktTokensMinted()*basketPrice*collateralOracle.getLiquidationRatio()) {
                 liquidateVault(vault);
             }
         }
