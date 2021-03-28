@@ -171,7 +171,7 @@ public class VaultManagerOracle extends Oracle {
         String colatType;
         for(Vault vault : vaults) {
             colatType = vault.getCollateralType();
-            
+
         }
 
     }
