@@ -180,7 +180,7 @@ data_path = "/../../Data/Vault-Data/"
 # Complete basket
 total_basket = total_user_basket + keepers_holdings
 placeholder = total_basket
-bskt_minted_distro = np.random.normal(user_gen_seed, user_gen_seed/5, 2000)
+bskt_minted_distro = np.random.normal(user_gen_seed, user_gen_seed/5, 10000)
 minted_index = 0
 for minted in bskt_minted_distro:
     if minted < 0:

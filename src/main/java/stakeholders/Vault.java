@@ -47,6 +47,7 @@ public class Vault {
     public String getCollateralType() { return this.collateralType; }
 
     public double getCollateralAmount() { return this.collateralAmount; }
+    public void setCollateralAmount(double collateralAmount) { this.collateralAmount = collateralAmount; }
 
     public double getBsktMinted() {
         return this.bsktMinted;

@@ -39,9 +39,8 @@ public class DataExtraction {
     }
 
     public static String[] shuffleArray(String[] ar) {
-        // If running on Java 6 or older, use `new Random()` on RHS here
-        String[] output = new String[ar.length];
-        Random rnd = ThreadLocalRandom.current();
+        String[] output = ar;
+        Random rnd = new Random();
         for (int i = output.length - 1; i > 0; i--)
         {
             int index = rnd.nextInt(i + 1);

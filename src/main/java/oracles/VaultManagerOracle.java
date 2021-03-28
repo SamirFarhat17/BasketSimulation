@@ -7,6 +7,7 @@ import stakeholders.Vault;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VaultManagerOracle extends Oracle {
     // Attributes of vault system
@@ -116,13 +117,62 @@ public class VaultManagerOracle extends Oracle {
 
     public  void updateOracle(String date) {
 
-    }
-
-    public void updateVaults() {
 
     }
 
-    public void checkLiquidations() {
+    public void updateVaults(String previousDate, String date, ArrayList<Vault> vaults, HashMap<String,Double> fullExchangeXRP,
+                             HashMap<String,Double> fullExchangeBTC, HashMap<String,Double> fullExchangeETH, HashMap<String,Double> fullExchangeLINK,
+                             HashMap<String,Double> fullExchangeLTC, HashMap<String,Double> fullExchangeUSDT)
+    {
+        for(Vault vault : vaults) {
+            double exchange = 1, exchangeOld = 1, colatAmount = 0;
+            String lockedColat = vault.getCollateralType();
+            if(lockedColat.equals("A-XRP")) {
+                exchangeOld = fullExchangeXRP.get(previousDate);
+                exchange = fullExchangeXRP.get(date);
+                System.out.println("og: " + getLockedXRP());
+                setLockedXRP(getLockedXRP() - vault.getCollateralAmount());
+                System.out.println("to add to: " + getLockedXRP());
+                colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+                System.out.println("to add: " + colatAmount);
+                setLockedXRP(getLockedXRP() + colatAmount);
+                System.out.println("updated: " + getLockedXRP());
+            }
+            if(lockedColat.equals("W-BTC")) {
+                exchangeOld = fullExchangeBTC.get(previousDate);
+                exchange = fullExchangeBTC.get(date);
+                colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+            }
+            if(lockedColat.equals("ETH")) {
+                exchangeOld = fullExchangeETH.get(previousDate);
+                exchange = fullExchangeETH.get(date);
+                colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+            }
+            if(lockedColat.equals("LINK")) {
+                exchangeOld = fullExchangeLINK.get(previousDate);
+                exchange = fullExchangeLINK.get(date);
+                colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+            }
+            if(lockedColat.equals("P-LTC")) {
+                exchangeOld = fullExchangeLTC.get(previousDate);
+                exchange = fullExchangeLTC.get(date);
+                colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+            }
+            if(lockedColat.equals("USDT")) {
+                exchangeOld = fullExchangeUSDT.get(previousDate);
+                exchange = fullExchangeUSDT.get(date);
+                colatAmount = vault.getCollateralAmount() * (exchange/exchangeOld);
+            }
+            vault.setCollateralAmount(colatAmount);
+        }
+    }
+
+    public void checkLiquidations(ArrayList<Vault> vaults, ArrayList<CollateralOracle> collateralOracles) {
+        String colatType;
+        for(Vault vault : vaults) {
+            colatType = vault.getCollateralType();
+            
+        }
 
     }
 

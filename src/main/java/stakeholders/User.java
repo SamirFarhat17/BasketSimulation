@@ -93,41 +93,27 @@ public class User {
     }
 
     // Variables
-    public static ArrayList<User> userList;
-
-    static {
-        try {
-            userList = getInitialUsers();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     // Methods
-    private static ArrayList<User> getInitialUsers() throws IOException {
+    public static ArrayList<User> getInitialUsers() throws IOException {
         String usersDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/User-Data/Users_Initial.json";
         JSONObject fullJson = JsonReader.readJsonFromFile(usersDataPath);
         ArrayList<User> users = new ArrayList<User>();
         ArrayList<Vault> vaults = VaultManagerOracle.initialActiveVaults;
 
-        User currUser;
-        String currUserID;
-        ArrayList<Vault> currVaults = new ArrayList<Vault>();
-        double currBasketHoldings;
-        HashMap<String,Double> currCollaterals = new HashMap<String,Double>();
-        HashMap<String, Double> currFeesOwed = new HashMap<String, Double>();
-        double currDesiredBasket;
-        HashMap<String,Double> currColatWanted = new HashMap<String,Double>();
-        int count = 0;
-
         for(String key: fullJson.keySet()) {
+            User currUser;
+            String currUserID;
+            double currBasketHoldings;
+            double currDesiredBasket;
+            ArrayList<Vault> currVaults = new ArrayList<Vault>();
+            HashMap<String,Double> currColatWanted = new HashMap<String,Double>();
+            HashMap<String,Double> currCollaterals = new HashMap<String,Double>();
+            HashMap<String, Double> currFeesOwed = new HashMap<String, Double>();
+
             JSONArray result = fullJson.getJSONArray(key);
             JSONObject value = result.getJSONObject(0);
             currUserID = key;
-
-            // Tracking
-            count++;
-            if(count % 1000 == 0) System.out.println("User number: " + count);
 
             for(Vault vault : vaults) {
                 if(vault.ownerID.equals(key)) currVaults.add(vault);
@@ -155,10 +141,6 @@ public class User {
             currUser = new User(currUserID, currVaults, currCollaterals, currBasketHoldings, currFeesOwed, currDesiredBasket, currColatWanted);
 
             users.add(currUser);
-            currColatWanted.clear();
-            currFeesOwed.clear();
-            currCollaterals.clear();
-            currVaults.clear();
 
         }
 
@@ -184,7 +166,6 @@ public class User {
         boolean entered;
 
         for(User u : userList) {
-
             entered = false;
             Random rn = new Random();
             int status = rn.nextInt(15) + 1;
@@ -197,7 +178,6 @@ public class User {
                 if(vaultDescision == 2) {
                     userColats = u.getCollaterals();
                     for(String colat : DataExtraction.shuffleArray(CollateralOracle.collateralTypes)) {
-                        System.out.println(userColats.keySet());
                         if(userColats.get(colat) > u.getDesiredBasket() * 1.5) {
                             Vault.openVault(DataExtraction.generateVaultID(), u.userID, true, colat, u.getDesiredBasket() * 1.5, u.getDesiredBasket());
                         }

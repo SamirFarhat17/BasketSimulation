@@ -15,10 +15,11 @@ public class CollateralOracle extends Oracle {
     public double stabilityFee;
     public double liquidationRatio;
     public double debtCeiling;
+    public HashMap<String,Double> fullExchange;
 
     //  Constructor
     public CollateralOracle(String oracleID, String oracleStatus, String collateralType, double exchangeRate,
-                            double stabilityFee, double liquidationRatio, double debtCeiling) throws IOException {
+                            double stabilityFee, double liquidationRatio, double debtCeiling, HashMap<String,Double> fullExchange) throws IOException {
         this.oracleID = oracleID;
         this.oracleStatus = oracleStatus;
         this.collateralType = collateralType;
@@ -26,6 +27,7 @@ public class CollateralOracle extends Oracle {
         this.stabilityFee = stabilityFee;
         this.liquidationRatio = liquidationRatio;
         this.debtCeiling = debtCeiling;
+        this.fullExchange = fullExchange;
     }
 
     // Getters and Setters
@@ -44,6 +46,8 @@ public class CollateralOracle extends Oracle {
 
     public void setDebtCeiling(double newDebtCeiling) { this.debtCeiling = newDebtCeiling; }
 
+    public HashMap<String,Double> getFullExchange() { return this.fullExchange; }
+
     // Methods for vault maintenance
     public double getCollateralEquivalent(double minted) {
         return this.exchangeRate * minted;
@@ -51,6 +55,7 @@ public class CollateralOracle extends Oracle {
 
     // Variables of Interest
     public static String[] collateralTypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
+
     public static HashMap<String,Double> fullExchangeXRP;
 
     static {
@@ -114,7 +119,7 @@ public class CollateralOracle extends Oracle {
 
     // Methods
     // Get exchange rate date-by-date
-    private static HashMap<String, Double> getExchangeDataFromJson(String dataset) throws IOException {
+    public static HashMap<String, Double> getExchangeDataFromJson(String dataset) throws IOException {
         HashMap<String, Double> exchangeData = new HashMap<>();
         String path = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Oracle-Data/oracle_" + dataset + ".json";
 
@@ -132,6 +137,11 @@ public class CollateralOracle extends Oracle {
     }
 
     public void updateOracle(String date) {
-        setExchangeRate(fullExchangeBTC.get(date)) ;
+        if(collateralType.equals("XRP")) setExchangeRate(fullExchangeXRP.get(date));
+        if(collateralType.equals("W-BTC")) setExchangeRate(fullExchangeBTC.get(date));
+        if(collateralType.equals("ETH")) setExchangeRate(fullExchangeETH.get(date));
+        if(collateralType.equals("LINK")) setExchangeRate(fullExchangeLINK.get(date));
+        if(collateralType.equals("P-LTC")) setExchangeRate(fullExchangeLTC.get(date));
+        if(collateralType.equals("USDT")) setExchangeRate(fullExchangeUSDT.get(date));
     }
 }

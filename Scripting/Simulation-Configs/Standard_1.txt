@@ -1,6 +1,6 @@
 "CPI":99.5
-"Days in Sim":1828
-"stakeholders.User-base Size":100000
+"Days in Sim":1827
+"stakeholders.User-base Size":10000
 "stakeholders.User Generation Seed":2000
 "stakeholders.Keeper generation Seed":17
 "Collateral Generation Seed":500

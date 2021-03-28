@@ -1,5 +1,8 @@
 import json.DataExtraction;
+import json.JsonReader;
 import oracles.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import stakeholders.Governor;
 import stakeholders.Keeper;
 import stakeholders.User;
@@ -40,15 +43,17 @@ public class Simulation {
 
         double basketValue = cpiValue/10;
         double basketTargetValue = basketValue;
-        String date = dates.get(1828-days);
+        String date = dates.get(1827-days);
         double totalBasket = Governor.getInitialBasket();
 
         System.out.println("Initializing basic oracles...");
+        
         // Initialize Oracles
         CPIOracle cpiOracle = new CPIOracle("CPIOracle", "Active", date, cpiValue);
         BsrOracle bsrOracle = new BsrOracle("BSROracle", "Active", bsrSeed);
         EmergencyOracle emergencyOracle = new EmergencyOracle("EmergencyOracle", "Active", "Healthy");
 
+        
         System.out.println("Initializing vault oracles...");
         // Vault Oracle
         ArrayList<Vault> vaults = new ArrayList<Vault>();
@@ -70,6 +75,7 @@ public class Simulation {
             if(colatType.equals("LINK")) vaultTotalLINK += v.collateralAmount;
             if(colatType.equals("P-LTC")) vaultTotalLTC += v.collateralAmount;
             if(colatType.equals("USDT")) vaultTotalUSDT += v.collateralAmount;
+            vaults.add(v);
             vaultManagerOracle.addActiveVault(v);
         }
         vaultManagerOracle.setMintedBasket(vaultTotalBasket);
@@ -80,27 +86,28 @@ public class Simulation {
         vaultManagerOracle.setLockedLTC(vaultTotalLTC);
         vaultManagerOracle.setLockedUSDT(vaultTotalUSDT);
 
+        
         // Collateral Oracles
         ArrayList<CollateralOracle> collateralOracles= new ArrayList<CollateralOracle>();
-        CollateralOracle xrpOracle = new CollateralOracle("A-XRP-Oracle", "Active", "A-XRP", CollateralOracle.fullExchangeXRP.get(date), 3.5, 140.0, vaultTotalXRP*1.5);
-        collateralOracles.add(xrpOracle);
-        CollateralOracle ethOracle = new CollateralOracle("ETH-Oracle", "Active", "ETH", CollateralOracle.fullExchangeETH.get(date), 5.5, 110.0, vaultTotalETH*3);
+        CollateralOracle xrpOracle = new CollateralOracle("A-XRP-Oracle", "Active", "A-XRP", CollateralOracle.fullExchangeXRP.get(date), 3.5, 140.0, vaultTotalXRP*1.5, CollateralOracle.fullExchangeXRP);
+        CollateralOracle ethOracle = new CollateralOracle("ETH-Oracle", "Active", "ETH", CollateralOracle.fullExchangeETH.get(date), 5.5, 110.0, vaultTotalETH*3, CollateralOracle.fullExchangeETH);
         collateralOracles.add(ethOracle);
-        CollateralOracle btcOracle = new CollateralOracle("W-BTC-Oracle", "Active", "W-BTC", CollateralOracle.fullExchangeBTC.get(date), 4.5, 130.0, vaultTotalBTC*2);
+        CollateralOracle btcOracle = new CollateralOracle("W-BTC-Oracle", "Active", "W-BTC", CollateralOracle.fullExchangeBTC.get(date), 4.5, 130.0, vaultTotalBTC*2, CollateralOracle.fullExchangeBTC);
         collateralOracles.add(btcOracle);
-        CollateralOracle linkOracle = new CollateralOracle("LINK-Oracle", "Active", "LINK", CollateralOracle.fullExchangeLINK.get(date), 5.5, 120.0, vaultTotalLINK*1.5);
+        CollateralOracle linkOracle = new CollateralOracle("LINK-Oracle", "Active", "LINK", CollateralOracle.fullExchangeLINK.get(date), 5.5, 120.0, vaultTotalLINK*1.5, CollateralOracle.fullExchangeLINK);
         collateralOracles.add(linkOracle);
-        CollateralOracle ltcOracle = new CollateralOracle("P-LTC-Oracle", "Active", "P-LTC", CollateralOracle.fullExchangeLTC.get(date), 2.0, 150.0, vaultTotalLTC*1.5);
+        CollateralOracle ltcOracle = new CollateralOracle("P-LTC-Oracle", "Active", "P-LTC", CollateralOracle.fullExchangeLTC.get(date), 2.0, 150.0, vaultTotalLTC*1.5, CollateralOracle.fullExchangeLTC);
         collateralOracles.add(ltcOracle);
-        CollateralOracle usdtOracle = new CollateralOracle("USDT-Oracle", "Active", "USDT", CollateralOracle.fullExchangeUSDT.get(date), 0.0, 165, vaultTotalETH*3);
+        CollateralOracle usdtOracle = new CollateralOracle("USDT-Oracle", "Active", "USDT", CollateralOracle.fullExchangeUSDT.get(date), 0.0, 165, vaultTotalETH*3, CollateralOracle.fullExchangeUSDT);
         collateralOracles.add(usdtOracle);
 
+        
         System.out.println("Initializing keeper and users...");
         // Keeper Initial
         Keeper keeper = new Keeper("Keeper", Keeper.initialKeeper, keeperSeed);
 
         // Users Initial
-        ArrayList<User> userBase = User.userList;
+        ArrayList<User> userBase = User.getInitialUsers();
         double userTotalBasket = 0.0;
         for(User user : userBase) {
             userTotalBasket += user.getBsktHoldings();
@@ -150,11 +157,13 @@ public class Simulation {
         writer.println("LINK: " + vaultTotalLINK + " Exchange Rate: " + linkOracle.getExchangeRate() + " Stability Fee: " + linkOracle.getStabilityFee() + " Liquidation Ratio " + linkOracle.getLiquidationRatio() + "%");
         writer.println("P-LTC: " + vaultTotalLTC + " Exchange Rate: " + ltcOracle.getExchangeRate() + " Stability Fee: " + ltcOracle.getStabilityFee() + " Liquidation Ratio " + ltcOracle.getLiquidationRatio() + "%");
         writer.println("USDT: " + vaultTotalUSDT + " Exchange Rate: " + usdtOracle.getExchangeRate() + " Stability Fee: " + usdtOracle.getStabilityFee() + " Liquidation Ratio " + usdtOracle.getLiquidationRatio() + "%");
-        writer.println("-------------------------------------------------------------------------------------------------- \n " + "__________________________________________________________________________________________________");
+        writer.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n" + "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
 
         // Tracking statistics
         // Basket
+        ArrayList<Double> cpis = new ArrayList<>();
+        cpis.add(cpiValue);
         ArrayList<Double> basketMinted = new ArrayList<>();
         basketMinted.add(totalBasket);
         ArrayList<Double> basketPrices = new ArrayList<>();
@@ -164,9 +173,11 @@ public class Simulation {
         ArrayList<Double> keeperTradeVolumes = new ArrayList<>();
         ArrayList<Integer> keeperPercentageHoldings = new ArrayList<>();
         keeperPercentageHoldings.add(keeperSeed);
+
         // Basket target
         ArrayList<Double> targetPrices = new ArrayList<>();
         targetPrices.add(basketTargetValue);
+
         // Collateral Health
         double totalDebtCeiling = 0;
         HashMap<String,Double> debtCeilings = new HashMap<String,Double>();
@@ -176,23 +187,27 @@ public class Simulation {
             debtCeilings.put(o.collateralType, o.getDebtCeiling());
             exchangeRates.put(o.collateralType, o.getExchangeRate());
         }
+
         // Auctions
         int flipAuctionCount = 0;
         int flopAuctionCount = 0;
+
         // BSR
         ArrayList<Double> bsrTrack = new ArrayList<>();
         bsrTrack.add(bsrSeed);
 
 
         System.out.println("Going into day loops...");
-        String previousDate = "";
-        while(days > 1) {
-            runSimDay(date, previousDate, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
-                    btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, debtCeilings);
+        String previousDate = date;
+        while(days > 0) {
 
-            days--;
+            date = dates.get(1827-days);
+
+            runSimDay(date, previousDate, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
+                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaults, debtCeilings);
+
             previousDate = date;
-            date = dates.get(1828-days);
+            days--;
         }
 
         writer.println(args[0] + "-" + args[2] + "-" + args[3] + "-" + args[4] + "-" + args[5]);
@@ -201,37 +216,54 @@ public class Simulation {
         //generateFinalCSV();
     }
 
+
+
     private static void runSimDay(String date, String previousDate, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
-             BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle,
-          CollateralOracle btcOracle, CollateralOracle ethOracle, CollateralOracle linkOracle, CollateralOracle ltcOracle, CollateralOracle usdtOracle,
-                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, HashMap<String,Double> debtCeilings)
+                                  BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle,
+                                  CollateralOracle btcOracle,  CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle,
+                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, ArrayList<Vault> vaults, HashMap<String,Double> debtCeilings)
     {
         bsrOracle.updateOracle(date);
         bufferOracle.updateOracle(date, debtCeilings);
         cpiOracle.updateOracle(date);
-        System.out.println(cpiOracle.getCpi());
         emergencyOracle.updateOracle(date);
 
+        colatOracles.clear();
+
         xrpOracle.updateOracle(date);
+        colatOracles.add(xrpOracle);
         btcOracle.updateOracle(date);
-        linkOracle.updateOracle(date);
+        colatOracles.add(btcOracle);
         ethOracle.updateOracle(date);
+        colatOracles.add(ethOracle);
+        linkOracle.updateOracle(date);
+        colatOracles.add(linkOracle);
         ltcOracle.updateOracle(date);
+        colatOracles.add(ltcOracle);
         usdtOracle.updateOracle(date);
+        colatOracles.add(usdtOracle);
+
+        vaultManagerOracle.updateVaults(previousDate, date, vaults, xrpOracle.getFullExchange(), btcOracle.getFullExchange(), ethOracle.getFullExchange(),
+                                        linkOracle.getFullExchange(), ltcOracle.getFullExchange(), usdtOracle.getFullExchange());
 
         vaultManagerOracle.updateOracle(date);
 
-        vaultManagerOracle.updateVaults();
-        vaultManagerOracle.checkLiquidations();
-        
-        User.generateUserWants(User.userList, userSeed, collateralSeed, colatOracles);
+        vaultManagerOracle.checkLiquidations(vaults, colatOracles);
+
+        User.generateUserWants(userBase, userSeed, collateralSeed, colatOracles);
         keeper.generateKeeperWants();
         User.generateNewUsers();
         Governor.analyzeSituation();
         Governor.updateGovernanceParameters();
 
+
+        vaultManagerOracle.updateOracle(date);
+
         // updateTrackingStatistics();
     }
+
+
+
 
     private static void updateTrackingStatistics(ArrayList<Double> basketMinted, ArrayList<Double> basketPrices, ArrayList<Integer> userPopulations,
                                                  ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> targetPrices,
@@ -241,23 +273,161 @@ public class Simulation {
         System.out.println("Placeholder");
     }
 
-    private static void generateFinalCSV(ArrayList<Double> basketMinted, ArrayList<Double> basketPrices, ArrayList<Integer> userPopulations,
+
+    private static void generateFinalCSV(ArrayList<String> cpis, ArrayList<Double> basketMinted, ArrayList<Double> basketPrices, ArrayList<Integer> userPopulations,
                                          ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> targetPrices,
                                          double totalDebtCeiling, HashMap<String,Double> debtCeilings, HashMap<String,Double> exchangeRates,
                                          String[] args, int flipAuctionCount, int flopAuctionCount, ArrayList<Double> bsrTrack)
     {
         try (PrintWriter writer = new PrintWriter(new File("/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"
                 + args[0] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5]+ ".csv"))) {
+            int count = 0;
 
             StringBuilder sb = new StringBuilder();
-            sb.append("id,");
+            sb.append("CPI,");
             sb.append(',');
-            sb.append("Name");
+            sb.append("BasketPrice,");
+            sb.append(',');
+            sb.append("BasketMinted,");
+            sb.append(',');
+            sb.append("DebtCeiling,");
+            sb.append(',');
+            sb.append("XRPDebtCeiling,");
+            sb.append(',');
+            sb.append("XRPLR,");
+            sb.append(',');
+            sb.append("XRPSF,");
+            sb.append(',');
+            sb.append("XRPExchangeRate,");
+            sb.append(',');
+            sb.append("XRPDebtCeiling,");
+            sb.append(',');
+            sb.append("XRPLR,");
+            sb.append(',');
+            sb.append("XRPSF,");
+            sb.append(',');
+            sb.append("XRPExchangeRate,");
+            sb.append(',');
+            sb.append("BTCDebtCeiling,");
+            sb.append(',');
+            sb.append("BTCLR,");
+            sb.append(',');
+            sb.append("BTCSF,");
+            sb.append(',');
+            sb.append("BTCExchangeRate,");
+            sb.append(',');
+            sb.append("ETHDebtCeiling,");
+            sb.append(',');
+            sb.append("ETHLR,");
+            sb.append(',');
+            sb.append("ETHSF,");
+            sb.append(',');
+            sb.append("ETHExchangeRate,");
+            sb.append(',');
+            sb.append("LINKDebtCeiling,");
+            sb.append(',');
+            sb.append("LINKLR,");
+            sb.append(',');
+            sb.append("LINKSF,");
+            sb.append(',');
+            sb.append("LINKExchangeRate,");
+            sb.append(',');
+            sb.append("LTCDebtCeiling,");
+            sb.append(',');
+            sb.append("LTCLR,");
+            sb.append(',');
+            sb.append("LTCSF,");
+            sb.append(',');
+            sb.append("LTCExchangeRate,");
+            sb.append(',');
+            sb.append("USDTDebtCeiling,");
+            sb.append(',');
+            sb.append("USDTLR,");
+            sb.append(',');
+            sb.append("USDTSF,");
+            sb.append(',');
+            sb.append("USDTExchangeRate,");
+            sb.append(',');
+            sb.append("BSR,");
+            sb.append(',');
+            sb.append("UserBaseSize,");
+            sb.append(',');
+            sb.append("KeeperHoldingPercentage,");
+            sb.append(',');
+            sb.append("KeeperTradePercentage,");
             sb.append('\n');
 
-            sb.append("1");
+            sb.append("CPI");
             sb.append(',');
-            sb.append("Prashant Ghimire");
+            sb.append("BasketPrice");
+            sb.append(',');
+            sb.append("BasketMinted");
+            sb.append(',');
+            sb.append("DebtCeiling");
+            sb.append(',');
+            sb.append("XRPDebtCeiling");
+            sb.append(',');
+            sb.append("XRPLR");
+            sb.append(',');
+            sb.append("XRPSF");
+            sb.append(',');
+            sb.append("XRPExchangeRate");
+            sb.append(',');
+            sb.append("XRPDebtCeiling");
+            sb.append(',');
+            sb.append("XRPLR");
+            sb.append(',');
+            sb.append("XRPSF");
+            sb.append(',');
+            sb.append("XRPExchangeRate");
+            sb.append(',');
+            sb.append("BTCDebtCeiling");
+            sb.append(',');
+            sb.append("BTCLR");
+            sb.append(',');
+            sb.append("BTCSF");
+            sb.append(',');
+            sb.append("BTCExchangeRate");
+            sb.append(',');
+            sb.append("ETHDebtCeiling");
+            sb.append(',');
+            sb.append("ETHLR");
+            sb.append(',');
+            sb.append("ETHSF");
+            sb.append(',');
+            sb.append("ETHExchangeRate");
+            sb.append(',');
+            sb.append("LINKDebtCeiling");
+            sb.append(',');
+            sb.append("LINKLR");
+            sb.append(',');
+            sb.append("LINKSF");
+            sb.append(',');
+            sb.append("LINKExchangeRate");
+            sb.append(',');
+            sb.append("LTCDebtCeiling");
+            sb.append(',');
+            sb.append("LTCLR");
+            sb.append(',');
+            sb.append("LTCSF");
+            sb.append(',');
+            sb.append("LTCExchangeRate");
+            sb.append(',');
+            sb.append("USDTDebtCeiling");
+            sb.append(',');
+            sb.append("USDTLR");
+            sb.append(',');
+            sb.append("USDTSF");
+            sb.append(',');
+            sb.append("USDTExchangeRate");
+            sb.append(',');
+            sb.append("BSR");
+            sb.append(',');
+            sb.append("UserBaseSize");
+            sb.append(',');
+            sb.append("KeeperHoldingPercentage");
+            sb.append(',');
+            sb.append("KeeperTradePercentage");
             sb.append('\n');
 
             writer.write(sb.toString());

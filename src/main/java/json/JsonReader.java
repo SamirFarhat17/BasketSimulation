@@ -19,12 +19,12 @@ public class JsonReader {
     public static JSONObject readJsonFromFile(String file) throws IOException {
         File initialFile = new File(file);
 
-        try (InputStream stream = new FileInputStream(initialFile)) {
-            BufferedReader bfRead = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
-            String jsonString = readAll(bfRead);
-            JSONObject jsonObject = new JSONObject(jsonString);
-            return jsonObject;
-        }
+        InputStream stream = new FileInputStream(initialFile);
+        BufferedReader bfRead = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+        String jsonString = readAll(bfRead);
+        JSONObject jsonObject = new JSONObject(jsonString);
+        return jsonObject;
+
 
     }
 }
