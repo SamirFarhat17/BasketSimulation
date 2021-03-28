@@ -28,12 +28,7 @@ public class BufferOracle extends Oracle {
 
 
     // Methods
-    public void updateOracle(String date, HashMap<String,Double> debtCeilings) {
-        double totalDebtCeiling = 0;
-        for(String key : debtCeilings.keySet()) {
-            totalDebtCeiling += debtCeilings.get(key);
-        }
-
+    public void updateOracle(String date, double totalDebtCeilings) {
         setTotalDebtCeiling(totalDebtCeiling);
     }
 }

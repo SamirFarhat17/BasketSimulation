@@ -233,7 +233,8 @@ public class User {
 
         int userBaseSize = userBase.size();
         Random rn = new Random();
-        int newUsers = rn.nextInt(userBaseSize/100) + userBaseSize/300;
+        int newUsers = (int)Math.log(rn.nextInt(userBaseSize/10) + userBaseSize/30);
+        System.out.println(newUsers);
         int selector;
         User user;
 
@@ -279,9 +280,9 @@ public class User {
             else {
                 user.setDesiredBasket(userBsktMinted);
             }
-
             userBase.add(user);
         }
+        System.out.println(userBaseSize);
 
     }
 

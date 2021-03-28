@@ -184,13 +184,19 @@ public class Simulation {
 
         // Collateral Health
         double totalDebtCeiling = 0;
-        HashMap<String,Double> debtCeilings = new HashMap<String,Double>();
-        HashMap<String,Double> exchangeRates = new HashMap<String,Double>();
-        for(CollateralOracle o : collateralOracles ) {
-            totalDebtCeiling += o.getDebtCeiling();
-            debtCeilings.put(o.collateralType, o.getDebtCeiling());
-            exchangeRates.put(o.collateralType, o.getExchangeRate());
-        }
+        ArrayList<Double> debtCeilingsXRP = new ArrayList<>();
+        ArrayList<Double> debtCeilingsBTC = new ArrayList<>();
+        ArrayList<Double> debtCeilingsETH = new ArrayList<>();
+        ArrayList<Double> debtCeilingsLINK = new ArrayList<>();
+        ArrayList<Double> debtCeilingsLTC= new ArrayList<>();
+        ArrayList<Double> debtCeilingsUSDT = new ArrayList<>();
+        ArrayList<Double> totalDebtCeilings = new ArrayList<>();
+        ArrayList<Double> exchangeRatesXRP = new ArrayList<>();
+        ArrayList<Double> exchangeRatesBTC = new ArrayList<>();
+        ArrayList<Double> exchangeRatesETH = new ArrayList<>();
+        ArrayList<Double> exchangeRatesLINK = new ArrayList<>();
+        ArrayList<Double> exchangeRatesLTC = new ArrayList<>();
+        ArrayList<Double> exchangeRatesUSDT = new ArrayList<>();
 
         // Auctions
         int flipAuctionCount = 0;
@@ -210,7 +216,11 @@ public class Simulation {
             date = dates.get(1827-days);
 
             runSimDay(date, basketValue, previousDate, vaultManagerOracle.getMintedBasketTokens(), userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
-                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaultManagerOracle.getActiveVaults(), debtCeilings);
+                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaultManagerOracle.getActiveVaults(), totalDebtCeiling);
+
+            updateTrackingStatistics(basketMinted, basketTokensMinted, basketPrices, userPopulations, keeperTradeVolumes, keeperPercentageHoldings, targetPrices, totalDebtCeilings, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH,
+                    debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, args, flipAuctionCount,
+                    flopAuctionCount, bsrTrack);
 
             previousDate = date;
             days--;
@@ -225,11 +235,11 @@ public class Simulation {
     private static void runSimDay(String date, double basketPrice, String previousDate, double totalBSKTTokensMinted, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
                                   BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle,
                                   CollateralOracle btcOracle,  CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle,
-                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, ArrayList<Vault> vaults, HashMap<String,Double> debtCeilings) throws IOException
+                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, ArrayList<Vault> vaults, double totalDebtCeiling) throws IOException
     {
         System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
-        bufferOracle.updateOracle(date, debtCeilings);
+        bufferOracle.updateOracle(date, totalDebtCeiling);
         cpiOracle.updateOracle(date);
         emergencyOracle.updateOracle(date);
 
@@ -265,18 +275,20 @@ public class Simulation {
         Governor.analyzeSituation();
         Governor.updateGovernanceParameters();
 
-        // updateTrackingStatistics();
     }
 
 
 
 
-    private static void updateTrackingStatistics(ArrayList<Double> basketMinted, ArrayList<Double> basketPrices, ArrayList<Integer> userPopulations,
-                                                 ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> targetPrices,
-                                                 double totalDebtCeiling, HashMap<String,Double> debtCeilings, HashMap<String,Double> exchangeRates,
-                                                 String[] args, int flipAuctionCount, int flopAuctionCount, ArrayList<Double> bsrTrack)
+    private static void updateTrackingStatistics(ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted, ArrayList<Double> basketPrices,
+                                                 ArrayList<Integer> userPopulations, ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings,
+                                                 ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC,
+                                                 ArrayList<Double> debtCeilingETH, ArrayList<Double> debtCeilingLINK, ArrayList<Double> debtCeilingLTC,
+                                                 ArrayList<Double> debtCeilingUSDT, ArrayList<Double> exchangeRateXRP, ArrayList<Double> exchangeRateBTC,
+                                                 ArrayList<Double> exchangeRateETH, ArrayList<Double> exchangeRateLINK, ArrayList<Double> exchangeRateLTC,
+                                                 ArrayList<Double> exchangeRateUSDT, String[] args, int flipAuctionCount, int flopAuctionCount, ArrayList<Double> bsrTrack)
     {
-        System.out.println("Placeholder");
+
     }
 
 
