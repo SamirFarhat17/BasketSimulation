@@ -182,7 +182,7 @@ public class VaultManagerOracle extends Oracle {
             }
 
             if(colatAmount < vault.getBsktTokensMinted() * basketPrice * (collateralOracle.getLiquidationRatio()/100)) {
-                liquidateVault(userBase, vault);
+                liquidateVault(userBase, vault, basketPrice);
                 removeActiveVault(vault);
                 addAuctionVault(vault);
                 if(colatType.equals("A-XRP")) setLockedXRP(getLockedXRP() - colatAmount);
@@ -196,19 +196,47 @@ public class VaultManagerOracle extends Oracle {
 
     }
 
-    public static void liquidateVault(ArrayList<User> userBase, Vault vault) {
+    public static void liquidateVault(ArrayList<User> userBase, Vault vault, double basketPrice) {
         String userID = vault.ownerID;
         ArrayList<Vault> userVaults;
-        
+
         for(User user: userBase) {
             if(user.getUserID().equals(userID)) {
                 userVaults = user.getVaults();
                 userVaults.remove(vault);
                 user.setVaults(userVaults);
-                user.addFees("Liquidation Fee", vault.bsktMinted*0.12);
+                user.addFees("Liquidation Fee", user.getFeesOwed().get("Liquidation Fee") + vault.bsktMinted*0.12);
+                System.out.println(user.getFeesOwed().get("Stability Fee") + " " + user.getFeesOwed().get("Liquidation Fee"));
+                user.payStabilityFee(basketPrice);
+                user.payLiquidationFee(basketPrice);
+                System.out.println(user.getFeesOwed().get("Stability Fee") + " " + user.getFeesOwed().get("Liquidation Fee"));
                 break;
             }
         }
+    }
+
+    public void closeVault(User user, Vault vault, double basketPrice) {
+        ArrayList<Vault> vaults = user.getVaults();
+        vaults.remove(vault);
+        user.setVaults(vaults);
+        String colatType = vault.getCollateralType();
+        double colatAmount = vault.getCollateralAmount();
+
+        user.addCollaterals(vault.getCollateralType(), vault.getCollateralAmount());
+        user.payStabilityFee(basketPrice);
+
+        user.setBsktHoldings(user.getBsktHoldings() - vault.getBsktTokensMinted() * basketPrice);
+        user.setBsktTokens(user.getBsktTokens() - vault.getBsktTokensMinted());
+
+        removeActiveVault(vault);
+
+        if(colatType.equals("A-XRP")) setLockedXRP(getLockedXRP() - colatAmount);
+        if(colatType.equals("W-BTC")) setLockedBTC(getLockedBTC() - colatAmount);
+        if(colatType.equals("ETH")) setLockedETH(getLockedETH() - colatAmount);
+        if(colatType.equals("LINK")) setLockedLINK(getLockedLINK() - colatAmount);
+        if(colatType.equals("P-LTC")) setLockedLTC(getLockedLTC() - colatAmount);
+        if(colatType.equals("USDT")) setLockedUSDT(getLockedUSDT() - colatAmount);
+
     }
 
 }

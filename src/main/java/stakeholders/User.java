@@ -72,14 +72,13 @@ public class User {
     public HashMap<String,Double> getFeesOwed() { return this.feesOwed; }
     public void setFeesOwed(HashMap<String,Double> feesOwed) { this.feesOwed = feesOwed;}
     // Add fees without conflict
-    public HashMap<String,Double> addFees(String feeType, double amount) {
-        if(!this.collaterals.containsKey(feeType)) {
-            this.collaterals.put(feeType, amount);
+    public void addFees(String feeType, double amount) {
+        if(!this.feesOwed.containsKey(feeType)) {
+            this.feesOwed.put(feeType, amount);
         }
         else {
-            this.collaterals.replace(feeType, this.collaterals.get(feeType)+amount);
+            this.feesOwed.replace(feeType, amount);
         }
-        return this.collaterals;
     }
 
     public double getDesiredBasket() { return this.desiredBasket; }
@@ -97,10 +96,12 @@ public class User {
         return this.colatWanted;
     }
 
+
     // Variables
     ArrayList<User> buyerList = new ArrayList<>();
     ArrayList<User> sellerList = new ArrayList<>();
     public static String[] collateralTypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
+
 
     // Methods
     public static ArrayList<User> getInitialUsers(double basketPrice, ArrayList<Vault> vaults) throws IOException {
@@ -156,28 +157,30 @@ public class User {
         return users;
     }
 
-    public static void generateStabilityFees(User user, ArrayList<CollateralOracle> oracles) {
+
+    public void generateStabilityFees(ArrayList<CollateralOracle> oracles) {
         String type;
         double amount;
         double multiplier = 0.0;
         Oracle oracle;
-        for(Vault v : user.getVaults()) {
+        for(Vault v : getVaults()) {
             type = v.getCollateralType();
             for( CollateralOracle o : oracles) {
                 if(o.getCollateralType().equals(type)) multiplier = o.stabilityFee;
             }
             amount = v.getCollateralAmount();
-            user.addFees("Stability Fee", amount*multiplier/(100*365));
+            addFees("Stability Fee", amount*multiplier/(100*365));
         }
     }
 
-    public static void generateUserWants(ArrayList<User> userList, double userSeed, double basketPrice, double collateralSeed,
-                                         ArrayList<CollateralOracle> colatOracles, VaultManagerOracle vaultManagerOracle) {
+
+    public static void generateUserWants(ArrayList<User> userList, ArrayList<User> sellers, ArrayList<User> buyers, double userSeed, double basketPrice,
+                                         double collateralSeed, ArrayList<CollateralOracle> colatOracles, VaultManagerOracle vaultManagerOracle) {
         boolean entered;
 
 
         for(User u : userList) {
-            generateStabilityFees(u, colatOracles);
+            u.generateStabilityFees(colatOracles);
             /*
             System.out.println("ID: " + u.getUserID() + "\nBasket Holdings: " + u.getBsktHoldings() + "\nDesired Basket: " + u.getDesiredBasket()
                     + "\nCollateral Holdings: " + u.getCollaterals().get("A-XRP") + " " + u.getCollaterals().get("W-BTC")  + " " + u.getCollaterals().get("ETH") + " "
@@ -191,6 +194,11 @@ public class User {
             int vaultDescision = rn.nextInt(3);
             HashMap<String,Double> userColats = new HashMap<>();
 
+            if(u.getBsktHoldings() < 0) {
+                u.setDesiredBasket(u.getBsktHoldings() * -1);
+                entered = true;
+            }
+
             if(u.bsktHoldings > 0 && status == 12 && !entered) {
                 u.setDesiredBasket(userSeed * (0 + Math.random() * (1)));
                 entered = true;
@@ -198,7 +206,7 @@ public class User {
                     userColats = u.getCollaterals();
                     for(String colat : DataExtraction.shuffleArray(CollateralOracle.collateralTypes)) {
                         if(userColats.get(colat) > u.getDesiredBasket() * 1.5) {
-                            Vault.openVault(u, u.userID, u.getDesiredBasket(), u.getDesiredBasket()/basketPrice, colat, u.getDesiredBasket() * 1.5, vaultManagerOracle);
+                            Vault.openVault(u, u.getUserID(), u.getDesiredBasket(), u.getDesiredBasket()/basketPrice, colat, u.getDesiredBasket() * 1.5, vaultManagerOracle);
                         }
                     }
                 }
@@ -210,7 +218,10 @@ public class User {
             }
 
             if(u.bsktHoldings > 0 && status == 13 && !entered) {
-                u.addCollateralWanted(CollateralOracle.collateralTypes[rn.nextInt(6)], collateralSeed * (0 + Math.random() * (2)));
+                if(!u.getVaults().isEmpty()) {
+                    vaultManagerOracle.closeVault(u, u.getVaults().get(0), basketPrice);
+                }
+                else u.addCollateralWanted(CollateralOracle.collateralTypes[rn.nextInt(6)], collateralSeed * (0 + Math.random() * (2)));
                 entered = true;
             }
 
@@ -228,6 +239,7 @@ public class User {
             */
         }
     }
+
 
     public static void generateNewUsers(ArrayList<User> userBase, double userSeed, double collateralSeed, double basketPrice, VaultManagerOracle vaultManagerOracle) throws IOException {
         String[] collaterals = CollateralOracle.collateralTypes;
@@ -285,6 +297,7 @@ public class User {
 
     }
 
+
     public static void buyBasket(User buyer, User seller, double payment, double basketPrice, String collateralType) {
         buyer.setBsktHoldings(buyer.getBsktHoldings() + payment);
         buyer.setBsktTokens(buyer.getBsktTokens() + payment/basketPrice);
@@ -297,6 +310,7 @@ public class User {
         seller.addCollaterals(collateralType, seller.getCollaterals().get(collateralType) + payment);
 
     }
+
 
     public static void generateUserCollaterals(ArrayList<User> userBase, double collateralSeed) {
         String[] collaterals = CollateralOracle.collateralTypes;
@@ -315,12 +329,19 @@ public class User {
     }
 
 
-    public static void payStabilityFee(Vault v, User u, VaultManagerOracle vaultManagerOracle) {
+    public void payStabilityFee(double basketPrice) {
+        double stabilityFee = getFeesOwed().get("Stability Fee");
+        setBsktHoldings(getBsktHoldings() - stabilityFee);
+        setBsktTokens(getBsktTokens() - stabilityFee/basketPrice);
+        addFees("Stability Fee", getFeesOwed().get("Stability Fee") - stabilityFee);
+     }
 
-    }
 
-    public static void payLiquidationFee(Vault v, User u, VaultManagerOracle vaultManagerOracle) {
-
+    public void payLiquidationFee(double basketPrice) {
+        double liquidationFee = getFeesOwed().get("Liquidation Fee");
+        setBsktHoldings(getBsktHoldings() - liquidationFee);
+        setBsktTokens(getBsktTokens() - liquidationFee/basketPrice);
+        addFees("Liquidation Fee", getFeesOwed().get("Liquidation Fee") - liquidationFee);
     }
 
 }

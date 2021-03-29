@@ -108,6 +108,8 @@ public class Simulation {
         Keeper keeper = new Keeper("Keeper", Keeper.initialKeeper, keeperSeed);
 
         // Users Initial
+        ArrayList<User> buyers = new ArrayList<>();
+        ArrayList<User> sellers = new ArrayList<>();
         ArrayList<User> userBase = User.getInitialUsers(basketValue, vaults);
         double userTotalBasket = 0.0;
         for(User user : userBase) {
@@ -228,7 +230,7 @@ public class Simulation {
             date = dates.get(1827-days);
 
             runSimDay(date, basketValue, previousDate, vaultManagerOracle.getMintedBasketTokens(), userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
-                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, totalDebtCeiling);
+                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, buyers, sellers, totalDebtCeiling);
 
             updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpis, cpiOracle,
                     targetPrices, totalDebtCeilings, collateralOracles, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC,
@@ -251,7 +253,7 @@ public class Simulation {
     private static void runSimDay(String date, double basketPrice, String previousDate, double totalBSKTTokensMinted, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
                                   BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle,
                                   CollateralOracle btcOracle,  CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle,
-                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, double totalDebtCeiling) throws IOException
+                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling) throws IOException
     {
         System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
@@ -280,12 +282,11 @@ public class Simulation {
                                         linkOracle.getFullExchange(), ltcOracle.getFullExchange(), usdtOracle.getFullExchange());
         vaultManagerOracle.updateOracle(date);
         vaultManagerOracle.checkLiquidations(vaultManagerOracle, userBase, vaultManagerOracle.getActiveVaults(), colatOracles, basketPrice);
-        System.out.println(vaultManagerOracle.getActiveVaults().size());
 
         System.out.println("User creation and interest generation");
         User.generateNewUsers(userBase, userSeed, collateralSeed, basketPrice, vaultManagerOracle);
         User.generateUserCollaterals(userBase, collateralSeed);
-        User.generateUserWants(userBase, userSeed, basketPrice, collateralSeed, colatOracles, vaultManagerOracle);
+        User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice, collateralSeed, colatOracles, vaultManagerOracle);
         keeper.generateKeeperWants(date);
 
         System.out.println("Governorship work\n");
