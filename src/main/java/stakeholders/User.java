@@ -281,7 +281,6 @@ public class User {
             }
             userBase.add(user);
         }
-        System.out.println(userBaseSize);
 
     }
 

@@ -231,7 +231,7 @@ public class Simulation {
             runSimDay(date, basketValue, previousDate, vaultManagerOracle.getMintedBasketTokens(), userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
                     btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaultManagerOracle.getActiveVaults(), totalDebtCeiling);
 
-            updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpiOracle,
+            updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpis, cpiOracle,
                     targetPrices, totalDebtCeilings, collateralOracles, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC,
                     exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC,
                     liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT, bsrOracle, bsrTrack);
@@ -241,7 +241,10 @@ public class Simulation {
         }
 
         writer.close();
-        //generateFinalCSV();
+        generateFinalCSV(basketMinted, basketTokensMinted, basketPrices, userBase, userPopulations, keeperTradeVolumes, keeperPercentageHoldings, cpis, targetPrices, totalDebtCeilings, collateralOracles,
+                debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC,
+                exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC,
+                stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT, bsrTrack, args);
     }
 
 
@@ -296,8 +299,8 @@ public class Simulation {
 
     private static void updateTrackingStatistics(VaultManagerOracle vaultManagerOracle, ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted,
                                                  double basketPrice, ArrayList<Double> basketPrices, ArrayList<User> userBase, ArrayList<Integer> userPopulations,
-                                                 Keeper keeper, ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, CPIOracle cpiOracle,
-                                                 ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles,
+                                                 Keeper keeper, ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> cpis,
+                                                 CPIOracle cpiOracle, ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles,
                                                  ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC, ArrayList<Double> debtCeilingETH,
                                                  ArrayList<Double> debtCeilingLINK, ArrayList<Double> debtCeilingLTC, ArrayList<Double> debtCeilingUSDT,
                                                  ArrayList<Double> exchangeRateXRP, ArrayList<Double> exchangeRateBTC, ArrayList<Double> exchangeRateETH,
@@ -314,7 +317,8 @@ public class Simulation {
         userPopulations.add(userBase.size());
         keeperTradeVolumes.add(keeper.getPercentTrading());
         keeperPercentageHoldings.add((int) Math.round(keeper.getKeeperBskt()/vaultManagerOracle.getMintedBasket()));
-        targetPrices.add(cpiOracle.getCpi());
+        targetPrices.add(cpiOracle.getCpi()/10);
+        cpis.add(cpiOracle.getCpi());
 
         debtCeilingXRP.add(collateralOracles.get(0).getDebtCeiling());
         debtCeilingBTC.add(collateralOracles.get(1).getDebtCeiling());
@@ -332,16 +336,37 @@ public class Simulation {
         exchangeRateLTC.add(collateralOracles.get(4).getExchangeRate());
         exchangeRateUSDT.add(collateralOracles.get(5).getExchangeRate());
 
-        
+        liquidationRatiosXRP.add(collateralOracles.get(0).getLiquidationRatio());
+        liquidationRatiosBTC.add(collateralOracles.get(1).getLiquidationRatio());
+        liquidationRatiosETH.add(collateralOracles.get(2).getLiquidationRatio());
+        liquidationRatiosLINK.add(collateralOracles.get(3).getLiquidationRatio());
+        liquidationRatiosLTC.add(collateralOracles.get(4).getLiquidationRatio());
+        liquidationRatiosUSDT.add(collateralOracles.get(5).getLiquidationRatio());
+
+        stabilityFeesXRP.add(collateralOracles.get(0).getStabilityFee());
+        stabilityFeesBTC.add(collateralOracles.get(1).getStabilityFee());
+        stabilityFeesETH.add(collateralOracles.get(2).getStabilityFee());
+        stabilityFeesLINK.add(collateralOracles.get(3).getStabilityFee());
+        stabilityFeesLTC.add(collateralOracles.get(4).getStabilityFee());
+        stabilityFeesUSDT.add(collateralOracles.get(5).getStabilityFee());
 
         bsrTrack.add(bsrOracle.getBsr());
     }
 
 
-    private static void generateFinalCSV(ArrayList<String> cpis, ArrayList<Double> basketMinted, ArrayList<Double> basketPrices, ArrayList<Integer> userPopulations,
-                                         ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> targetPrices,
-                                         double totalDebtCeiling, HashMap<String,Double> debtCeilings, HashMap<String,Double> exchangeRates,
-                                         String[] args, int flipAuctionCount, int flopAuctionCount, ArrayList<Double> bsrTrack)
+    private static void generateFinalCSV(ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted,
+                                         ArrayList<Double> basketPrices, ArrayList<User> userBase, ArrayList<Integer> userPopulations,
+                                         ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> cpis,
+                                         ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles,
+                                         ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC, ArrayList<Double> debtCeilingETH,
+                                         ArrayList<Double> debtCeilingLINK, ArrayList<Double> debtCeilingLTC, ArrayList<Double> debtCeilingUSDT,
+                                         ArrayList<Double> exchangeRateXRP, ArrayList<Double> exchangeRateBTC, ArrayList<Double> exchangeRateETH,
+                                         ArrayList<Double> exchangeRateLINK, ArrayList<Double> exchangeRateLTC, ArrayList<Double> exchangeRateUSDT,
+                                         ArrayList<Double> liquidationRatiosXRP, ArrayList<Double> liquidationRatiosBTC, ArrayList<Double> liquidationRatiosETH,
+                                         ArrayList<Double> liquidationRatiosLINK, ArrayList<Double> liquidationRatiosLTC, ArrayList<Double> liquidationRatiosUSDT,
+                                         ArrayList<Double> stabilityFeesXRP, ArrayList<Double> stabilityFeesBTC, ArrayList<Double> stabilityFeesETH,
+                                         ArrayList<Double> stabilityFeesLINK, ArrayList<Double> stabilityFeesLTC, ArrayList<Double> stabilityFeesUSDT,
+                                         ArrayList<Double> bsrTrack, String[] args)
     {
         try (PrintWriter writer = new PrintWriter(new File("/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"
                 + args[0] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5]+ ".csv"))) {
@@ -352,17 +377,11 @@ public class Simulation {
             sb.append(',');
             sb.append("BasketPrice,");
             sb.append(',');
+            sb.append("TargetPrice,");
+            sb.append(',');
             sb.append("BasketMinted,");
             sb.append(',');
             sb.append("DebtCeiling,");
-            sb.append(',');
-            sb.append("XRPDebtCeiling,");
-            sb.append(',');
-            sb.append("XRPLR,");
-            sb.append(',');
-            sb.append("XRPSF,");
-            sb.append(',');
-            sb.append("XRPExchangeRate,");
             sb.append(',');
             sb.append("XRPDebtCeiling,");
             sb.append(',');
@@ -421,78 +440,74 @@ public class Simulation {
             sb.append("KeeperTradePercentage,");
             sb.append('\n');
 
-            sb.append("CPI");
-            sb.append(',');
-            sb.append("BasketPrice");
-            sb.append(',');
-            sb.append("BasketMinted");
-            sb.append(',');
-            sb.append("DebtCeiling");
-            sb.append(',');
-            sb.append("XRPDebtCeiling");
-            sb.append(',');
-            sb.append("XRPLR");
-            sb.append(',');
-            sb.append("XRPSF");
-            sb.append(',');
-            sb.append("XRPExchangeRate");
-            sb.append(',');
-            sb.append("XRPDebtCeiling");
-            sb.append(',');
-            sb.append("XRPLR");
-            sb.append(',');
-            sb.append("XRPSF");
-            sb.append(',');
-            sb.append("XRPExchangeRate");
-            sb.append(',');
-            sb.append("BTCDebtCeiling");
-            sb.append(',');
-            sb.append("BTCLR");
-            sb.append(',');
-            sb.append("BTCSF");
-            sb.append(',');
-            sb.append("BTCExchangeRate");
-            sb.append(',');
-            sb.append("ETHDebtCeiling");
-            sb.append(',');
-            sb.append("ETHLR");
-            sb.append(',');
-            sb.append("ETHSF");
-            sb.append(',');
-            sb.append("ETHExchangeRate");
-            sb.append(',');
-            sb.append("LINKDebtCeiling");
-            sb.append(',');
-            sb.append("LINKLR");
-            sb.append(',');
-            sb.append("LINKSF");
-            sb.append(',');
-            sb.append("LINKExchangeRate");
-            sb.append(',');
-            sb.append("LTCDebtCeiling");
-            sb.append(',');
-            sb.append("LTCLR");
-            sb.append(',');
-            sb.append("LTCSF");
-            sb.append(',');
-            sb.append("LTCExchangeRate");
-            sb.append(',');
-            sb.append("USDTDebtCeiling");
-            sb.append(',');
-            sb.append("USDTLR");
-            sb.append(',');
-            sb.append("USDTSF");
-            sb.append(',');
-            sb.append("USDTExchangeRate");
-            sb.append(',');
-            sb.append("BSR");
-            sb.append(',');
-            sb.append("UserBaseSize");
-            sb.append(',');
-            sb.append("KeeperHoldingPercentage");
-            sb.append(',');
-            sb.append("KeeperTradePercentage");
-            sb.append('\n');
+            for(int i = 0; i < basketMinted.size(); i++) {
+                sb.append(cpis.get(i));
+                sb.append(',');
+                sb.append(basketPrices.get(i));
+                sb.append(',');
+                sb.append(targetPrices.get(i));
+                sb.append(',');
+                sb.append(basketMinted.get(i));
+                sb.append(',');
+                sb.append(totalDebtCeilings.get(i));
+                sb.append(',');
+                sb.append(debtCeilingXRP.get(i));
+                sb.append(',');
+                sb.append(liquidationRatiosXRP.get(i));
+                sb.append(',');
+                sb.append(stabilityFeesXRP.get(i));
+                sb.append(',');
+                sb.append(exchangeRateXRP.get(i));
+                sb.append(',');
+                sb.append(debtCeilingBTC.get(i));
+                sb.append(',');
+                sb.append(liquidationRatiosBTC.get(i));
+                sb.append(',');
+                sb.append(stabilityFeesBTC.get(i));
+                sb.append(',');
+                sb.append(exchangeRateBTC.get(i));
+                sb.append(',');
+                sb.append(debtCeilingETH.get(i));
+                sb.append(',');
+                sb.append(liquidationRatiosETH.get(i));
+                sb.append(',');
+                sb.append(stabilityFeesETH.get(i));
+                sb.append(',');
+                sb.append(exchangeRateETH.get(i));
+                sb.append(',');
+                sb.append(debtCeilingLINK.get(i));
+                sb.append(',');
+                sb.append(liquidationRatiosLINK.get(i));
+                sb.append(',');
+                sb.append(stabilityFeesLINK.get(i));
+                sb.append(',');
+                sb.append(exchangeRateLINK.get(i));
+                sb.append(',');
+                sb.append(debtCeilingLTC.get(i));
+                sb.append(',');
+                sb.append(liquidationRatiosLTC.get(i));
+                sb.append(',');
+                sb.append(stabilityFeesLTC.get(i));
+                sb.append(',');
+                sb.append(exchangeRateLTC.get(i));
+                sb.append(',');
+                sb.append(debtCeilingUSDT.get(i));
+                sb.append(',');
+                sb.append(liquidationRatiosUSDT.get(i));
+                sb.append(',');
+                sb.append(stabilityFeesUSDT.get(i));
+                sb.append(',');
+                sb.append(exchangeRateUSDT.get(i));
+                sb.append(',');
+                sb.append(bsrTrack.get(i));
+                sb.append(',');
+                sb.append(userPopulations.get(i));
+                sb.append(',');
+                sb.append(keeperPercentageHoldings.get(i));
+                sb.append(',');
+                sb.append(keeperTradeVolumes.get(i));
+                sb.append('\n');
+            }
 
             writer.write(sb.toString());
 
