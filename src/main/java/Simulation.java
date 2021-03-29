@@ -225,7 +225,6 @@ public class Simulation {
         System.out.println("Going into day loops...");
         String previousDate = date;
         while(days > 0) {
-
             date = dates.get(1827-days);
 
             runSimDay(date, basketValue, previousDate, vaultManagerOracle.getMintedBasketTokens(), userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
@@ -369,78 +368,79 @@ public class Simulation {
                                          ArrayList<Double> bsrTrack, String[] args)
     {
         try (PrintWriter writer = new PrintWriter(new File("/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"
-                + args[0] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5]+ ".csv"))) {
-            int count = 0;
+                + args[0] + "_" + args[1] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5]+ ".csv"))) {
 
             StringBuilder sb = new StringBuilder();
-            sb.append("CPI,");
+            sb.append("CPI");
             sb.append(',');
-            sb.append("BasketPrice,");
+            sb.append("BasketPrice");
             sb.append(',');
-            sb.append("TargetPrice,");
+            sb.append("TargetPrice");
             sb.append(',');
-            sb.append("BasketMinted,");
+            sb.append("BasketMinted");
             sb.append(',');
-            sb.append("DebtCeiling,");
+            sb.append("BasketTokensMinted");
             sb.append(',');
-            sb.append("XRPDebtCeiling,");
+            sb.append("DebtCeiling");
             sb.append(',');
-            sb.append("XRPLR,");
+            sb.append("XRPDebtCeiling");
             sb.append(',');
-            sb.append("XRPSF,");
+            sb.append("XRPLR");
             sb.append(',');
-            sb.append("XRPExchangeRate,");
+            sb.append("XRPSF");
             sb.append(',');
-            sb.append("BTCDebtCeiling,");
+            sb.append("XRPExchangeRate");
             sb.append(',');
-            sb.append("BTCLR,");
+            sb.append("BTCDebtCeiling");
             sb.append(',');
-            sb.append("BTCSF,");
+            sb.append("BTCLR");
             sb.append(',');
-            sb.append("BTCExchangeRate,");
+            sb.append("BTCSF");
             sb.append(',');
-            sb.append("ETHDebtCeiling,");
+            sb.append("BTCExchangeRate");
             sb.append(',');
-            sb.append("ETHLR,");
+            sb.append("ETHDebtCeiling");
+            sb.append(',');
+            sb.append("ETHLR");
             sb.append(',');
             sb.append("ETHSF,");
             sb.append(',');
-            sb.append("ETHExchangeRate,");
+            sb.append("ETHExchangeRate");
             sb.append(',');
-            sb.append("LINKDebtCeiling,");
+            sb.append("LINKDebtCeiling");
             sb.append(',');
-            sb.append("LINKLR,");
+            sb.append("LINKLR");
             sb.append(',');
-            sb.append("LINKSF,");
+            sb.append("LINKSF");
             sb.append(',');
-            sb.append("LINKExchangeRate,");
+            sb.append("LINKExchangeRate");
             sb.append(',');
-            sb.append("LTCDebtCeiling,");
+            sb.append("LTCDebtCeiling");
             sb.append(',');
-            sb.append("LTCLR,");
+            sb.append("LTCLR");
             sb.append(',');
-            sb.append("LTCSF,");
+            sb.append("LTCSF");
             sb.append(',');
-            sb.append("LTCExchangeRate,");
+            sb.append("LTCExchangeRate");
             sb.append(',');
-            sb.append("USDTDebtCeiling,");
+            sb.append("USDTDebtCeiling");
             sb.append(',');
-            sb.append("USDTLR,");
+            sb.append("USDTLR");
             sb.append(',');
-            sb.append("USDTSF,");
+            sb.append("USDTSF");
             sb.append(',');
-            sb.append("USDTExchangeRate,");
+            sb.append("USDTExchangeRate");
             sb.append(',');
-            sb.append("BSR,");
+            sb.append("BSR");
             sb.append(',');
-            sb.append("UserBaseSize,");
+            sb.append("UserBaseSize");
             sb.append(',');
-            sb.append("KeeperHoldingPercentage,");
+            sb.append("KeeperHoldingPercentage");
             sb.append(',');
-            sb.append("KeeperTradePercentage,");
+            sb.append("KeeperTradePercentage");
             sb.append('\n');
 
-            for(int i = 0; i < basketMinted.size(); i++) {
+            for(int i = 0; i < basketMinted.size()-1; i++) {
                 sb.append(cpis.get(i));
                 sb.append(',');
                 sb.append(basketPrices.get(i));
@@ -448,6 +448,8 @@ public class Simulation {
                 sb.append(targetPrices.get(i));
                 sb.append(',');
                 sb.append(basketMinted.get(i));
+                sb.append(',');
+                sb.append(basketTokensMinted.get(i));
                 sb.append(',');
                 sb.append(totalDebtCeilings.get(i));
                 sb.append(',');
