@@ -9,9 +9,9 @@ if __name__ == '__main__':
 
     #exec(compile(open('CpiToJson.py', "rb").read(), 'CpiToJson.py', 'exec'))
     #exec(compile(open('CollateralToJson.py', "rb").read(), 'CollateralToJson.py', 'exec'))
+    #exec(compile(open('NormalDistributionCreation.py', "rb").read(), 'NormalDistributionCreation.py', 'exec'))
 
-    exec(compile(open('NormalDistributionCreation.py', "rb").read(), 'NormalDistributionCreation.py', 'exec'))
-
+    exec(compile(open('NormalDistributionCreation.py', "rb").read(), 'OutputProcessing.py', 'exec'))
     '''import psutil
     import os
     import numpy as np

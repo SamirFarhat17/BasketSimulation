@@ -409,7 +409,7 @@ public class Simulation {
             sb.append(',');
             sb.append("ETHLR");
             sb.append(',');
-            sb.append("ETHSF,");
+            sb.append("ETHSF");
             sb.append(',');
             sb.append("ETHExchangeRate");
             sb.append(',');
