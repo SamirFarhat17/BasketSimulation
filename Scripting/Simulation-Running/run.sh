@@ -38,16 +38,18 @@ for filename in *; do
 
   done < "$filename"
 
-  python3 /home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Dataset-Creation/NormalDistributionCreation.py "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
+  #python3 /home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Dataset-Creation/NormalDistributionCreation.py "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
 
   # shellcheck disable=SC2164
-  cd ../../src/main/java
+  #cd ../../src/main/java
 
-  javac -cp /home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/*:. Simulation.java
-  java -cp /home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/*:. Simulation "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
+  #javac -cp /home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/*:. Simulation.java
+  #java -cp /home/samir/Documents/Year4/Dissertation/BasketSimulation/Dependencies/*:. Simulation "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
+
+  python3 /home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Dataset-Creation/OutputProcessing.py "$args1" "$args2" "$args3" "$args4" "$args5" "$args6" "$args7"
 
   # shellcheck disable=SC2164
-  cd /home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Configs
+  #cd /home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Configs
 
   ((i=i-7))
 done

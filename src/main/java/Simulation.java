@@ -261,7 +261,7 @@ public class Simulation {
 
         colatOracles.clear();
 
-        System.out.println("Updating colatteral oracles");
+        System.out.println("Updating collateral oracles");
         xrpOracle.updateOracle(date);
         colatOracles.add(xrpOracle);
         btcOracle.updateOracle(date);
@@ -329,11 +329,17 @@ public class Simulation {
                                 collateralOracles.get(3).getDebtCeiling() + collateralOracles.get(4).getDebtCeiling() + collateralOracles.get(5).getDebtCeiling());
 
         exchangeRateXRP.add(collateralOracles.get(0).getExchangeRate());
+        // System.out.println(collateralOracles.get(0).getExchangeRate());
         exchangeRateBTC.add(collateralOracles.get(1).getExchangeRate());
+        // System.out.println(collateralOracles.get(1).getExchangeRate());
         exchangeRateETH.add(collateralOracles.get(2).getExchangeRate());
+        // System.out.println(collateralOracles.get(2).getExchangeRate());
         exchangeRateLINK.add(collateralOracles.get(3).getExchangeRate());
+        // System.out.println(collateralOracles.get(3).getExchangeRate());
         exchangeRateLTC.add(collateralOracles.get(4).getExchangeRate());
+        // System.out.println(collateralOracles.get(4).getExchangeRate());
         exchangeRateUSDT.add(collateralOracles.get(5).getExchangeRate());
+        // System.out.println(collateralOracles.get(5).getExchangeRate());
 
         liquidationRatiosXRP.add(collateralOracles.get(0).getLiquidationRatio());
         liquidationRatiosBTC.add(collateralOracles.get(1).getLiquidationRatio());

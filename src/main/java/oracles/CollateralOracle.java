@@ -137,7 +137,7 @@ public class CollateralOracle extends Oracle {
     }
 
     public void updateOracle(String date) {
-        if(collateralType.equals("XRP")) setExchangeRate(fullExchangeXRP.get(date));
+        if(collateralType.equals("A-XRP")) setExchangeRate(fullExchangeXRP.get(date));
         if(collateralType.equals("W-BTC")) setExchangeRate(fullExchangeBTC.get(date));
         if(collateralType.equals("ETH")) setExchangeRate(fullExchangeETH.get(date));
         if(collateralType.equals("LINK")) setExchangeRate(fullExchangeLINK.get(date));
