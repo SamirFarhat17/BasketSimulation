@@ -3,6 +3,7 @@ package oracles;
 import json.JsonReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import stakeholders.User;
 import stakeholders.Vault;
 
 import java.io.IOException;
@@ -115,6 +116,7 @@ public class VaultManagerOracle extends Oracle {
                              HashMap<String,Double> fullExchangeLTC, HashMap<String,Double> fullExchangeUSDT)
     {
         for(Vault vault : vaults) {
+
             double exchange = 1, exchangeOld = 1, colatAmount = 0;
             String lockedColat = vault.getCollateralType();
             if(lockedColat.equals("A-XRP")) {
@@ -164,25 +166,49 @@ public class VaultManagerOracle extends Oracle {
         }
     }
 
-    public void checkLiquidations(ArrayList<Vault> vaults, ArrayList<CollateralOracle> collateralOracles, double basketPrice) {
+    public void checkLiquidations(VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase, ArrayList<Vault> vaults, ArrayList<CollateralOracle> collateralOracles, double basketPrice) {
         String colatType;
         double colatAmount;
         CollateralOracle collateralOracle = collateralOracles.get(0);
-        for(Vault vault : vaults) {
+        Vault vault;
+
+        for(int i = 0; i < vaults.size(); i++) {
+            vault = vaultManagerOracle.getActiveVaults().get(i);
             colatType = vault.getCollateralType();
             colatAmount = vault.getCollateralAmount();
+
             for(CollateralOracle colatOracle: collateralOracles) {
                 if(colatOracle.getCollateralType().equals(colatType)) collateralOracle = colatOracle; break;
             }
-            if(colatAmount < vault.getBsktTokensMinted()*basketPrice*collateralOracle.getLiquidationRatio()) {
-                liquidateVault(vault);
+
+            if(colatAmount < vault.getBsktTokensMinted() * basketPrice * (collateralOracle.getLiquidationRatio()/100)) {
+                liquidateVault(userBase, vault);
+                removeActiveVault(vault);
+                addAuctionVault(vault);
+                if(colatType.equals("A-XRP")) setLockedXRP(getLockedXRP() - colatAmount);
+                if(colatType.equals("W-BTC")) setLockedBTC(getLockedBTC() - colatAmount);
+                if(colatType.equals("ETH")) setLockedETH(getLockedETH() - colatAmount);
+                if(colatType.equals("LINK")) setLockedLINK(getLockedLINK() - colatAmount);
+                if(colatType.equals("P-LTC")) setLockedLTC(getLockedLTC() - colatAmount);
+                if(colatType.equals("USDT")) setLockedUSDT(getLockedUSDT() - colatAmount);
             }
         }
 
     }
 
-    public static void liquidateVault(Vault vault) {
-        vault.setStatus(false);
+    public static void liquidateVault(ArrayList<User> userBase, Vault vault) {
+        String userID = vault.ownerID;
+        ArrayList<Vault> userVaults;
+        
+        for(User user: userBase) {
+            if(user.getUserID().equals(userID)) {
+                userVaults = user.getVaults();
+                userVaults.remove(vault);
+                user.setVaults(userVaults);
+                user.addFees("Liquidation Fee", vault.bsktMinted*0.12);
+                break;
+            }
+        }
     }
 
 }

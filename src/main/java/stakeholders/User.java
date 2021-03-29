@@ -177,6 +177,7 @@ public class User {
 
 
         for(User u : userList) {
+            generateStabilityFees(u, colatOracles);
             /*
             System.out.println("ID: " + u.getUserID() + "\nBasket Holdings: " + u.getBsktHoldings() + "\nDesired Basket: " + u.getDesiredBasket()
                     + "\nCollateral Holdings: " + u.getCollaterals().get("A-XRP") + " " + u.getCollaterals().get("W-BTC")  + " " + u.getCollaterals().get("ETH") + " "
@@ -314,7 +315,11 @@ public class User {
     }
 
 
-    public static void payFee() {
+    public static void payStabilityFee(Vault v, User u, VaultManagerOracle vaultManagerOracle) {
+
+    }
+
+    public static void payLiquidationFee(Vault v, User u, VaultManagerOracle vaultManagerOracle) {
 
     }
 

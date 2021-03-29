@@ -228,7 +228,7 @@ public class Simulation {
             date = dates.get(1827-days);
 
             runSimDay(date, basketValue, previousDate, vaultManagerOracle.getMintedBasketTokens(), userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
-                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, vaultManagerOracle.getActiveVaults(), totalDebtCeiling);
+                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, totalDebtCeiling);
 
             updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpis, cpiOracle,
                     targetPrices, totalDebtCeilings, collateralOracles, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC,
@@ -251,7 +251,7 @@ public class Simulation {
     private static void runSimDay(String date, double basketPrice, String previousDate, double totalBSKTTokensMinted, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
                                   BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle,
                                   CollateralOracle btcOracle,  CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle,
-                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, ArrayList<Vault> vaults, double totalDebtCeiling) throws IOException
+                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, double totalDebtCeiling) throws IOException
     {
         System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
@@ -276,10 +276,11 @@ public class Simulation {
         colatOracles.add(usdtOracle);
 
         System.out.println("Update vault manager");
-        vaultManagerOracle.updateVaults(previousDate, date, vaults, basketPrice, xrpOracle.getFullExchange(), btcOracle.getFullExchange(), ethOracle.getFullExchange(),
+        vaultManagerOracle.updateVaults(previousDate, date, vaultManagerOracle.getActiveVaults(), basketPrice, xrpOracle.getFullExchange(), btcOracle.getFullExchange(), ethOracle.getFullExchange(),
                                         linkOracle.getFullExchange(), ltcOracle.getFullExchange(), usdtOracle.getFullExchange());
         vaultManagerOracle.updateOracle(date);
-        vaultManagerOracle.checkLiquidations(vaults, colatOracles, basketPrice);
+        vaultManagerOracle.checkLiquidations(vaultManagerOracle, userBase, vaultManagerOracle.getActiveVaults(), colatOracles, basketPrice);
+        System.out.println(vaultManagerOracle.getActiveVaults().size());
 
         System.out.println("User creation and interest generation");
         User.generateNewUsers(userBase, userSeed, collateralSeed, basketPrice, vaultManagerOracle);
