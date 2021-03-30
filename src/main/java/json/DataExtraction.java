@@ -18,7 +18,7 @@ import com.opencsv.exceptions.CsvException;
 
 public class DataExtraction {
 
-    public static final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public static ArrayList<String> makeDates() throws IOException {
         String dataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Oracle-Data/GBP-USD.csv";
@@ -56,7 +56,7 @@ public class DataExtraction {
         SecureRandom rnd = new SecureRandom();
         StringBuilder sb = new StringBuilder(15);
         for(int i = 0; i < 15; i++)
-            sb.append(alphabet.charAt(rnd.nextInt(alphabet.length())));
+            sb.append(ALPHABET.charAt(rnd.nextInt(ALPHABET.length())));
         return sb.toString();
     }
 
@@ -64,7 +64,7 @@ public class DataExtraction {
         SecureRandom rnd = new SecureRandom();
         StringBuilder sb = new StringBuilder(16);
         for(int i = 0; i < 16; i++)
-            sb.append(alphabet.charAt(rnd.nextInt(alphabet.length())));
+            sb.append(ALPHABET.charAt(rnd.nextInt(ALPHABET.length())));
         return sb.toString();
     }
 

@@ -10,12 +10,12 @@ import java.util.HashMap;
 public class CollateralOracle extends Oracle {
 
     // Attributes of Collateral Oracles
-    public String collateralType;
-    public double exchangeRate;
-    public double stabilityFee;
-    public double liquidationRatio;
-    public double debtCeiling;
-    public HashMap<String,Double> fullExchange;
+    private final String collateralType;
+    private double exchangeRate;
+    private double stabilityFee;
+    private double liquidationRatio;
+    private double debtCeiling;
+    private final HashMap<String,Double> fullExchange;
 
     //  Constructor
     public CollateralOracle(String oracleID, String oracleStatus, String collateralType, double exchangeRate,
@@ -37,25 +37,18 @@ public class CollateralOracle extends Oracle {
     public void setExchangeRate(double exchangeRate) { this.exchangeRate = exchangeRate; }
 
     public double getStabilityFee() { return  this.stabilityFee; }
+    public void setStabilityFee(double stabilityFee) { this.stabilityFee = stabilityFee; }
 
     public double getLiquidationRatio() { return this.liquidationRatio; }
-
     public void setLiquidationRatio(double newLiquidationRatio) {this.liquidationRatio = newLiquidationRatio; }
 
     public double getDebtCeiling() { return this.debtCeiling; }
-
     public void setDebtCeiling(double newDebtCeiling) { this.debtCeiling = newDebtCeiling; }
 
     public HashMap<String,Double> getFullExchange() { return this.fullExchange; }
 
-    // Methods for vault maintenance
-    public double getCollateralEquivalent(double minted) {
-        return this.exchangeRate * minted;
-    }
-
     // Variables of Interest
     public static String[] collateralTypes = {"A-XRP", "ETH", "LINK", "W-BTC", "USDT", "P-LTC"};
-
     public static HashMap<String,Double> fullExchangeXRP;
 
     static {

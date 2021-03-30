@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class Keeper {
     // Attributes of Keepers
-    public String keeperID;
+    private final String keeperID;
     private double basketPossessed;
     private double percentTrading;
 
@@ -59,10 +59,6 @@ public class Keeper {
 
     }
 
-
-    public static void bidAuctions() {
-
-    }
 
 
 }

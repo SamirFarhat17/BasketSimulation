@@ -3,7 +3,7 @@ package oracles;
 public class BsrOracle extends Oracle {
 
     // Attributes
-    public double bsr;
+    private double bsr;
 
     // Constructor
     public BsrOracle(String oracleID, String oracleStatus, double bsr) {

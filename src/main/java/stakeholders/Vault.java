@@ -14,13 +14,13 @@ import java.util.List;
 public class Vault {
 
     // Attribute of Vaults
-    public final String vaultID;
-    public final String ownerID;
-    public Boolean status;
-    public double bsktMinted;
-    public final double bsktTokensMinted;
-    public String collateralType;
-    public double collateralAmount;
+    private final String vaultID;
+    private final String ownerID;
+    private boolean status;
+    private double bsktMinted;
+    private final double bsktTokensMinted;
+    private String collateralType;
+    private double collateralAmount;
 
     // Constructor
     public Vault(String vaultID, String ownerID, Boolean status, double minted, double mintedTokens, String collateralType, double collateralAmount) {
@@ -64,7 +64,6 @@ public class Vault {
     public static void openVault(User user, String userID, double basketMinted, double bsktTokensMinted, String colatType, double colatAmount, VaultManagerOracle vaultManagerOracle) {
         String vaultID = DataExtraction.generateVaultID();
         boolean status = true;
-
         Vault vault = new Vault(vaultID, userID, status, basketMinted, bsktTokensMinted, colatType, colatAmount);
 
         user.setDesiredBasket(user.getDesiredBasket() - basketMinted);
@@ -85,6 +84,30 @@ public class Vault {
         if(colatType.equals("USDT")) vaultManagerOracle.setLockedUSDT(vaultManagerOracle.getLockedUSDT() + colatAmount);
 
         user.addVault(vault);
+    }
+
+    public static void closeVault(VaultManagerOracle vaultManagerOracle, User user, Vault vault, double basketPrice) {
+        ArrayList<Vault> vaults = user.getVaults();
+        vaults.remove(vault);
+        user.setVaults(vaults);
+        String colatType = vault.getCollateralType();
+        double colatAmount = vault.getCollateralAmount();
+
+        user.addCollaterals(vault.getCollateralType(), vault.getCollateralAmount());
+        user.payStabilityFee(basketPrice);
+
+        user.setBsktHoldings(user.getBsktHoldings() - vault.getBsktTokensMinted() * basketPrice);
+        user.setBsktTokens(user.getBsktTokens() - vault.getBsktTokensMinted());
+
+        vaultManagerOracle.removeActiveVault(vault);
+
+        if(colatType.equals("A-XRP")) vaultManagerOracle.setLockedXRP(vaultManagerOracle.getLockedXRP() - colatAmount);
+        if(colatType.equals("W-BTC")) vaultManagerOracle.setLockedBTC(vaultManagerOracle.getLockedBTC() - colatAmount);
+        if(colatType.equals("ETH")) vaultManagerOracle.setLockedETH(vaultManagerOracle.getLockedETH() - colatAmount);
+        if(colatType.equals("LINK")) vaultManagerOracle.setLockedLINK(vaultManagerOracle.getLockedLINK() - colatAmount);
+        if(colatType.equals("P-LTC")) vaultManagerOracle.setLockedLTC(vaultManagerOracle.getLockedLTC() - colatAmount);
+        if(colatType.equals("USDT")) vaultManagerOracle.setLockedUSDT(vaultManagerOracle.getLockedUSDT() - colatAmount);
+
     }
 
 }

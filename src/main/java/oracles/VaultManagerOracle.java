@@ -12,16 +12,16 @@ import java.util.HashMap;
 
 public class VaultManagerOracle extends Oracle {
     // Attributes of vault system
-    public double mintedBasket;
-    public double mintedBasketTokens;
-    public double lockedXRP;
-    public double lockedBTC;
-    public double lockedETH;
-    public double lockedLINK;
-    public double lockedLTC;
-    public double lockedUSDT;
-    public ArrayList<Vault> activeVaults;
-    public ArrayList<Vault> auctionVaults;
+    private double mintedBasket;
+    private double mintedBasketTokens;
+    private double lockedXRP;
+    private double lockedBTC;
+    private double lockedETH;
+    private double lockedLINK;
+    private double lockedLTC;
+    private double lockedUSDT;
+    private ArrayList<Vault> activeVaults;
+    private ArrayList<Vault> auctionVaults;
 
     // Constructor
     public VaultManagerOracle(String oracleID, String oracleStatus, double mintedBasket, double mintedBasketTokens, double lockedXRP, double lockedBTC,
@@ -66,12 +66,9 @@ public class VaultManagerOracle extends Oracle {
     public void setLockedUSDT(double locked) { this.lockedUSDT = locked; }
 
     public ArrayList<Vault> getActiveVaults() { return this.activeVaults; }
-
     public ArrayList<Vault> getAuctionVaults() { return this.auctionVaults; }
-
     public void addAuctionVault(Vault vault) { this.auctionVaults.add(vault); }
     public void removeAuctionVault(Vault vault) { this.auctionVaults.remove(vault); }
-
     public void addActiveVault(Vault vault) { this.activeVaults.add(vault); }
     public void removeActiveVault(Vault vault) { this.activeVaults.remove(vault); }
 
@@ -162,14 +159,14 @@ public class VaultManagerOracle extends Oracle {
         }
     }
 
-    public void checkLiquidations(VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase, ArrayList<Vault> vaults, ArrayList<CollateralOracle> collateralOracles, double basketPrice) {
+    public void checkLiquidations(ArrayList<User> userBase, ArrayList<Vault> vaults, ArrayList<CollateralOracle> collateralOracles, double basketPrice) {
         String colatType;
         double colatAmount;
         CollateralOracle collateralOracle = collateralOracles.get(0);
         Vault vault;
 
         for(int i = 0; i < vaults.size(); i++) {
-            vault = vaultManagerOracle.getActiveVaults().get(i);
+            vault = getActiveVaults().get(i);
             colatType = vault.getCollateralType();
             colatAmount = vault.getCollateralAmount();
 
@@ -187,7 +184,7 @@ public class VaultManagerOracle extends Oracle {
     }
 
     public static void liquidateVault(ArrayList<User> userBase, Vault vault, double basketPrice) {
-        String userID = vault.ownerID;
+        String userID = vault.getOwnerID();
         ArrayList<Vault> userVaults;
 
         for(User user: userBase) {
@@ -195,36 +192,14 @@ public class VaultManagerOracle extends Oracle {
                 userVaults = user.getVaults();
                 userVaults.remove(vault);
                 user.setVaults(userVaults);
-                user.addFees("Liquidation Fee", user.getFeesOwed().get("Liquidation Fee") + vault.bsktMinted*0.12);
+                user.addFees("Liquidation Fee", user.getFeesOwed().get("Liquidation Fee") + vault.getBsktMinted()*0.12);
                 user.payStabilityFee(basketPrice);
                 user.payLiquidationFee(basketPrice);
+                user.addCollaterals(vault.getCollateralType(), vault.getCollateralAmount());
                 break;
             }
         }
     }
 
-    public void closeVault(User user, Vault vault, double basketPrice) {
-        ArrayList<Vault> vaults = user.getVaults();
-        vaults.remove(vault);
-        user.setVaults(vaults);
-        String colatType = vault.getCollateralType();
-        double colatAmount = vault.getCollateralAmount();
-
-        user.addCollaterals(vault.getCollateralType(), vault.getCollateralAmount());
-        user.payStabilityFee(basketPrice);
-
-        user.setBsktHoldings(user.getBsktHoldings() - vault.getBsktTokensMinted() * basketPrice);
-        user.setBsktTokens(user.getBsktTokens() - vault.getBsktTokensMinted());
-
-        removeActiveVault(vault);
-
-        if(colatType.equals("A-XRP")) setLockedXRP(getLockedXRP() - colatAmount);
-        if(colatType.equals("W-BTC")) setLockedBTC(getLockedBTC() - colatAmount);
-        if(colatType.equals("ETH")) setLockedETH(getLockedETH() - colatAmount);
-        if(colatType.equals("LINK")) setLockedLINK(getLockedLINK() - colatAmount);
-        if(colatType.equals("P-LTC")) setLockedLTC(getLockedLTC() - colatAmount);
-        if(colatType.equals("USDT")) setLockedUSDT(getLockedUSDT() - colatAmount);
-
-    }
 
 }

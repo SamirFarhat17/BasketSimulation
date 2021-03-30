@@ -1,7 +1,9 @@
 package stakeholders;
 
 import json.JsonReader;
+import oracles.BsrOracle;
 import oracles.CollateralOracle;
+import oracles.VaultManagerOracle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,19 +14,13 @@ import java.util.HashMap;
 public class Governor {
 
     // Individual stakeholders.Governor Attributes
-    public String governorID;
-    public String governorStatus;
-    public double governorToken;
-    public Boolean voteCheck;
-    public String voteDecision;
+    private final String governorID;
+    private String governorStatus;
 
     // Constructor
-    public Governor(String governorID, String governorStatus, double governorToken) {
+    public Governor(String governorID, String governorStatus) {
         this.governorID = governorID;
         this.governorStatus = governorStatus;
-        this.governorToken = governorToken;
-        this.voteCheck = false;
-        this.voteDecision = "";
     }
 
     // Getters and Setters
@@ -33,17 +29,8 @@ public class Governor {
     public String getGovernorStatus() {return this.governorStatus; }
     public void setGovernorStatus(String governorStatus) { this.governorStatus = governorStatus; }
 
-    public double getGovernorToken() { return this.governorToken; }
-    public void setGovernorToken(double governorToken) { this.governorToken = governorToken; }
-
-    public Boolean getGovernorVote() { return this.voteCheck; }
-    public void setGovernorVote(Boolean hasVoted) { this.voteCheck = hasVoted; }
-
-    public String getVoteDecision() { return this.voteDecision; }
-    public void setVoteDecision(String decision) { this.voteDecision = decision; }
 
     // Variables
-
 
     // Methods
     public static double getInitialBasket() throws IOException {
@@ -55,21 +42,57 @@ public class Governor {
         return value.getDouble("Value");
     }
 
-    public static void analyzeSituation() {
-
+    public static void changeBSR(double targetPrice, double basketPrice, BsrOracle bsrOracle) {
+        if(basketPrice > targetPrice)bsrOracle.setBsr(bsrOracle.getBsr() + bsrOracle.getBsr()/10);
+        else if (basketPrice < targetPrice) bsrOracle.setBsr(bsrOracle.getBsr() - bsrOracle.getBsr()/10);
+        if(bsrOracle.getBsr() > 9) bsrOracle.setBsr(3.5);
+        else if(bsrOracle.getBsr() < 1) bsrOracle.setBsr(4);
     }
 
-    public static void changeBSR() {
+    public static void updateDebtCeilings(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,CollateralOracle linkOracle, CollateralOracle ltcOracle,
+                                                  CollateralOracle usdtOracle, ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase) {
+        for(CollateralOracle collateralOracle: collateralOracles) {
+            if(collateralOracle.getCollateralType().equals("A-XRP") && vaultManagerOracle.getLockedXRP() > 0.75 * xrpOracle.getDebtCeiling()) {
+                xrpOracle.setDebtCeiling(vaultManagerOracle.getLockedXRP() + (vaultManagerOracle.getLockedXRP() * Math.random()));
+                continue;
+            }
+            if(collateralOracle.getCollateralType().equals("W-BTC") && vaultManagerOracle.getLockedBTC() > 0.75 * btcOracle.getDebtCeiling()) {
+                btcOracle.setDebtCeiling(vaultManagerOracle.getLockedBTC() + (vaultManagerOracle.getLockedBTC() * Math.random()));
+                continue;
+            }
+            if(collateralOracle.getCollateralType().equals("ETH") && vaultManagerOracle.getLockedETH() > 0.75 * ethOracle.getDebtCeiling()) {
+                ethOracle.setDebtCeiling(vaultManagerOracle.getLockedETH() + (vaultManagerOracle.getLockedETH() * Math.random()));
+                continue;
+            }
+            if(collateralOracle.getCollateralType().equals("LINK") && vaultManagerOracle.getLockedLINK() > 0.75 * linkOracle.getDebtCeiling()) {
+                linkOracle.setDebtCeiling(vaultManagerOracle.getLockedLINK() + (vaultManagerOracle.getLockedLINK() * Math.random()));
+                continue;
+            }
+            if(collateralOracle.getCollateralType().equals("P-LTC") && vaultManagerOracle.getLockedLTC() > 0.75 * ltcOracle.getDebtCeiling()) {
+                ltcOracle.setDebtCeiling(vaultManagerOracle.getLockedLTC() + (vaultManagerOracle.getLockedLTC() * Math.random()));
+                continue;
+            }
+            if(collateralOracle.getCollateralType().equals("USDT") && vaultManagerOracle.getLockedUSDT() > 0.75 * usdtOracle.getDebtCeiling()) {
+                usdtOracle.setDebtCeiling(vaultManagerOracle.getLockedUSDT() + (vaultManagerOracle.getLockedUSDT() * Math.random()));
+            }
 
+        }
     }
 
-    public static void changeCollateralStats() {
 
+    public static void updateStabilityFees(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,CollateralOracle linkOracle, CollateralOracle ltcOracle,
+                                          CollateralOracle usdtOracle, ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase) {
+        for(CollateralOracle collateralOracle: collateralOracles) {
+
+        }
     }
 
-    public static void updateGovernanceParameters() {
 
+    public static void updateLiquidationRatios(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,CollateralOracle linkOracle, CollateralOracle ltcOracle,
+                                           CollateralOracle usdtOracle, ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase) {
+        for(CollateralOracle collateralOracle: collateralOracles) {
+
+        }
     }
-
 
 }

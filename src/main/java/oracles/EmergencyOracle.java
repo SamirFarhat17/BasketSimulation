@@ -4,7 +4,7 @@ import oracles.Oracle;
 
 public class EmergencyOracle extends Oracle {
     // Attributes
-    public String healthStatus;
+    private String healthStatus;
 
     //Constructors
     public EmergencyOracle(String oracleID, String oracleStatus, String healthStatus) {
@@ -15,6 +15,5 @@ public class EmergencyOracle extends Oracle {
 
     // Getters and Setters
     public String getHealthStatus() { return this.healthStatus; }
-
     public void setHealthStatus(String healthStatus) { this.healthStatus = healthStatus; }
 }

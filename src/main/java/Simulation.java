@@ -20,6 +20,14 @@ import java.util.HashMap;
 
 public class Simulation {
 
+    private String date;
+    private double cpi;
+    private double basketValue;
+    private int userBaseSize;
+    private double userSeed;
+    private double keeperSeed;
+    private double collateralSeed;
+
     public static void main(String[] args) throws IOException {
 
         // Check arguments
@@ -67,14 +75,14 @@ public class Simulation {
         double vaultTotalLTC = 0.0;
         double vaultTotalUSDT = 0.0;
         for(Vault v : VaultManagerOracle.getInitialActiveVaults(basketValue)) {
-            vaultTotalBasket += v.bsktMinted;
-            colatType = v.collateralType;
-            if(colatType.equals("A-XRP")) vaultTotalXRP += v.collateralAmount;
-            if(colatType.equals("W-BTC")) vaultTotalBTC += v.collateralAmount;
-            if(colatType.equals("ETH")) vaultTotalETH += v.collateralAmount;
-            if(colatType.equals("LINK")) vaultTotalLINK += v.collateralAmount;
-            if(colatType.equals("P-LTC")) vaultTotalLTC += v.collateralAmount;
-            if(colatType.equals("USDT")) vaultTotalUSDT += v.collateralAmount;
+            vaultTotalBasket += v.getBsktMinted();
+            colatType = v.getCollateralType();
+            if(colatType.equals("A-XRP")) vaultTotalXRP += v.getCollateralAmount();
+            if(colatType.equals("W-BTC")) vaultTotalBTC += v.getCollateralAmount();
+            if(colatType.equals("ETH")) vaultTotalETH += v.getCollateralAmount();
+            if(colatType.equals("LINK")) vaultTotalLINK += v.getCollateralAmount();
+            if(colatType.equals("P-LTC")) vaultTotalLTC += v.getCollateralAmount();
+            if(colatType.equals("USDT")) vaultTotalUSDT += v.getCollateralAmount();
             vaults.add(v);
             vaultManagerOracle.addActiveVault(v);
         }
@@ -263,7 +271,7 @@ public class Simulation {
                                     CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle, VaultManagerOracle vaultManagerOracle,
                                     Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling) throws IOException
     {
-        System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
+        //System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
         bufferOracle.updateOracle(date, totalDebtCeiling);
         cpiOracle.updateOracle(date);
@@ -271,7 +279,7 @@ public class Simulation {
 
         colatOracles.clear();
 
-        System.out.println("Updating collateral oracles");
+        //System.out.println("Updating collateral oracles");
         xrpOracle.updateOracle(date);
         colatOracles.add(xrpOracle);
         btcOracle.updateOracle(date);
@@ -285,24 +293,26 @@ public class Simulation {
         usdtOracle.updateOracle(date);
         colatOracles.add(usdtOracle);
 
-        System.out.println("Update vault manager");
+        //System.out.println("Update vault manager");
         vaultManagerOracle.updateVaults(previousDate, date, vaultManagerOracle.getActiveVaults(), basketPrice, xrpOracle.getFullExchange(), btcOracle.getFullExchange(), ethOracle.getFullExchange(),
                                         linkOracle.getFullExchange(), ltcOracle.getFullExchange(), usdtOracle.getFullExchange());
         vaultManagerOracle.updateOracle(date);
-        vaultManagerOracle.checkLiquidations(vaultManagerOracle, userBase, vaultManagerOracle.getActiveVaults(), colatOracles, basketPrice);
+        vaultManagerOracle.checkLiquidations(userBase, vaultManagerOracle.getActiveVaults(), colatOracles, basketPrice);
 
-        System.out.println("User creation and interest generation");
+        //System.out.println("User creation and interest generation");
         User.generateNewUsers(userBase, userSeed, collateralSeed, basketPrice, vaultManagerOracle);
         User.generateUserCollaterals(userBase, collateralSeed);
         User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice, cpiOracle.getCpi()/10, collateralSeed, colatOracles, vaultManagerOracle);
         keeper.generateKeeperWants(date);
 
         basketPrice = User.marketTrades(basketPrice, userBase, buyers, sellers);
-        System.out.println(basketPrice);
+        //System.out.println(basketPrice);
 
-        System.out.println("Governorship work\n");
-        Governor.analyzeSituation();
-        Governor.updateGovernanceParameters();
+        //System.out.println("Governorship work\n");
+        Governor.updateDebtCeilings(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
+        Governor.updateStabilityFees(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
+        Governor.updateLiquidationRatios(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
+        Governor.changeBSR(cpiOracle.getCpi()/10, basketPrice,bsrOracle);
 
         return basketPrice;
     }

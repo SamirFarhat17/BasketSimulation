@@ -7,6 +7,8 @@ import java.util.Iterator;
 import org.json.JSONObject;
 
 public class JsonReader {
+    private String datapath = "";
+
     private static String readAll(Reader read) throws IOException {
         int ref;
         StringBuilder builder = new StringBuilder();

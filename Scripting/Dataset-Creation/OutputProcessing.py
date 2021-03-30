@@ -101,17 +101,20 @@ days = int(args[2])
 for i in range(days):
     x_axis.append(i)
 
-
+print(sys.path)
 output_data_path = "../Simulation-Raw/" + args[1] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5] + "_" + args[6]+ ".csv"
 output_pandas = pd.read_csv(output_data_path)
-shutil.rmtree("../Simulation-Processed/" + args[1] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5] + "_" + args[6] + "/")
+
+if os.path.exists("../Simulation-Processed/" + args[1] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5] + "_" + args[6] + "/"):
+    shutil.rmtree("../Simulation-Processed/" + args[1] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5] + "_" + args[6] + "/")
+
 os.makedirs("../Simulation-Processed/" + args[1] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5] + "_" + args[6] + "/")
 
 cpi = output_pandas['CPI'].values
 target_price = output_pandas['TargetPrice'].values
 basket_price = output_pandas['BasketPrice'].values
 
-graph_three(cpi, target_price, basket_price, x_axis, 'Actual_Basket_Value_vs_Ideal_basket_Value_and_CPI', 'Price(GBP)', 'Days', 'CPI', 'Target Price', 'Basket Price')
+graph_two(target_price, basket_price, x_axis, 'Actual_Basket_Value_vs_Ideal_basket_Value_and_CPI', 'Price(GBP)', 'Days', 'Target Price', 'Basket Price')
 
 basket_minted = output_pandas['BasketMinted'].values
 basket_tokens_minted = output_pandas['BasketTokensMinted'].values
@@ -129,7 +132,7 @@ ltc_debt_ceiling = output_pandas['LTCDebtCeiling'].values
 usdt_debt_ceiling = output_pandas['USDTDebtCeiling'].values
 
 graph_seven(debt_ceiling, xrp_debt_ceiling, btc_debt_ceiling, eth_debt_ceiling, link_debt_ceiling, ltc_debt_ceiling, usdt_debt_ceiling, x_axis, 'Debt_Ceilings', 'Days',
-           'GBP', 'Total', 'A-XRP', 'W-BTC', 'ETH', 'P-LINK', 'LTC', 'USDT')
+           'GBP', 'Total', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 xrp_exchange_rates = output_pandas['XRPExchangeRate'].values
 btc_exchange_rates = output_pandas['BTCExchangeRate'].values
@@ -139,7 +142,7 @@ ltc_exchange_rates = output_pandas['LTCExchangeRate'].values
 usdt_exchange_rates = output_pandas['USDTExchangeRate'].values
 
 graph_seven(basket_price, xrp_exchange_rates, btc_exchange_rates, eth_exchange_rates, link_exchange_rates, ltc_exchange_rates, usdt_exchange_rates, x_axis, 'Exchange_Rates',
-           'Days','GBP', 'BSKT', 'A-XRP', 'W-BTC', 'ETH', 'P-LINK', 'LTC', 'USDT')
+           'Days','GBP', 'BSKT', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 xrp_sfs = output_pandas['XRPSF'].values
 btc_sfs = output_pandas['BTCSF'].values
@@ -148,7 +151,7 @@ link_sfs = output_pandas['LINKSF'].values
 ltc_sfs = output_pandas['LTCSF'].values
 usdt_sfs = output_pandas['USDTSF'].values
 
-graph_six(xrp_sfs, btc_sfs, eth_sfs, link_sfs, ltc_sfs, usdt_sfs, x_axis, 'Savings_Rates', 'Days', '%', 'A-XRP', 'W-BTC', 'ETH', 'P-LINK', 'LTC', 'USDT')
+graph_six(xrp_sfs, btc_sfs, eth_sfs, link_sfs, ltc_sfs, usdt_sfs, x_axis, 'Savings_Rates', 'Days', '%', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 xrp_lrs = output_pandas['XRPLR'].values
 btc_lrs = output_pandas['BTCLR'].values
@@ -157,10 +160,21 @@ link_lrs = output_pandas['LINKLR'].values
 ltc_lrs = output_pandas['LTCLR'].values
 usdt_lrs = output_pandas['USDTLR'].values
 
-graph_six(xrp_lrs, btc_lrs, eth_lrs, link_lrs, ltc_lrs, usdt_lrs, x_axis, 'Liquidation_Ratios', 'Days', '%', 'A-XRP', 'W-BTC', 'ETH', 'P-LINK', 'LTC', 'USDT')
+graph_six(xrp_lrs, btc_lrs, eth_lrs, link_lrs, ltc_lrs, usdt_lrs, x_axis, 'Liquidation_Ratios', 'Days', '%', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 keeper_holdings = output_pandas['KeeperHoldingPercentage'].values
 keeper_tradings = output_pandas['KeeperTradePercentage'].values
 
 graph_two(keeper_holdings, keeper_tradings, x_axis, 'Keeper_Statistics', 'Days', '%', 'Keeper Holdings Percentage', 'Keeper Trade Percentage')
 
+locked_xrp = output_pandas['LockedXRP'].values
+locked_btc = output_pandas['LockedBTC'].values
+locked_eth = output_pandas['LockedETH'].values
+locked_link = output_pandas['LockedLINK'].values
+locked_ltc = output_pandas['LockedLTC'].values
+locked_usdt = output_pandas['LockedUSDT'].values
+
+graph_six(locked_xrp, locked_btc, locked_eth, locked_link, locked_ltc, locked_usdt, x_axis, 'Collaterals_Locked_Vaults', 'Days', 'GBP', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
+
+bsr = output_pandas['BSR'].values
+graph_one(bsr, x_axis, 'BSR', 'Days', '%')

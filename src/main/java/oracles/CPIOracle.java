@@ -10,8 +10,8 @@ import java.util.HashMap;
 
 public class CPIOracle extends Oracle {
     // Attributes for Module
-    String date;
-    double cpi;
+    private String date;
+    private double cpi;
 
     // Constructor
     public CPIOracle(String oracleID, String oracleStatus, String date, double cpi) throws IOException {

@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class BufferOracle extends Oracle {
 
     // Attributes of buffer oracle
-    public double bufferHoldings;
-    public double totalDebtCeiling;
+    private double bufferHoldings;
+    private double totalDebtCeiling;
 
     // Constructors
     public BufferOracle(String bufferOracle, String oracleStatus, double bufferHoldings, double totalDebtCeiling) {
