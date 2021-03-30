@@ -107,10 +107,6 @@ public class VaultManagerOracle extends Oracle {
         return allVaults;
     }
 
-    public static void addActiveVault(ArrayList<Vault> vs, Vault v) {
-        vs.add(v);
-    }
-
     public void updateVaults(String previousDate, String date, ArrayList<Vault> vaults, double basketPrice, HashMap<String,Double> fullExchangeXRP,
                              HashMap<String,Double> fullExchangeBTC, HashMap<String,Double> fullExchangeETH, HashMap<String,Double> fullExchangeLINK,
                              HashMap<String,Double> fullExchangeLTC, HashMap<String,Double> fullExchangeUSDT)

@@ -428,7 +428,7 @@ public class Simulation {
             sb.append(',');
             sb.append("BTCExchangeRate");
             sb.append(',');
-            sb.append("LockedXETH");
+            sb.append("LockedETH");
             sb.append(',');
             sb.append("ETHDebtCeiling");
             sb.append(',');

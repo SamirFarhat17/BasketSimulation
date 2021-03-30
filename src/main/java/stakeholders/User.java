@@ -116,6 +116,7 @@ public class User {
         }
 
         System.out.println("Issue");
+        System.exit(0);
         return 0;
     }
 
@@ -323,7 +324,7 @@ public class User {
             userBsktTokens = userBsktMinted/basketPrice;
 
             for(String colat : collaterals) {
-                if(userSeedRandom.nextInt(4) == 2) userCollaterals.put(colat, userSeedRandom.nextGaussian() * collateralSeed/5 + collateralSeed);
+                if(userSeedRandom.nextInt(2) == 1) userCollaterals.put(colat, userSeedRandom.nextGaussian() * collateralSeed/5 + collateralSeed);
                 else userCollaterals.put(colat, 0.0);
             }
 
@@ -346,6 +347,7 @@ public class User {
 
 
     public static void buyBasket(User buyer, User seller, double payment, double basketPrice, String collateralType) {
+        System.out.println("Here");
         double basketTokens = buyer.getDesiredBasket()/basketPrice;
         buyer.setBsktHoldings(buyer.getBsktHoldings() + basketTokens * basketPrice);
         buyer.setBsktTokens(buyer.getBsktTokens() + basketTokens);
@@ -422,7 +424,7 @@ public class User {
         }
 
         for(double value : basketSales) totalSales += value;
-        System.out.println(salesCount);
+        System.out.println("Sales Count: " + salesCount);
         return totalSales/basketSales.size();
     }
 
