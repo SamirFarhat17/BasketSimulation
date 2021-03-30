@@ -177,6 +177,13 @@ public class User {
     public static void generateUserWants(ArrayList<User> userList, ArrayList<User> sellers, ArrayList<User> buyers, double userSeed, double basketPrice,
                                          double collateralSeed, ArrayList<CollateralOracle> colatOracles, VaultManagerOracle vaultManagerOracle) {
         boolean entered;
+        sellers.clear();
+        buyers.clear();
+
+        int buyerNum = 0;
+        int sellerNum = 0;
+        double basketSale = 0;
+        double basketBuy = 0;
 
 
         for(User u : userList) {
@@ -196,6 +203,9 @@ public class User {
 
             if(u.getBsktHoldings() < 0) {
                 u.setDesiredBasket(u.getBsktHoldings() * -1);
+                buyers.add(u);
+                buyerNum++;
+                basketBuy += u.getDesiredBasket();
                 entered = true;
             }
 
@@ -210,25 +220,39 @@ public class User {
                         }
                     }
                 }
-            }
-
-            else if((status == 11 || status == 10) && !entered) {
-                u.setDesiredBasket(userSeed * (0 + Math.random() * (2)));
-                entered = true;
+                else {
+                    buyers.add(u);
+                    buyerNum++;
+                    basketBuy += u.getDesiredBasket();
+                }
             }
 
             if(u.bsktHoldings > 0 && status == 13 && !entered) {
+                String colat = CollateralOracle.collateralTypes[rn.nextInt(6)];
                 if(!u.getVaults().isEmpty()) {
                     vaultManagerOracle.closeVault(u, u.getVaults().get(0), basketPrice);
                 }
-                else u.addCollateralWanted(CollateralOracle.collateralTypes[rn.nextInt(6)], collateralSeed * (0 + Math.random() * (2)));
+                else u.addCollateralWanted(colat, u.getColatWanted().get(colat) + collateralSeed * (0 + Math.random() * (2)));
+                sellers.add(u);
+                sellerNum++;
+                basketSale += u.getColatWanted().get(colat);
                 entered = true;
             }
 
             else if(u.bsktHoldings > 0 && (status == 4 || status == 5) && !entered) {
-                u.addCollateralWanted(CollateralOracle.collateralTypes[rn.nextInt(6)], u.bsktHoldings* (0 + Math.random() * (1)));
+                String colat = CollateralOracle.collateralTypes[rn.nextInt(6)];
+                u.addCollateralWanted(colat, u.bsktHoldings * (0 + Math.random() * (1)));
+                sellers.add(u);
+                sellerNum++;
+                basketSale += u.getColatWanted().get(colat);
                 entered = true;
             }
+            /*
+            System.out.println("buyerNum: " + buyerNum);
+            System.out.println("basketBuy: " + basketBuy);
+            System.out.println("sellerNum: " + sellerNum);
+            System.out.println("basketSale: " + basketSale);
+            */
 
             /*
             System.out.println("Basket Holdings: " + u.getBsktHoldings() + "\nDesired Basket: " + u.getDesiredBasket()
@@ -243,7 +267,7 @@ public class User {
 
     public static void generateNewUsers(ArrayList<User> userBase, double userSeed, double collateralSeed, double basketPrice, VaultManagerOracle vaultManagerOracle) throws IOException {
         String[] collaterals = CollateralOracle.collateralTypes;
-
+        System.out.println(userBase.size());
         int userBaseSize = userBase.size();
         Random rn = new Random();
         int newUsers = (int)Math.log(rn.nextInt(userBaseSize/10) + userBaseSize/30);
