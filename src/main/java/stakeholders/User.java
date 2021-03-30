@@ -205,13 +205,13 @@ public class User {
         for(User u : userList) {
             Random ran = new Random();
             u.generateStabilityFees(colatOracles);
-            /*
+
             System.out.println("ID: " + u.getUserID() + "\nBasket Holdings: " + u.getBsktHoldings() + "\nDesired Basket: " + u.getDesiredBasket()
                     + "\nCollateral Holdings: " + u.getCollaterals().get("A-XRP") + " " + u.getCollaterals().get("W-BTC")  + " " + u.getCollaterals().get("ETH") + " "
                     + u.getCollaterals().get("LINK") + " " + u.getCollaterals().get("P-LTC") + " " + u.getCollaterals().get("USDT")  + "\nWanted Collateral: "
                     + u.getColatWanted().get("A-XRP") + " " + u.getColatWanted().get("W-BTC")  + " " + u.getColatWanted().get("ETH") + " " + u.getColatWanted().get("LINK")
                     + " " + u.getColatWanted().get("P-LTC") + " " + u.getColatWanted().get("USDT"));
-            */
+
             entered = false;
             Random rn = new Random();
             int status = rn.nextInt(50) + 1;
@@ -270,20 +270,20 @@ public class User {
                 basketSale += u.getColatWanted().get(colat);
                 entered = true;
             }
-            /*
+
             System.out.println("buyerNum: " + buyerNum);
             System.out.println("basketBuy: " + basketBuy);
             System.out.println("sellerNum: " + sellerNum);
             System.out.println("basketSale: " + basketSale);
-            */
 
-            /*
+
+
             System.out.println("Basket Holdings: " + u.getBsktHoldings() + "\nDesired Basket: " + u.getDesiredBasket()
                     + "\nCollateral Holdings: " + u.getCollaterals().get("A-XRP") + " " + u.getCollaterals().get("W-BTC")  + " " + u.getCollaterals().get("ETH") + " "
                     + u.getCollaterals().get("LINK") + " " + u.getCollaterals().get("P-LTC") + " " + u.getCollaterals().get("USDT")  + "\nWanted Collateral: "
                     + u.getColatWanted().get("A-XRP") + " " + u.getColatWanted().get("W-BTC")  + " " + u.getColatWanted().get("ETH") + " " + u.getColatWanted().get("LINK")
                     + " " + u.getColatWanted().get("P-LTC") + " " + u.getColatWanted().get("USDT"));
-            */
+
         }
     }
 
@@ -394,6 +394,7 @@ public class User {
 
 
     public static double marketTrades(double basketPrice, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers) {
+        int salesCount = 0;
         ArrayList<Double> basketSales = new ArrayList<>();
         double totalSales = 0;
 
@@ -412,6 +413,7 @@ public class User {
                 }
                 if(b.getDesiredPrice() >= s.getDesiredPrice() && b.getDesiredBasket() >= s.getColatWanted().get(colat)) {
                     buyerID = b.getUserID();
+                    salesCount++;
                     buyBasket(userBase.get(findUserByID(userBase, buyerID)), userBase.get(findUserByID(userBase, sellerID)), (b.getDesiredBasket()/basketPrice)*b.getDesiredPrice(), basketPrice, colat);
                     basketSales.add(b.getDesiredPrice());
                 }
@@ -420,7 +422,7 @@ public class User {
         }
 
         for(double value : basketSales) totalSales += value;
-
+        System.out.println(salesCount);
         return totalSales/basketSales.size();
     }
 

@@ -185,12 +185,6 @@ public class VaultManagerOracle extends Oracle {
                 liquidateVault(userBase, vault, basketPrice);
                 removeActiveVault(vault);
                 addAuctionVault(vault);
-                if(colatType.equals("A-XRP")) setLockedXRP(getLockedXRP() - colatAmount);
-                if(colatType.equals("W-BTC")) setLockedBTC(getLockedBTC() - colatAmount);
-                if(colatType.equals("ETH")) setLockedETH(getLockedETH() - colatAmount);
-                if(colatType.equals("LINK")) setLockedLINK(getLockedLINK() - colatAmount);
-                if(colatType.equals("P-LTC")) setLockedLTC(getLockedLTC() - colatAmount);
-                if(colatType.equals("USDT")) setLockedUSDT(getLockedUSDT() - colatAmount);
             }
         }
 

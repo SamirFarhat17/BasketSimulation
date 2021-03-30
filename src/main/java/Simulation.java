@@ -185,6 +185,13 @@ public class Simulation {
         targetPrices.add(basketTargetValue);
 
         // Collateral Health
+        ArrayList<Double> lockedXRP = new ArrayList<>();
+        ArrayList<Double> lockedBTC = new ArrayList<>();
+        ArrayList<Double> lockedETH = new ArrayList<>();
+        ArrayList<Double> lockedLINK = new ArrayList<>();
+        ArrayList<Double> lockedLTC = new ArrayList<>();
+        ArrayList<Double> lockedUSDT = new ArrayList<>();
+
         double totalDebtCeiling = 0;
         ArrayList<Double> debtCeilingsXRP = new ArrayList<>();
         ArrayList<Double> debtCeilingsBTC = new ArrayList<>();
@@ -233,9 +240,10 @@ public class Simulation {
                     btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, buyers, sellers, totalDebtCeiling);
 
             updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpis, cpiOracle,
-                    targetPrices, totalDebtCeilings, collateralOracles, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC,
-                    exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC,
-                    liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT, bsrOracle, bsrTrack);
+                    targetPrices, lockedXRP, lockedBTC, lockedETH, lockedLINK,  lockedLTC, lockedUSDT, totalDebtCeilings, collateralOracles, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK,
+                    debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC,
+                    liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT,
+                    bsrOracle, bsrTrack);
 
             previousDate = date;
             days--;
@@ -243,9 +251,9 @@ public class Simulation {
 
         writer.close();
         generateFinalCSV(basketMinted, basketTokensMinted, basketPrices, userBase, userPopulations, keeperTradeVolumes, keeperPercentageHoldings, cpis, targetPrices, totalDebtCeilings, collateralOracles,
-                debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC,
-                exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC,
-                stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT, bsrTrack, args);
+                lockedXRP, lockedBTC, lockedETH, lockedLINK,  lockedLTC, lockedUSDT, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP,
+                exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK,
+                liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT, bsrTrack, args);
     }
 
 
@@ -305,7 +313,9 @@ public class Simulation {
     private static void updateTrackingStatistics(VaultManagerOracle vaultManagerOracle, ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted,
                                                  double basketPrice, ArrayList<Double> basketPrices, ArrayList<User> userBase, ArrayList<Integer> userPopulations,
                                                  Keeper keeper, ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> cpis,
-                                                 CPIOracle cpiOracle, ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles,
+                                                 CPIOracle cpiOracle, ArrayList<Double> targetPrices, ArrayList<Double> lockedXRP, ArrayList<Double> lockedBTC,
+                                                 ArrayList<Double> lockedETH, ArrayList<Double> lockedLINK, ArrayList<Double> lockedLTC, ArrayList<Double> lockedUSDT,
+                                                 ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles,
                                                  ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC, ArrayList<Double> debtCeilingETH,
                                                  ArrayList<Double> debtCeilingLINK, ArrayList<Double> debtCeilingLTC, ArrayList<Double> debtCeilingUSDT,
                                                  ArrayList<Double> exchangeRateXRP, ArrayList<Double> exchangeRateBTC, ArrayList<Double> exchangeRateETH,
@@ -324,6 +334,13 @@ public class Simulation {
         keeperPercentageHoldings.add((int) Math.round(keeper.getKeeperBskt()/vaultManagerOracle.getMintedBasket()));
         targetPrices.add(cpiOracle.getCpi()/10);
         cpis.add(cpiOracle.getCpi());
+
+        lockedXRP.add(vaultManagerOracle.getLockedXRP());
+        lockedBTC.add(vaultManagerOracle.getLockedBTC());
+        lockedETH.add(vaultManagerOracle.getLockedETH());
+        lockedLINK.add(vaultManagerOracle.getLockedLINK());
+        lockedLTC.add(vaultManagerOracle.getLockedLTC());
+        lockedUSDT.add(vaultManagerOracle.getLockedUSDT());
 
         debtCeilingXRP.add(collateralOracles.get(0).getDebtCeiling());
         debtCeilingBTC.add(collateralOracles.get(1).getDebtCeiling());
@@ -362,7 +379,9 @@ public class Simulation {
     private static void generateFinalCSV(ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted,
                                          ArrayList<Double> basketPrices, ArrayList<User> userBase, ArrayList<Integer> userPopulations,
                                          ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> cpis,
-                                         ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles,
+                                         ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings,
+                                         ArrayList<CollateralOracle> collateralOracles, ArrayList<Double> lockedXRP, ArrayList<Double> lockedBTC,
+                                         ArrayList<Double> lockedETH, ArrayList<Double> lockedLINK, ArrayList<Double> lockedLTC, ArrayList<Double> lockedUSDT,
                                          ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC, ArrayList<Double> debtCeilingETH,
                                          ArrayList<Double> debtCeilingLINK, ArrayList<Double> debtCeilingLTC, ArrayList<Double> debtCeilingUSDT,
                                          ArrayList<Double> exchangeRateXRP, ArrayList<Double> exchangeRateBTC, ArrayList<Double> exchangeRateETH,
@@ -389,6 +408,8 @@ public class Simulation {
             sb.append(',');
             sb.append("DebtCeiling");
             sb.append(',');
+            sb.append("LockedXRP");
+            sb.append(',');
             sb.append("XRPDebtCeiling");
             sb.append(',');
             sb.append("XRPLR");
@@ -396,6 +417,8 @@ public class Simulation {
             sb.append("XRPSF");
             sb.append(',');
             sb.append("XRPExchangeRate");
+            sb.append(',');
+            sb.append("LockedBTC");
             sb.append(',');
             sb.append("BTCDebtCeiling");
             sb.append(',');
@@ -405,6 +428,8 @@ public class Simulation {
             sb.append(',');
             sb.append("BTCExchangeRate");
             sb.append(',');
+            sb.append("LockedXETH");
+            sb.append(',');
             sb.append("ETHDebtCeiling");
             sb.append(',');
             sb.append("ETHLR");
@@ -412,6 +437,8 @@ public class Simulation {
             sb.append("ETHSF");
             sb.append(',');
             sb.append("ETHExchangeRate");
+            sb.append(',');
+            sb.append("LockedLINK");
             sb.append(',');
             sb.append("LINKDebtCeiling");
             sb.append(',');
@@ -421,6 +448,8 @@ public class Simulation {
             sb.append(',');
             sb.append("LINKExchangeRate");
             sb.append(',');
+            sb.append("LockedLTC");
+            sb.append(',');
             sb.append("LTCDebtCeiling");
             sb.append(',');
             sb.append("LTCLR");
@@ -428,6 +457,8 @@ public class Simulation {
             sb.append("LTCSF");
             sb.append(',');
             sb.append("LTCExchangeRate");
+            sb.append(',');
+            sb.append("LockedUSDT");
             sb.append(',');
             sb.append("USDTDebtCeiling");
             sb.append(',');
@@ -459,6 +490,8 @@ public class Simulation {
                 sb.append(',');
                 sb.append(totalDebtCeilings.get(i));
                 sb.append(',');
+                sb.append(lockedXRP.get(i));
+                sb.append(',');
                 sb.append(debtCeilingXRP.get(i));
                 sb.append(',');
                 sb.append(liquidationRatiosXRP.get(i));
@@ -466,6 +499,8 @@ public class Simulation {
                 sb.append(stabilityFeesXRP.get(i));
                 sb.append(',');
                 sb.append(exchangeRateXRP.get(i));
+                sb.append(',');
+                sb.append(lockedBTC.get(i));
                 sb.append(',');
                 sb.append(debtCeilingBTC.get(i));
                 sb.append(',');
@@ -475,6 +510,8 @@ public class Simulation {
                 sb.append(',');
                 sb.append(exchangeRateBTC.get(i));
                 sb.append(',');
+                sb.append(lockedETH.get(i));
+                sb.append(',');
                 sb.append(debtCeilingETH.get(i));
                 sb.append(',');
                 sb.append(liquidationRatiosETH.get(i));
@@ -482,6 +519,8 @@ public class Simulation {
                 sb.append(stabilityFeesETH.get(i));
                 sb.append(',');
                 sb.append(exchangeRateETH.get(i));
+                sb.append(',');
+                sb.append(lockedLINK.get(i));
                 sb.append(',');
                 sb.append(debtCeilingLINK.get(i));
                 sb.append(',');
@@ -491,6 +530,8 @@ public class Simulation {
                 sb.append(',');
                 sb.append(exchangeRateLINK.get(i));
                 sb.append(',');
+                sb.append(lockedLTC.get(i));
+                sb.append(',');
                 sb.append(debtCeilingLTC.get(i));
                 sb.append(',');
                 sb.append(liquidationRatiosLTC.get(i));
@@ -498,6 +539,8 @@ public class Simulation {
                 sb.append(stabilityFeesLTC.get(i));
                 sb.append(',');
                 sb.append(exchangeRateLTC.get(i));
+                sb.append(',');
+                sb.append(lockedUSDT.get(i));
                 sb.append(',');
                 sb.append(debtCeilingUSDT.get(i));
                 sb.append(',');
