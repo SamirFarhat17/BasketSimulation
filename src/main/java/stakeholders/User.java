@@ -23,11 +23,12 @@ public class User {
     public double bsktHoldings;
     public HashMap<String,Double> feesOwed;
     public double desiredBasket;
+    public double desiredPrice;
     public HashMap<String, Double> colatWanted;
 
     // Constructor
-    public User(String userID, ArrayList<Vault> vaults, HashMap<String,Double> collaterals, double bsktHoldings,
-                double bsktTokens, HashMap<String,Double> feesOwed, double desiredBasket, HashMap<String,Double> colatWanted) throws IOException {
+    public User(String userID, ArrayList<Vault> vaults, HashMap<String,Double> collaterals, double bsktHoldings, double bsktTokens,
+                HashMap<String,Double> feesOwed, double desiredBasket, double desiredPrice, HashMap<String,Double> colatWanted) throws IOException {
         this.userID = userID;
         this.vaults = vaults;
         this.collaterals = collaterals;
@@ -35,6 +36,7 @@ public class User {
         this.bsktTokens = bsktTokens;
         this.feesOwed = feesOwed;
         this.desiredBasket = desiredBasket;
+        this.desiredPrice = desiredPrice;
         this.colatWanted = colatWanted;
     }
 
@@ -84,6 +86,9 @@ public class User {
     public double getDesiredBasket() { return this.desiredBasket; }
     public void setDesiredBasket(double desiredBasket) { this.desiredBasket = desiredBasket; }
 
+    public double getDesiredPrice() { return  this.desiredPrice; }
+    public void setDesiredPrice(double desiredPrice) { this.desiredPrice = desiredPrice; }
+
     public HashMap<String,Double> getColatWanted() { return this.colatWanted; }
     public void setColatWanted(HashMap<String,Double> colatWanted) { this.colatWanted = colatWanted; }
     public HashMap<String,Double> addCollateralWanted(String collateralType, double amount) {
@@ -104,6 +109,17 @@ public class User {
 
 
     // Methods
+    private static int findUserByID(ArrayList<User> users, String userID) {
+
+        for(int i = 0; i < users.size(); i ++) {
+            if(users.get(i).getUserID().equals(userID)) return i;
+        }
+
+        System.out.println("Issue");
+        return 0;
+    }
+
+
     public static ArrayList<User> getInitialUsers(double basketPrice, ArrayList<Vault> vaults) throws IOException {
         String usersDataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/User-Data/Users_Initial.json";
         JSONObject fullJson = JsonReader.readJsonFromFile(usersDataPath);
@@ -148,7 +164,7 @@ public class User {
             currColatWanted.put("LINK", 0.0);
             currColatWanted.put("A-XRP", 0.0);
 
-            currUser = new User(currUserID, currVaults, currCollaterals, currBasketHoldings, currBasketTokens, currFeesOwed, currDesiredBasket, currColatWanted);
+            currUser = new User(currUserID, currVaults, currCollaterals, currBasketHoldings, currBasketTokens, currFeesOwed, currDesiredBasket, 0.0, currColatWanted);
 
             users.add(currUser);
 
@@ -175,7 +191,7 @@ public class User {
 
 
     public static void generateUserWants(ArrayList<User> userList, ArrayList<User> sellers, ArrayList<User> buyers, double userSeed, double basketPrice,
-                                         double collateralSeed, ArrayList<CollateralOracle> colatOracles, VaultManagerOracle vaultManagerOracle) {
+                                         double targetPrice, double collateralSeed, ArrayList<CollateralOracle> colatOracles, VaultManagerOracle vaultManagerOracle) {
         boolean entered;
         sellers.clear();
         buyers.clear();
@@ -187,6 +203,7 @@ public class User {
 
 
         for(User u : userList) {
+            Random ran = new Random();
             u.generateStabilityFees(colatOracles);
             /*
             System.out.println("ID: " + u.getUserID() + "\nBasket Holdings: " + u.getBsktHoldings() + "\nDesired Basket: " + u.getDesiredBasket()
@@ -203,6 +220,7 @@ public class User {
 
             if(u.getBsktHoldings() < 0) {
                 u.setDesiredBasket(u.getBsktHoldings() * -1);
+                u.setDesiredPrice(targetPrice + (targetPrice * ran.nextGaussian()/10));
                 buyers.add(u);
                 buyerNum++;
                 basketBuy += u.getDesiredBasket();
@@ -222,6 +240,7 @@ public class User {
                 }
                 else {
                     buyers.add(u);
+                    u.setDesiredPrice(targetPrice + (targetPrice * ran.nextGaussian()/10));
                     buyerNum++;
                     basketBuy += u.getDesiredBasket();
                 }
@@ -232,8 +251,11 @@ public class User {
                 if(!u.getVaults().isEmpty()) {
                     vaultManagerOracle.closeVault(u, u.getVaults().get(0), basketPrice);
                 }
-                else u.addCollateralWanted(colat, u.getColatWanted().get(colat) + collateralSeed * (0 + Math.random() * (2)));
-                sellers.add(u);
+                else {
+                    u.addCollateralWanted(colat, u.getColatWanted().get(colat) + collateralSeed * (0 + Math.random() * (2)));
+                    u.setDesiredPrice(targetPrice + (targetPrice * ran.nextGaussian()/10));
+                    sellers.add(u);
+                }
                 sellerNum++;
                 basketSale += u.getColatWanted().get(colat);
                 entered = true;
@@ -242,6 +264,7 @@ public class User {
             else if(u.bsktHoldings > 0 && (status == 4 || status == 5) && !entered) {
                 String colat = CollateralOracle.collateralTypes[rn.nextInt(6)];
                 u.addCollateralWanted(colat, u.bsktHoldings * (0 + Math.random() * (1)));
+                u.setDesiredPrice(targetPrice + (targetPrice * ran.nextGaussian()/10));
                 sellers.add(u);
                 sellerNum++;
                 basketSale += u.getColatWanted().get(colat);
@@ -267,7 +290,6 @@ public class User {
 
     public static void generateNewUsers(ArrayList<User> userBase, double userSeed, double collateralSeed, double basketPrice, VaultManagerOracle vaultManagerOracle) throws IOException {
         String[] collaterals = CollateralOracle.collateralTypes;
-        System.out.println(userBase.size());
         int userBaseSize = userBase.size();
         Random rn = new Random();
         int newUsers = (int)Math.log(rn.nextInt(userBaseSize/10) + userBaseSize/30);
@@ -308,13 +330,14 @@ public class User {
             rn = new Random();
             selector = rn.nextInt(5);
 
-            user = new User(userID, userVaults, userCollaterals, userBsktMinted, userBsktTokens, feesOwed, desiredBasket, collateralsWanted);
+            user = new User(userID, userVaults, userCollaterals, userBsktMinted, userBsktTokens, feesOwed, desiredBasket, 0.0, collateralsWanted);
 
             if(selector == 3) {
                 Vault.openVault(user, userID,  userBsktMinted, userBsktTokens, collaterals[userSeedRandom.nextInt(5)], userBsktMinted * 1.5, vaultManagerOracle);
             }
             else {
                 user.setDesiredBasket(userBsktMinted);
+                user.setDesiredPrice(basketPrice + basketPrice/100 );
             }
             userBase.add(user);
         }
@@ -323,13 +346,14 @@ public class User {
 
 
     public static void buyBasket(User buyer, User seller, double payment, double basketPrice, String collateralType) {
-        buyer.setBsktHoldings(buyer.getBsktHoldings() + payment);
-        buyer.setBsktTokens(buyer.getBsktTokens() + payment/basketPrice);
+        double basketTokens = buyer.getDesiredBasket()/basketPrice;
+        buyer.setBsktHoldings(buyer.getBsktHoldings() + basketTokens * basketPrice);
+        buyer.setBsktTokens(buyer.getBsktTokens() + basketTokens);
         buyer.setDesiredBasket(buyer.getDesiredBasket() - payment);
         buyer.addCollaterals(collateralType, buyer.getCollaterals().get(collateralType) - payment);
 
-        seller.setBsktHoldings(seller.getBsktHoldings() - payment);
-        seller.setBsktTokens(seller.getBsktTokens() - payment/basketPrice);
+        seller.setBsktHoldings(seller.getBsktHoldings() - basketTokens * basketPrice);
+        seller.setBsktTokens(seller.getBsktTokens() - basketTokens);
         seller.addCollateralWanted(collateralType, seller.getColatWanted().get(collateralType) - payment);
         seller.addCollaterals(collateralType, seller.getCollaterals().get(collateralType) + payment);
 
@@ -366,6 +390,38 @@ public class User {
         setBsktHoldings(getBsktHoldings() - liquidationFee);
         setBsktTokens(getBsktTokens() - liquidationFee/basketPrice);
         addFees("Liquidation Fee", getFeesOwed().get("Liquidation Fee") - liquidationFee);
+    }
+
+
+    public static double marketTrades(double basketPrice, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers) {
+        ArrayList<Double> basketSales = new ArrayList<>();
+        double totalSales = 0;
+
+        String buyerID;
+        String sellerID;
+        String colat = "A-XRP";
+
+        for(User s: sellers) {
+            sellerID = s.userID;
+            for(User b: buyers) {
+                for(String collateralType: collateralTypes) {
+                    if(s.getColatWanted().get(collateralType) >= b.getCollaterals().get(collateralType)) {
+                        colat = collateralType;
+                        break;
+                    }
+                }
+                if(b.getDesiredPrice() >= s.getDesiredPrice() && b.getDesiredBasket() >= s.getColatWanted().get(colat)) {
+                    buyerID = b.getUserID();
+                    buyBasket(userBase.get(findUserByID(userBase, buyerID)), userBase.get(findUserByID(userBase, sellerID)), (b.getDesiredBasket()/basketPrice)*b.getDesiredPrice(), basketPrice, colat);
+                    basketSales.add(b.getDesiredPrice());
+                }
+                break;
+            }
+        }
+
+        for(double value : basketSales) totalSales += value;
+
+        return totalSales/basketSales.size();
     }
 
 }

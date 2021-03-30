@@ -206,10 +206,8 @@ public class VaultManagerOracle extends Oracle {
                 userVaults.remove(vault);
                 user.setVaults(userVaults);
                 user.addFees("Liquidation Fee", user.getFeesOwed().get("Liquidation Fee") + vault.bsktMinted*0.12);
-                System.out.println(user.getFeesOwed().get("Stability Fee") + " " + user.getFeesOwed().get("Liquidation Fee"));
                 user.payStabilityFee(basketPrice);
                 user.payLiquidationFee(basketPrice);
-                System.out.println(user.getFeesOwed().get("Stability Fee") + " " + user.getFeesOwed().get("Liquidation Fee"));
                 break;
             }
         }

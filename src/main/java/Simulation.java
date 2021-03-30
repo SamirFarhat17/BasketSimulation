@@ -229,7 +229,7 @@ public class Simulation {
         while(days > 0) {
             date = dates.get(1827-days);
 
-            runSimDay(date, basketValue, previousDate, vaultManagerOracle.getMintedBasketTokens(), userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
+            basketValue = runSimDay(date, basketValue, previousDate, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
                     btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, buyers, sellers, totalDebtCeiling);
 
             updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpis, cpiOracle,
@@ -250,10 +250,10 @@ public class Simulation {
 
 
 
-    private static void runSimDay(String date, double basketPrice, String previousDate, double totalBSKTTokensMinted, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
-                                  BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle,
-                                  CollateralOracle btcOracle,  CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle,
-                                  VaultManagerOracle vaultManagerOracle, Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling) throws IOException
+    private static double runSimDay(String date, double basketPrice, String previousDate, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
+                                    BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle, CollateralOracle btcOracle,
+                                    CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle, VaultManagerOracle vaultManagerOracle,
+                                    Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling) throws IOException
     {
         System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
@@ -286,13 +286,17 @@ public class Simulation {
         System.out.println("User creation and interest generation");
         User.generateNewUsers(userBase, userSeed, collateralSeed, basketPrice, vaultManagerOracle);
         User.generateUserCollaterals(userBase, collateralSeed);
-        User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice, collateralSeed, colatOracles, vaultManagerOracle);
+        User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice, cpiOracle.getCpi()/10, collateralSeed, colatOracles, vaultManagerOracle);
         keeper.generateKeeperWants(date);
+
+        basketPrice = User.marketTrades(basketPrice, userBase, buyers, sellers);
+        System.out.println(basketPrice);
 
         System.out.println("Governorship work\n");
         Governor.analyzeSituation();
         Governor.updateGovernanceParameters();
 
+        return basketPrice;
     }
 
 
