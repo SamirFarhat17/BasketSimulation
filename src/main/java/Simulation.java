@@ -245,13 +245,13 @@ public class Simulation {
             date = dates.get(1827-days);
 
             basketValue = runSimDay(date, basketValue, previousDate, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
-                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, buyers, sellers, totalDebtCeiling);
+                    btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, buyers, sellers, totalDebtCeiling, writer);
 
             updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpis, cpiOracle,
                     targetPrices, lockedXRP, lockedBTC, lockedETH, lockedLINK,  lockedLTC, lockedUSDT, totalDebtCeilings, collateralOracles, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK,
                     debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC,
                     liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT,
-                    bsrOracle, bsrTrack);
+                    bsrOracle, bsrTrack, writer);
 
             previousDate = date;
             days--;
@@ -269,9 +269,9 @@ public class Simulation {
     private static double runSimDay(String date, double basketPrice, String previousDate, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
                                     BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle, CollateralOracle btcOracle,
                                     CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle, VaultManagerOracle vaultManagerOracle,
-                                    Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling) throws IOException
+                                    Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling, PrintWriter writer) throws IOException
     {
-        //System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
+        System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
         bufferOracle.updateOracle(date, totalDebtCeiling);
         cpiOracle.updateOracle(date);
@@ -279,7 +279,7 @@ public class Simulation {
 
         colatOracles.clear();
 
-        //System.out.println("Updating collateral oracles");
+        System.out.println("Updating collateral oracles");
         xrpOracle.updateOracle(date);
         colatOracles.add(xrpOracle);
         btcOracle.updateOracle(date);
@@ -293,22 +293,22 @@ public class Simulation {
         usdtOracle.updateOracle(date);
         colatOracles.add(usdtOracle);
 
-        //System.out.println("Update vault manager");
+        System.out.println("Update vault manager");
         vaultManagerOracle.updateVaults(previousDate, date, vaultManagerOracle.getActiveVaults(), basketPrice, xrpOracle.getFullExchange(), btcOracle.getFullExchange(), ethOracle.getFullExchange(),
                                         linkOracle.getFullExchange(), ltcOracle.getFullExchange(), usdtOracle.getFullExchange());
         vaultManagerOracle.updateOracle(date);
         vaultManagerOracle.checkLiquidations(userBase, vaultManagerOracle.getActiveVaults(), colatOracles, basketPrice);
 
-        //System.out.println("User creation and interest generation");
+        System.out.println("User creation and interest generation");
         User.generateNewUsers(userBase, userSeed, collateralSeed, basketPrice, vaultManagerOracle);
         User.generateUserCollaterals(userBase, collateralSeed);
         User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice, cpiOracle.getCpi()/10, collateralSeed, colatOracles, vaultManagerOracle);
         keeper.generateKeeperWants(date);
 
         basketPrice = User.marketTrades(basketPrice, userBase, buyers, sellers);
-        //System.out.println(basketPrice);
+        System.out.println(basketPrice);
 
-        //System.out.println("Governorship work\n");
+        System.out.println("Governorship work\n");
         Governor.updateDebtCeilings(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
         Governor.updateStabilityFees(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
         Governor.updateLiquidationRatios(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
@@ -334,7 +334,7 @@ public class Simulation {
                                                  ArrayList<Double> liquidationRatiosLINK, ArrayList<Double> liquidationRatiosLTC, ArrayList<Double> liquidationRatiosUSDT,
                                                  ArrayList<Double> stabilityFeesXRP, ArrayList<Double> stabilityFeesBTC, ArrayList<Double> stabilityFeesETH,
                                                  ArrayList<Double> stabilityFeesLINK, ArrayList<Double> stabilityFeesLTC, ArrayList<Double> stabilityFeesUSDT,
-                                                 BsrOracle bsrOracle, ArrayList<Double> bsrTrack)
+                                                 BsrOracle bsrOracle, ArrayList<Double> bsrTrack, PrintWriter writer)
     {
         basketMinted.add(vaultManagerOracle.getMintedBasket());
         basketTokensMinted.add(vaultManagerOracle.getMintedBasketTokens());

@@ -415,7 +415,7 @@ public class User {
         }
 
         for(double value : basketSales) totalSales += value;
-        // System.out.println("Sales Count: " + salesCount);
+        System.out.println("Sales Count: " + salesCount);
         return totalSales/basketSales.size();
     }
 
