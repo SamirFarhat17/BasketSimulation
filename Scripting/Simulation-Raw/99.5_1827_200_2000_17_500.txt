@@ -5,10 +5,10 @@ Date: 2016-01-01
 Consumer Price Index: 99.5
 BSKT Value: 9.95
 BSKT Target Peg: 9.95
-Total Basket in Market46412.31472712851
+Total Basket in Market46612.55620878763
 User Base Population: 200
-User Base Basket Holdings: 394703.018405922
-Keeper Total Basket: 67099.51312900672
+User Base Basket Holdings: 396405.92673285207
+Keeper Total Basket: 67389.00754458485
 -------------------------------------------------------------------------------------------------
 Oracles
 -------------------------------------------------------------------------------------------------
@@ -26,13 +26,13 @@ USDT-Oracle - Active
 -------------------------------------------------------------------------------------------------
 Vaults
 -------------------------------------------------------------------------------------------------
-Number of Vaults: 478
+Number of Vaults: 458
 Collateral holdings in vaults along with exchange rates, stability fees and liquidation ratios:
-A-XRP: 124408.64125800529 Exchange Rate: 0.004433352906635349 Stability Fee: 3.5 Liquidation Ratio 140.0%
-W-BTC: 146345.08057315458 Exchange Rate: 316.14871403405755 Stability Fee: 4.5 Liquidation Ratio 130.0%
-ETH: 157761.8133776059 Exchange Rate: 0.6853435114503817 Stability Fee: 5.5 Liquidation Ratio 110.0%
-LINK: 129907.9498223476 Exchange Rate: 0.13882266588373457 Stability Fee: 5.5 Liquidation Ratio 120.0%
-P-LTC: 135792.49241949304 Exchange Rate: 2.5539635936582497 Stability Fee: 2.0 Liquidation Ratio 150.0%
-USDT: 93709.64678680523 Exchange Rate: 0.733998825601879 Stability Fee: 0.0 Liquidation Ratio 165.0%
+A-XRP: 139749.22440552124 Exchange Rate: 0.004433352906635349 Stability Fee: 3.5 Liquidation Ratio 140.0%
+W-BTC: 127092.83860455028 Exchange Rate: 316.14871403405755 Stability Fee: 4.5 Liquidation Ratio 130.0%
+ETH: 111390.81582567627 Exchange Rate: 0.6853435114503817 Stability Fee: 5.5 Liquidation Ratio 110.0%
+LINK: 150899.56880812978 Exchange Rate: 0.13882266588373457 Stability Fee: 5.5 Liquidation Ratio 120.0%
+P-LTC: 159658.07153693112 Exchange Rate: 2.5539635936582497 Stability Fee: 2.0 Liquidation Ratio 150.0%
+USDT: 95973.57829601818 Exchange Rate: 0.733998825601879 Stability Fee: 0.0 Liquidation Ratio 165.0%
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
