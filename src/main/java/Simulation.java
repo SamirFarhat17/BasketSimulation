@@ -272,7 +272,7 @@ public class Simulation {
                                     CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle, VaultManagerOracle vaultManagerOracle,
                                     Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling, PrintWriter writer) throws IOException
     {
-        //System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
+        System.out.println(date);
         writer.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
         bufferOracle.updateOracle(date, totalDebtCeiling);
@@ -319,7 +319,6 @@ public class Simulation {
         Governor.updateDebtCeilings(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
         Governor.updateStabilityFees(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
         Governor.updateLiquidationRatios(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
-        System.out.println("BSR change");
         Governor.changeBSR(cpiOracle.getCpi()/10, basketPrice,bsrOracle);
 
         return basketPrice;
