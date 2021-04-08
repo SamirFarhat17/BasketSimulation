@@ -152,7 +152,7 @@ link_sfs = output_pandas['LINKSF'].values
 ltc_sfs = output_pandas['LTCSF'].values
 usdt_sfs = output_pandas['USDTSF'].values
 
-graph_six(xrp_sfs, btc_sfs, eth_sfs, link_sfs, ltc_sfs, usdt_sfs, x_axis, 'Savings_Rates', 'Days', '%', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
+graph_six(xrp_sfs, btc_sfs, eth_sfs, link_sfs, ltc_sfs, usdt_sfs, x_axis, 'Stability_Fees', 'Days', '%', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 xrp_lrs = output_pandas['XRPLR'].values
 btc_lrs = output_pandas['BTCLR'].values

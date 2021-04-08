@@ -92,8 +92,47 @@ public class Governor {
 
     public static void updateStabilityFees(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,CollateralOracle linkOracle, CollateralOracle ltcOracle,
                                           CollateralOracle usdtOracle, ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase) {
-        for(CollateralOracle collateralOracle: collateralOracles) {
-
+        String colatType;
+        double currentLocked;
+        double currentCeiling;
+        if(count == 28) {
+            for(CollateralOracle collateralOracle : collateralOracles) {
+                colatType = collateralOracle.getCollateralType();
+                if(collateralOracle.getCollateralType().equals("A-XRP")) {
+                    currentLocked = vaultManagerOracle.getLockedXRP();
+                    currentCeiling = xrpOracle.getDebtCeiling();
+                    if (currentLocked >= 0.75 * currentCeiling) xrpOracle.setStabilityFee(xrpOracle.getStabilityFee() + Math.random() * ((xrpOracle.getStabilityFee()/5)- 0));
+                    else if(xrpOracle.getStabilityFee() > 0.5) xrpOracle.setStabilityFee(xrpOracle.getStabilityFee() - Math.random() * ((xrpOracle.getStabilityFee()/5)- 0));
+                    continue;
+                }
+                if(collateralOracle.getCollateralType().equals("W-BTC")) {
+                    currentLocked = vaultManagerOracle.getLockedBTC();
+                    currentCeiling = btcOracle.getDebtCeiling();
+                    if (currentLocked >= 0.75 * currentCeiling) btcOracle.setStabilityFee(btcOracle.getStabilityFee() + 0 + Math.random() * ((btcOracle.getStabilityFee()/5)- 0));
+                    else if(btcOracle.getStabilityFee() > 0.5) btcOracle.setStabilityFee(btcOracle.getStabilityFee() - Math.random() * ((btcOracle.getStabilityFee()/5)- 0));
+                    continue;
+                }
+                if (collateralOracle.getCollateralType().equals("ETH")) {
+                    currentLocked = vaultManagerOracle.getLockedETH();
+                    currentCeiling = ethOracle.getDebtCeiling();
+                    if (currentLocked >= 0.75 * currentCeiling) ethOracle.setStabilityFee(ethOracle.getStabilityFee() + Math.random() * ((ethOracle.getStabilityFee()/5)- 0));
+                    else if(ethOracle.getStabilityFee() > 0.5) ethOracle.setStabilityFee(ethOracle.getStabilityFee() - Math.random() * ((ethOracle.getStabilityFee()/5)- 0));
+                    continue;
+                }
+                if(collateralOracle.getCollateralType().equals("LINK")) {
+                    currentLocked = vaultManagerOracle.getLockedLINK();
+                    currentCeiling = linkOracle.getDebtCeiling();
+                    if (currentLocked >= 0.75 * currentCeiling) linkOracle.setStabilityFee(linkOracle.getStabilityFee() + Math.random() * ((linkOracle.getStabilityFee()/5)- 0));
+                    else if(linkOracle.getStabilityFee() > 0.5) linkOracle.setStabilityFee(linkOracle.getStabilityFee() - Math.random() * ((linkOracle.getStabilityFee()/5)- 0));
+                    continue;
+                }
+                if(collateralOracle.getCollateralType().equals("P-LTC")) {
+                    currentLocked = vaultManagerOracle.getLockedLTC();
+                    currentCeiling = ltcOracle.getDebtCeiling();
+                    if (currentLocked >= 0.75 * currentCeiling) ltcOracle.setStabilityFee(ltcOracle.getStabilityFee() + Math.random() * ((ltcOracle.getStabilityFee()/5)- 0));
+                    else if(ltcOracle.getStabilityFee() > 0.5) ltcOracle.setStabilityFee(ltcOracle.getStabilityFee() - Math.random() * ((ltcOracle.getStabilityFee()/5)- 0));
+                }
+            }
         }
     }
 
