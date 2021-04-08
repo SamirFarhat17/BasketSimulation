@@ -20,7 +20,7 @@ public class DataExtraction {
 
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    public static ArrayList<String> makeDates() throws IOException {
+    public static ArrayList<String> makeDates() throws IOException, CsvException {
         String dataPath = "/home/samir/Documents/Year4/Dissertation/BasketSimulation/Data/Oracle-Data/GBP-USD.csv";
         CSVReader reader = new CSVReader(new FileReader(dataPath));
         String [] nextLine;

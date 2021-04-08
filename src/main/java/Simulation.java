@@ -1,3 +1,4 @@
+import com.opencsv.exceptions.CsvException;
 import json.DataExtraction;
 import json.JsonReader;
 import oracles.*;
@@ -28,7 +29,7 @@ public class Simulation {
     private double keeperSeed;
     private double collateralSeed;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, CsvException {
 
         // Check arguments
         if(args.length != 7) {
@@ -271,7 +272,8 @@ public class Simulation {
                                     CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle, VaultManagerOracle vaultManagerOracle,
                                     Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling, PrintWriter writer) throws IOException
     {
-        System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
+        //System.out.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
+        writer.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
         bufferOracle.updateOracle(date, totalDebtCeiling);
         cpiOracle.updateOracle(date);
@@ -279,7 +281,8 @@ public class Simulation {
 
         colatOracles.clear();
 
-        System.out.println("Updating collateral oracles");
+        //System.out.println("Updating collateral oracles");
+        writer.println("Updating collateral oracles");
         xrpOracle.updateOracle(date);
         colatOracles.add(xrpOracle);
         btcOracle.updateOracle(date);
@@ -293,25 +296,30 @@ public class Simulation {
         usdtOracle.updateOracle(date);
         colatOracles.add(usdtOracle);
 
-        System.out.println("Update vault manager");
+        //System.out.println("Update vault manager");
+        writer.println("Update vault manager");
         vaultManagerOracle.updateVaults(previousDate, date, vaultManagerOracle.getActiveVaults(), basketPrice, xrpOracle.getFullExchange(), btcOracle.getFullExchange(), ethOracle.getFullExchange(),
                                         linkOracle.getFullExchange(), ltcOracle.getFullExchange(), usdtOracle.getFullExchange());
         vaultManagerOracle.updateOracle(date);
         vaultManagerOracle.checkLiquidations(userBase, vaultManagerOracle.getActiveVaults(), colatOracles, basketPrice);
 
-        System.out.println("User creation and interest generation");
+        //System.out.println("User creation and interest generation");
+        writer.println("User creation and interest generation");
         User.generateNewUsers(userBase, userSeed, collateralSeed, basketPrice, vaultManagerOracle);
         User.generateUserCollaterals(userBase, collateralSeed);
         User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice, cpiOracle.getCpi()/10, collateralSeed, colatOracles, vaultManagerOracle);
         keeper.generateKeeperWants(date);
 
         basketPrice = User.marketTrades(basketPrice, userBase, buyers, sellers);
-        System.out.println(basketPrice);
+        //System.out.println("Basket Price: " + basketPrice);
+        writer.println("Basket Price: " + basketPrice);
 
-        System.out.println("Governorship work\n");
+        //System.out.println("Governorship work\n");
+        writer.println("Governorship work\n");
         Governor.updateDebtCeilings(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
         Governor.updateStabilityFees(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
         Governor.updateLiquidationRatios(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
+        System.out.println("BSR change");
         Governor.changeBSR(cpiOracle.getCpi()/10, basketPrice,bsrOracle);
 
         return basketPrice;
@@ -337,6 +345,7 @@ public class Simulation {
                                                  BsrOracle bsrOracle, ArrayList<Double> bsrTrack, PrintWriter writer)
     {
         basketMinted.add(vaultManagerOracle.getMintedBasket());
+        // System.out.println("Basket tokens: " + vaultManagerOracle.getMintedBasketTokens());
         basketTokensMinted.add(vaultManagerOracle.getMintedBasketTokens());
         basketPrices.add(basketPrice);
         userPopulations.add(userBase.size());

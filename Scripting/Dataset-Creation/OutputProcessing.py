@@ -120,8 +120,9 @@ basket_minted = output_pandas['BasketMinted'].values
 basket_tokens_minted = output_pandas['BasketTokensMinted'].values
 user_size = output_pandas['UserBaseSize'].values
 
-graph_three(basket_minted, basket_tokens_minted, user_size, x_axis, 'Total_Basket_and_Basket_Tokens', 'Days', 'Quantity(Tokens, GBP and People)', 'Total Basket Value',
-            'Basket Tokens Minted', 'User-Base Size')
+graph_two(user_size, basket_tokens_minted/100, x_axis, 'Userbase Size vs Tokens Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/100')
+
+graph_two(basket_minted, basket_tokens_minted, x_axis, 'Total_Basket_and_Basket_Tokens', 'Days', 'Quantity(Tokens and GBP)', 'Total Basket Value', 'Basket Tokens Minted',)
 
 debt_ceiling = output_pandas['DebtCeiling'].values
 xrp_debt_ceiling = output_pandas['XRPDebtCeiling'].values

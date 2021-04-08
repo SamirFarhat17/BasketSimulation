@@ -200,6 +200,7 @@ public class User {
         double basketSale = 0;
         double basketBuy = 0;
 
+        // System.out.println(targetPrice +  "vs" + basketPrice);
 
         for(User u : userList) {
             Random ran = new Random();
@@ -220,7 +221,7 @@ public class User {
 
             if(u.getBsktHoldings() < 0) {
                 u.setDesiredBasket(u.getBsktHoldings() * -1);
-                u.setDesiredPrice(targetPrice + (targetPrice * ran.nextGaussian()/100));
+                u.setDesiredPrice(targetPrice - Math.abs((targetPrice * ran.nextGaussian()/100)));
                 buyers.add(u);
                 buyerNum++;
                 basketBuy += u.getDesiredBasket();
@@ -229,18 +230,19 @@ public class User {
 
             if(u.bsktHoldings > 0 &&(status == 17 || status == 12) && !entered) {
                 u.setDesiredBasket(u.getDesiredBasket() + (userSeed * (0 + Math.random() * (1))));
+                u.setDesiredPrice(targetPrice - Math.abs((targetPrice * ran.nextGaussian()/100)));
+                buyers.add(u);
                 entered = true;
                 if(vaultDescision == 2) {
                     userColats = u.getCollaterals();
                     for(String colat : DataExtraction.shuffleArray(CollateralOracle.collateralTypes)) {
                         if(userColats.get(colat) > u.getDesiredBasket() * 1.5) {
+                            buyers.remove(u);
                             Vault.openVault(u, u.getUserID(), u.getDesiredBasket(), u.getDesiredBasket()/basketPrice, colat, u.getDesiredBasket() * 1.5, vaultManagerOracle);
                         }
                     }
                 }
                 else {
-                    buyers.add(u);
-                    u.setDesiredPrice(targetPrice + (targetPrice * ran.nextGaussian()/100));
                     buyerNum++;
                     basketBuy += u.getDesiredBasket();
                 }
@@ -253,7 +255,7 @@ public class User {
                 }
                 else {
                     u.addCollateralWanted(colat, u.getColatWanted().get(colat) + collateralSeed * (0 + Math.random() * (2)));
-                    u.setDesiredPrice(targetPrice + (targetPrice * ran.nextGaussian()/100));
+                    u.setDesiredPrice(targetPrice - Math.abs((targetPrice * ran.nextGaussian()/100)));
                     sellers.add(u);
                 }
                 sellerNum++;
@@ -264,7 +266,7 @@ public class User {
             else if(u.bsktHoldings > 0 && (status == 4 || status == 5) && !entered) {
                 String colat = CollateralOracle.collateralTypes[rn.nextInt(6)];
                 u.addCollateralWanted(colat, u.bsktHoldings * (0 + Math.random() * (1)));
-                u.setDesiredPrice(targetPrice + (targetPrice * ran.nextGaussian()/100));
+                u.setDesiredPrice(targetPrice - Math.abs((targetPrice * ran.nextGaussian()/100)));
                 sellers.add(u);
                 sellerNum++;
                 basketSale += u.getColatWanted().get(colat);
@@ -415,8 +417,10 @@ public class User {
         }
 
         for(double value : basketSales) totalSales += value;
-        System.out.println("Sales Count: " + salesCount);
-        return totalSales/basketSales.size();
+        //System.out.println("Sales Count: " + salesCount);
+        //System.out.println("Basket Price: " + basketPrice);
+        if(!basketSales.isEmpty()) return totalSales/basketSales.size();
+        else return basketPrice;
     }
 
 }

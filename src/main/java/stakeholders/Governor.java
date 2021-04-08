@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Governor {
 
@@ -31,6 +32,8 @@ public class Governor {
 
 
     // Variables
+    private static int count = 0;
+    private static Random randomizer;
 
     // Methods
     public static double getInitialBasket() throws IOException {
@@ -43,10 +46,17 @@ public class Governor {
     }
 
     public static void changeBSR(double targetPrice, double basketPrice, BsrOracle bsrOracle) {
-        if(basketPrice > targetPrice)bsrOracle.setBsr(bsrOracle.getBsr() + bsrOracle.getBsr()/10);
-        else if (basketPrice < targetPrice) bsrOracle.setBsr(bsrOracle.getBsr() - bsrOracle.getBsr()/10);
-        if(bsrOracle.getBsr() > 9) bsrOracle.setBsr(3.5);
-        else if(bsrOracle.getBsr() < 1) bsrOracle.setBsr(4);
+        System.out.println("here: " + count);
+        count++;
+        if (count == 30) {
+            count = 0;
+            if(basketPrice > targetPrice) {
+                bsrOracle.setBsr(3.5 + Math.random() * (7 - 3.5));
+            }
+            else {
+                bsrOracle.setBsr(0 + Math.random() * (3.5 - 0));
+            }
+        }
     }
 
     public static void updateDebtCeilings(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,CollateralOracle linkOracle, CollateralOracle ltcOracle,
