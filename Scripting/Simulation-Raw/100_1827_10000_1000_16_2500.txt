@@ -5,10 +5,10 @@ Date: 2016-01-01
 Consumer Price Index: 100.0
 BSKT Value: 10.0
 BSKT Target Peg: 10.0
-Total Basket in Market1161497.076150855
+Total Basket in Market1157243.294366824
 User Base Population: 10000
-User Base Basket Holdings: 1.0012905828886606E7
-Keeper Total Basket: 0.13793028605555097
+User Base Basket Holdings: 9976235.296265688
+Keeper Total Basket: 0.13792710299914754
 -------------------------------------------------------------------------------------------------
 Oracles
 -------------------------------------------------------------------------------------------------
@@ -26,14 +26,14 @@ USDT-Oracle - Active
 -------------------------------------------------------------------------------------------------
 Vaults
 -------------------------------------------------------------------------------------------------
-Number of Vaults: 23218
+Number of Vaults: 23074
 Collateral holdings in vaults along with exchange rates, stability fees and liquidation ratios:
-A-XRP: 3117280.7143820697 Exchange Rate: 0.004433352906635349 Stability Fee: 3.5 Liquidation Ratio 140.0%
-W-BTC: 3293894.571811754 Exchange Rate: 316.14871403405755 Stability Fee: 4.5 Liquidation Ratio 130.0%
-ETH: 3300564.241665359 Exchange Rate: 0.6853435114503817 Stability Fee: 5.5 Liquidation Ratio 110.0%
-LINK: 3274059.621505043 Exchange Rate: 0.13882266588373457 Stability Fee: 5.5 Liquidation Ratio 120.0%
-P-LTC: 3372660.3618457946 Exchange Rate: 2.5539635936582497 Stability Fee: 2.0 Liquidation Ratio 150.0%
-USDT: 3374108.497073914 Exchange Rate: 0.733998825601879 Stability Fee: 0.0 Liquidation Ratio 165.0%
+A-XRP: 3325945.3143461836 Exchange Rate: 0.004433352906635349 Stability Fee: 3.5 Liquidation Ratio 140.0%
+W-BTC: 3327349.8286470673 Exchange Rate: 316.14871403405755 Stability Fee: 4.5 Liquidation Ratio 130.0%
+ETH: 3223941.9931962183 Exchange Rate: 0.6853435114503817 Stability Fee: 5.5 Liquidation Ratio 110.0%
+LINK: 3328023.369662583 Exchange Rate: 0.13882266588373457 Stability Fee: 5.5 Liquidation Ratio 120.0%
+P-LTC: 3209308.908705818 Exchange Rate: 2.5539635936582497 Stability Fee: 2.0 Liquidation Ratio 150.0%
+USDT: 3254062.1893353197 Exchange Rate: 0.733998825601879 Stability Fee: 0.0 Liquidation Ratio 165.0%
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ___________________________________________________________________________________________________________
@@ -42,7 +42,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.963528924566356
+Basket Price: 9.926689435620121
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -51,7 +51,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.838673158648326
+Basket Price: 9.94758189040191
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -60,7 +60,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.93223512467238
+Basket Price: 9.971369468247705
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -69,7 +69,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.97674367339155
+Basket Price: 9.945075282278703
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -78,7 +78,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.972412774082304
+Basket Price: 9.97606411786182
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -87,7 +87,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.947793646785355
+Basket Price: 9.890274961605796
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -96,7 +96,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.931754832305076
+Basket Price: 9.961019871827892
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -105,7 +105,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.95957187135524
+Basket Price: 9.950465530795714
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -114,7 +114,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.938905801841672
+Basket Price: 9.950465530795714
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -123,7 +123,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.97617696061714
+Basket Price: 9.96489305513751
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -132,7 +132,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.95541435412646
+Basket Price: 9.90826296660937
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -141,7 +141,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.927417289155603
+Basket Price: 9.95242301202237
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -150,7 +150,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.874393107488995
+Basket Price: 9.95242301202237
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -159,7 +159,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.975818229617563
+Basket Price: 9.978994601607095
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -168,7 +168,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.970752985443168
+Basket Price: 9.978994601607095
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -177,7 +177,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.977736892007655
+Basket Price: 9.93429473410387
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -186,7 +186,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.96322968830044
+Basket Price: 9.9557705925876
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -195,7 +195,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.842250906664779
+Basket Price: 9.967675416418563
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -204,7 +204,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.976273024643884
+Basket Price: 9.926540029920714
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -213,7 +213,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.97141907615956
+Basket Price: 9.903982252912437
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -222,7 +222,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.88930494350661
+Basket Price: 9.913578583831605
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -231,7 +231,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.961763766636958
+Basket Price: 9.969372400402044
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -240,7 +240,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.979312096239529
+Basket Price: 9.965130445001721
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -249,7 +249,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.96826296226106
+Basket Price: 9.935341844560114
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -258,7 +258,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.972809482545474
+Basket Price: 9.935341844560114
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -267,7 +267,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.959407794950467
+Basket Price: 9.97349185993444
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -276,7 +276,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.918496334762496
+Basket Price: 9.965881886779306
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -285,7 +285,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.942981722575132
+Basket Price: 9.965881886779306
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -294,7 +294,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.885705960305822
+Basket Price: 9.965881886779306
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -303,7 +303,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.930742464200435
+Basket Price: 9.965881886779306
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -312,7 +312,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.918994265651042
+Basket Price: 9.927341865609748
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -321,7 +321,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.918994265651042
+Basket Price: 9.976353508205621
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -330,7 +330,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.95576048369505
+Basket Price: 9.940328029929416
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -339,7 +339,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.968087095388867
+Basket Price: 10.002085267133229
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -348,7 +348,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.981761399756602
+Basket Price: 9.995670779345335
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -357,7 +357,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.009041314051794
+Basket Price: 9.990263174699333
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -366,7 +366,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.947119310927464
+Basket Price: 9.964024523698248
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -375,7 +375,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.987921234714959
+Basket Price: 9.919432754807595
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -384,7 +384,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.971779020547185
+Basket Price: 9.919432754807595
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -393,7 +393,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.981712138089762
+Basket Price: 10.0071951458522
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -402,7 +402,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.976092681856562
+Basket Price: 9.94544988206213
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -411,7 +411,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.976092681856562
+Basket Price: 9.947241298792699
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -420,7 +420,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.992684293945576
+Basket Price: 9.992500450706677
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -429,7 +429,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.992684293945576
+Basket Price: 9.992500450706677
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -438,7 +438,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.94792299025608
+Basket Price: 9.98101500268238
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -447,7 +447,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.911650289839374
+Basket Price: 9.995057300443472
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -456,7 +456,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.998127481856717
+Basket Price: 10.000566204336423
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -465,7 +465,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.00613110455497
+Basket Price: 9.995056927863368
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -474,7 +474,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.98160973183628
+Basket Price: 10.00293800289358
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -483,7 +483,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.917613782124796
+Basket Price: 9.988768980940437
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -492,7 +492,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.944802399134247
+Basket Price: 9.992931216591236
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -501,7 +501,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.976348281467226
+Basket Price: 9.932280984921926
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -510,7 +510,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.947380747629575
+Basket Price: 9.946375983060532
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -519,7 +519,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.992116903453283
+Basket Price: 9.979097576047478
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -528,7 +528,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.005338302329783
+Basket Price: 10.005780527428097
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -537,7 +537,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.968740418873614
+Basket Price: 9.951336548871053
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -546,7 +546,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.968740418873614
+Basket Price: 9.974901766860654
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -555,7 +555,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.950625796398471
+Basket Price: 10.00932655765036
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -564,7 +564,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.950625796398471
+Basket Price: 10.00990072700837
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -573,7 +573,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.993649601536958
+Basket Price: 9.984725715544917
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -582,7 +582,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.023855660368074
+Basket Price: 9.99856886793532
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -591,7 +591,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.015374220285343
+Basket Price: 10.031042891605404
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -600,7 +600,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.029705527808638
+Basket Price: 9.970293160474572
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -609,7 +609,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.042360217328609
+Basket Price: 9.960430267602575
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -618,7 +618,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.94784015155013
+Basket Price: 10.031863186695986
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -627,7 +627,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.007366847667079
+Basket Price: 10.019038500624362
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -636,7 +636,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.046220660110032
+Basket Price: 10.015599160037974
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -645,7 +645,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.982711607884747
+Basket Price: 10.024849148775159
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -654,7 +654,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.973466416372114
+Basket Price: 10.028370652243215
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -663,7 +663,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.973466416372114
+Basket Price: 9.92446175432455
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -672,7 +672,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.004590242138502
+Basket Price: 10.024293977619013
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -681,7 +681,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.026519801369416
+Basket Price: 10.006505215732643
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -690,7 +690,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.953965904700736
+Basket Price: 10.038580173135617
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -699,7 +699,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.985508388439284
+Basket Price: 9.974810574053764
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -708,7 +708,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.039647454809492
+Basket Price: 10.009363403823329
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -717,7 +717,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.024388211637122
+Basket Price: 10.009363403823329
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -726,7 +726,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.03332063741125
+Basket Price: 10.01616167904437
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -735,7 +735,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.029647149811668
+Basket Price: 9.998253541946482
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -744,7 +744,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.029647149811668
+Basket Price: 9.987295713118181
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -753,7 +753,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.035786655749943
+Basket Price: 10.026244631506696
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -762,7 +762,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.046125691456112
+Basket Price: 10.007492464301677
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -771,7 +771,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.017616818318219
+Basket Price: 10.01864829324016
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -780,7 +780,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.017616818318219
+Basket Price: 10.001530753142148
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -789,7 +789,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.017616818318219
+Basket Price: 10.019670425604977
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -798,7 +798,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.988708901372762
+Basket Price: 9.975455736186708
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -807,7 +807,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.04504311264765
+Basket Price: 10.047800992446499
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -816,7 +816,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.01695683330763
+Basket Price: 10.028681197969163
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -825,7 +825,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.028895043759102
+Basket Price: 9.96835914847784
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -834,7 +834,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.006945612436512
+Basket Price: 10.033546274085692
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -843,7 +843,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.01729566436754
+Basket Price: 10.019891314027648
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -852,7 +852,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.021922632436727
+Basket Price: 10.017975268785937
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -861,7 +861,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.041029321567532
+Basket Price: 9.979910438488272
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -870,7 +870,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.030426732131877
+Basket Price: 9.976539293630703
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -879,7 +879,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.042087781184343
+Basket Price: 10.014372672569916
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -888,7 +888,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.979028679844138
+Basket Price: 10.033075516483898
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -897,7 +897,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.032292494510864
+Basket Price: 9.932804412667187
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -906,7 +906,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.015479714885302
+Basket Price: 10.032174943363774
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -915,7 +915,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.025766299965381
+Basket Price: 10.0428567412568
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -924,7 +924,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.03889478705823
+Basket Price: 10.027546387915155
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -933,7 +933,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.01651437873776
+Basket Price: 10.034383052567376
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -942,7 +942,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.951912208625059
+Basket Price: 10.048829151614877
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -951,7 +951,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.99150650375497
+Basket Price: 10.02882770515033
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -960,7 +960,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.048381422372804
+Basket Price: 10.021319701415306
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -969,7 +969,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.97934453485067
+Basket Price: 10.036621278785356
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -978,7 +978,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.96598974732751
+Basket Price: 10.035184082895046
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -987,7 +987,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.03602224383436
+Basket Price: 10.035184082895046
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -996,7 +996,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.028337269638994
+Basket Price: 10.042878311410536
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1005,7 +1005,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 9.942884796017848
+Basket Price: 10.042878311410536
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1014,20 +1014,547 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.04473682670253
+Basket Price: 10.048354313826136
 Governorship work
 
 ___________________________________________________________________________________________________________
 2016-04-19
 Updating basic oracles
 Updating collateral oracles
-Update vault m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ______________________________________________________________________________________________
+Update vault manager
+User creation and interest generation
+Basket Price: 9.990136917750306
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.022234820124119
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.994813499453993
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.01310954924006
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.001973558488324
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.040610510976656
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.98311028154262
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.035483540541703
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.009438540631528
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.015384013920917
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.042629863868418
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-04-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.036727726617217
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.052723696910297
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.00924791652595
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.061487868391051
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.028362915491115
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.0360702348007
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.985985064473834
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.050682004343448
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.917263034847688
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.020864351316577
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.034375028150794
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.015858344531736
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.059354362951138
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.99413945397419
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.06638077302117
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.061846381330493
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.007125988722485
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.007622717092085
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.010109174168186
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.951480312250698
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.05960290132148
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.05125319748105
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.066391932992587
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.988166221721157
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.066487835677927
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.047034097951851
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.065251162378805
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.057150101147085
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.003968839858038
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.056890550903663
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.038166053989466
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-05-31
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.033996249005476
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.07990410584833
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.042442153315154
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.053089721110126
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.033355644693128
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.081534606810923
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.030735174536902
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.085917483187004
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.065028397260539
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.03153245107912
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.075981106644337
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.075981106644337
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.049588632383871
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.055686848031115
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.058913095872134
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.971266927648808
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-06-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.08395126308153
+Governorship work
+
+___________________________________________________________________________________________________________
 2016-06-17
 Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.089275876773351
+Basket Price: 10.07727038341094
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1036,7 +1563,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.02099478890517
+Basket Price: 10.023711893803902
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1045,7 +1572,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.052479693034455
+Basket Price: 10.065886446439766
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1054,7 +1581,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.089005309332414
+Basket Price: 9.990478456850964
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1063,7 +1590,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.057324523729584
+Basket Price: 10.036504912610358
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1072,7 +1599,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.085723761375172
+Basket Price: 10.063264161882723
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1081,7 +1608,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.011476478947229
+Basket Price: 10.054522445001734
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1090,7 +1617,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.063284387158813
+Basket Price: 10.005268818609247
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1099,7 +1626,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.085710172038594
+Basket Price: 10.059608724859851
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1108,7 +1635,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.001127853246093
+Basket Price: 10.086689806006056
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1117,7 +1644,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.022778626864163
+Basket Price: 10.035354440545726
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1126,7 +1653,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.035215537170744
+Basket Price: 10.037255330675482
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1135,7 +1662,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.046541292252883
+Basket Price: 10.082718569105612
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1144,7 +1671,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.068565303855374
+Basket Price: 10.06273390990571
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1153,7 +1680,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.074687797429721
+Basket Price: 10.088597353475054
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1162,7 +1689,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.047459669641318
+Basket Price: 10.00662948701194
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1171,7 +1698,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.085123318866827
+Basket Price: 10.053376017902009
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1180,7 +1707,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.04420230404913
+Basket Price: 10.084100869138924
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1189,7 +1716,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.082031205926963
+Basket Price: 10.062772809816165
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1198,7 +1725,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.057402630972305
+Basket Price: 10.008887025073395
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1207,7 +1734,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.080360426200928
+Basket Price: 10.084227316453958
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1216,7 +1743,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.029728720013837
+Basket Price: 10.068359817573787
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1225,7 +1752,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.00971843111346
+Basket Price: 10.034109872387537
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1234,7 +1761,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.00971843111346
+Basket Price: 10.037042217564514
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1243,7 +1770,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.085450905623427
+Basket Price: 10.076105044955257
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1252,7 +1779,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.053494252896181
+Basket Price: 10.072832149824286
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1261,7 +1788,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.074018573508258
+Basket Price: 10.05389179310229
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1270,7 +1797,7 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.069176433911922
+Basket Price: 10.0448072379382
 Governorship work
 
 ___________________________________________________________________________________________________________
@@ -1279,7 +1806,2633 @@ Updating basic oracles
 Updating collateral oracles
 Update vault manager
 User creation and interest generation
-Basket Price: 10.011632090540422
+Basket Price: 10.06050037070355
 Governorship work
 
-____________________________________________________________
+___________________________________________________________________________________________________________
+2016-07-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.085271568626881
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.078957819061005
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.069136459125971
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.08484846566201
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.071979767032488
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.050012496904245
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.053215552132222
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.999579637687175
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.03913040045283
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.081215162845039
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.00859026935814
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.07247231062867
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.085321553670378
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.088475629776564
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.07501516566193
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-07-31
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.080632053200466
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.10746079777337
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.093311639848316
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.090534292059942
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.078430797333471
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.013839312968374
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.965603427679666
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.100502772642356
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.078572355109824
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.081552306645749
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.049389992981872
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.093229682810428
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.10277532817079
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.04776021641735
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.077976795406327
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.105343996713431
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.09975723912155
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.107957921527397
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.111379507734998
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.07450582498069
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.103192769020888
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.101332682021251
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.094441633772037
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.078010366322951
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.10504811228771
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.089222224979903
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.079190248315726
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.089599456307022
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.045386600463488
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.031312731865487
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.080138329708179
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-08-31
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.112221919429542
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.05242669999917
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.045355346824174
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.094422532456441
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.137376424394361
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.115622486905973
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.138998374301389
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.12928378649535
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.092687991415831
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.085763616562259
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.129237419910861
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.13834159204043
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.082698623764616
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.101032667324489
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.064002034456877
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.088802399569515
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.130956345248581
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.107105928039031
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.125644726163006
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.105234086708334
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.101909857106113
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.068778129108052
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 9.998480057718075
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.113884496628923
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.139856103140561
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.097145639481697
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.123704648286404
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.130943220199883
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.080098322782383
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.092525681103526
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-09-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.049012866080668
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.120103465294449
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.119806507760392
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.10200253409104
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.120361112744826
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.055347099092149
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.075632194552886
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.127592386723956
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.14382528783867
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.131852148500897
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.118359087771129
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.102687839717579
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.117429440189595
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.121577061730704
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.148384448941261
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.138368156505072
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.140233182032917
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.082115193054978
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.088171135293837
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.136884013511011
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.097596014660677
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.120963287881493
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.092275196140529
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.122404030195028
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.092509643000865
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.12459282771057
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.126018621619252
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.14128317091667
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.12760083234116
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.130045268677561
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.110187236182362
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-10-31
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.046072924272783
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.151708636098448
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.13070769490471
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.140225028571898
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.08590965592305
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.11107195217434
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.1689922685449
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.107185129264684
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.072752752634472
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.134363860830595
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.105628447732016
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.160727887712714
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.112351654379369
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.16684674470686
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.126683306286553
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.144062963019694
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.084736178732816
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.145272649628229
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.133018566164539
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.169303252981527
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.157400515279914
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.143484557651115
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.141270119601954
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.143689797912218
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.11126439211308
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.144381682597725
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.148408873683362
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.161580952204485
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.106596903440487
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.079059219947055
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-11-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.139716437566591
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.219391997802457
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.176855772221161
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.199716972878363
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.210578750826077
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.176040752745772
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.081133433826459
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.171412758485534
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.184841694004009
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.202564828396818
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.209756333392304
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.214403940481928
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.189426699170482
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.21016517283033
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.204928171357817
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.172844314307008
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.218236532195448
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.199202603505636
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.215301827084328
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.193367403808123
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.19285164100471
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.213904364827664
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.167259517040335
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.212499124986854
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.202340271710353
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.169960923010251
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.21162985524986
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.185555038656728
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.13080063665014
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.209397571146031
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.152960119215878
+Governorship work
+
+___________________________________________________________________________________________________________
+2016-12-31
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.213776539281575
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.137757722049315
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.105651525496922
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.144947679621719
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.166872404814246
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.131508946880444
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.161129231209866
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.144825801260634
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.15495033991829
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.088632007188147
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.091573065714673
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.114308845227013
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.108776120717094
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.078147462455638
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.16555693837278
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.067400151766146
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.167914898539006
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.150113965896765
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.167483940521988
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.145477920040433
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.13334849675084
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.0901553781829
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.150563953654288
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.16007098891213
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.115271181136672
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.159301126249828
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.100386079074399
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.151528352678735
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.132165425783734
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.118702639410767
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.169539815321361
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-01-31
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.168221779283863
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.172611486687604
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.223674191457649
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.22660625879429
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.187617167042642
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.21822224470412
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.235716858280277
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.234210134975966
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.215720284071518
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.162123264644068
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.1633109749019
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.172979854824948
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.213946104399826
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.228680152626872
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.234797679690809
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.229960883089685
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.219051959924201
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.162832230672908
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.213678303937524
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.171611860938244
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.169847974759165
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.235457947262114
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.226550791838223
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.213243233722844
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.211876986904805
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.233376621511738
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.163646672005102
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.207963384576123
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-02-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.237697879467877
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.241011869180221
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.23725389214645
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.258879553328306
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.274049021962563
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.216546703293767
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.218169855414077
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.210039850544412
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.241049698790215
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.208244438929716
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.210090972578854
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.269469633294435
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.236475147892667
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.23176373913871
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.258031761103927
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.230527219790472
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.230676832334733
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.241321604982724
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.271450539280066
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.18529874216228
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.22051864277159
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.243316462658303
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.261001338823032
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.239379656591721
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.277911328416128
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.2153614920917
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.217555611375925
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.236682238961203
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.242679301707179
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.222835937357472
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.217523101559184
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-03-31
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.279469077561195
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.31672972951969
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.31744515209665
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.239490243341693
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-04
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.285878170089514
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-05
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.298573263856655
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-06
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.23315470879487
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-07
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.248276503829048
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-08
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.300457756302764
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-09
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.314885061206642
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-10
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.285096782165791
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-11
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.294912615913503
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-12
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.248611676972365
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-13
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.31541162466343
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-14
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.278514724066184
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-15
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.28004649291933
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-16
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.306650768597578
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-17
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.30291647002353
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-18
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.305294780890167
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-19
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.308427719922564
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-20
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.311277871941684
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-21
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.29738852049086
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-22
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.268715333890222
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-23
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.28367352301209
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-24
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.280800656613613
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-25
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.309828114016673
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-26
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.298838091249284
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-27
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.209888329979298
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-28
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.305464411482259
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-29
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.30261075407928
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-04-30
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.258902185471364
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-05-01
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.324036194718643
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-05-02
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.320385025230273
+Governorship work
+
+___________________________________________________________________________________________________________
+2017-05-03
+Updating basic oracles
+Updating collateral oracles
+Update vault manager
+User creation and interest generation
+Basket Price: 10.347204181871312
+Go

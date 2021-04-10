@@ -46,23 +46,16 @@ public class Governor {
         return value.getDouble("Value");
     }
 
-    public static void changeBSR(double targetPrice, double basketPrice, BsrOracle bsrOracle) {
+
+    public static void changeBSR(double targetPrice, double basketPrice, BsrOracle bsrOracle, double bsr) {
         if (count == 31) {
-            count = 0;
-            if(basketPrice > targetPrice) {
-                bsrOracle.setBsr(3.5 + Math.random() * (7 - 3.5));
-            }
-            else {
-                bsrOracle.setBsr(0 + Math.random() * (3.5 - 0));
-            }
+            bsrOracle.setBsr(bsr);
         }
     }
 
 
     public static void setParameters(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle, CollateralOracle linkOracle, CollateralOracle ltcOracle, CollateralOracle usdtOracle,
                                      ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle,  Keeper keeper, double buys, double sales, double targetPrice) {
-        User.targeting = 0;
-
         count++;
 
         double currentLocked;
@@ -221,10 +214,12 @@ public class Governor {
                 curr = curr - (averageColat * 20 + vaultSystem + buySell + keeper.getPercentTrading() / 20);
             }
             targeting[0] = (targetValue - curr)/2;
-            targeting[1] = curr - (averageColat * 20 + vaultSystem + buySell + keeper.getPercentTrading() / 20) * c + (targeting[0]*2);
+            targeting[1] = curr + (targeting[0]*2);
             System.out.println("Target: " + targetValue + " vs " + curr);
             System.out.println("bsr: " + targeting[0] + "target theory: " + targeting[1]);
         }
+
+        User.targeting = targeting[1];
 
         return targeting;
     }
