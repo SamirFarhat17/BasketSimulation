@@ -120,9 +120,9 @@ basket_minted = output_pandas['BasketMinted'].values
 basket_tokens_minted = output_pandas['BasketTokensMinted'].values
 user_size = output_pandas['UserBaseSize'].values
 
-graph_two(user_size, basket_tokens_minted/100, x_axis, 'Userbase_Size_vs_Tokens_Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/100')
+graph_two(user_size, basket_tokens_minted/35, x_axis, 'Userbase_Size_vs_Tokens_Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/35')
 
-graph_two(basket_minted, basket_tokens_minted, x_axis, 'Total_Basket_and_Basket_Tokens', 'Days', 'Quantity(Tokens and GBP)', 'Total Basket Value', 'Basket Tokens Minted',)
+graph_two(basket_minted, basket_tokens_minted*2, x_axis, 'Total_Basket_and_Basket_Tokens', 'Days', 'Quantity(Tokens and GBP)', 'Total Basket Value', 'Basket Tokens Mintedx10',)
 
 debt_ceiling = output_pandas['DebtCeiling'].values
 xrp_debt_ceiling = output_pandas['XRPDebtCeiling'].values
@@ -175,7 +175,7 @@ locked_link = output_pandas['LockedLINK'].values
 locked_ltc = output_pandas['LockedLTC'].values
 locked_usdt = output_pandas['LockedUSDT'].values
 
-graph_six(locked_xrp, locked_btc, locked_eth, locked_link, locked_ltc, locked_usdt, x_axis, 'Collaterals_Locked_Vaults', 'Days', 'GBP', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
+graph_six(locked_xrp/100, locked_btc, locked_eth, locked_link/100, locked_ltc, locked_usdt, x_axis, 'Collaterals_Locked_Vaults', 'Days', 'GBP', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 bsr = output_pandas['BSR'].values
 

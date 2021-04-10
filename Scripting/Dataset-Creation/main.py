@@ -11,7 +11,7 @@ if __name__ == '__main__':
     #exec(compile(open('CollateralToJson.py', "rb").read(), 'CollateralToJson.py', 'exec'))
     #exec(compile(open('NormalDistributionCreation.py', "rb").read(), 'NormalDistributionCreation.py', 'exec'))
     #exec(compile(open('OutputProcessing.py', "rb").read(), 'OutputProcessing.py', 'exec'))
-    exec(compile(open('MetaStatistics.py', "rb").read(), 'MetaStatistics.py', 'exec'))
+    #exec(compile(open('MetaStatistics.py', "rb").read(), 'MetaStatistics.py', 'exec'))
 
     '''import psutil
     import os
