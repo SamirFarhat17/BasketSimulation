@@ -120,7 +120,7 @@ basket_minted = output_pandas['BasketMinted'].values
 basket_tokens_minted = output_pandas['BasketTokensMinted'].values
 user_size = output_pandas['UserBaseSize'].values
 
-graph_two(user_size, basket_tokens_minted/100, x_axis, 'Userbase_Size_vs_Tokens_Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/100')
+graph_two(user_size, basket_tokens_minted/10, x_axis, 'Userbase_Size_vs_Tokens_Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/10')
 
 graph_two(basket_minted, basket_tokens_minted, x_axis, 'Total_Basket_and_Basket_Tokens', 'Days', 'Quantity(Tokens and GBP)', 'Total Basket Value', 'Basket Tokens Minted',)
 
@@ -132,8 +132,8 @@ link_debt_ceiling = output_pandas['LINKDebtCeiling'].values
 ltc_debt_ceiling = output_pandas['LTCDebtCeiling'].values
 usdt_debt_ceiling = output_pandas['USDTDebtCeiling'].values
 
-graph_seven(debt_ceiling, xrp_debt_ceiling, btc_debt_ceiling, eth_debt_ceiling, link_debt_ceiling, ltc_debt_ceiling, usdt_debt_ceiling, x_axis, 'Debt_Ceilings', 'Days',
-           'GBP', 'Total', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
+graph_six(xrp_debt_ceiling, btc_debt_ceiling, eth_debt_ceiling, link_debt_ceiling, ltc_debt_ceiling, usdt_debt_ceiling,
+          x_axis, 'Debt_Ceilings', 'Days', 'GBP', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 xrp_exchange_rates = output_pandas['XRPExchangeRate'].values
 btc_exchange_rates = output_pandas['BTCExchangeRate'].values
