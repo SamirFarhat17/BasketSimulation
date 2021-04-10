@@ -120,9 +120,9 @@ basket_minted = output_pandas['BasketMinted'].values
 basket_tokens_minted = output_pandas['BasketTokensMinted'].values
 user_size = output_pandas['UserBaseSize'].values
 
-graph_two(user_size, basket_tokens_minted/35, x_axis, 'Userbase_Size_vs_Tokens_Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/35')
+graph_two(user_size, basket_tokens_minted/1000, x_axis, 'Userbase_Size_vs_Tokens_Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/100')
 
-graph_two(basket_minted, basket_tokens_minted*2, x_axis, 'Total_Basket_and_Basket_Tokens', 'Days', 'Quantity(Tokens and GBP)', 'Total Basket Value', 'Basket Tokens Mintedx10',)
+graph_two(basket_minted, basket_tokens_minted*10, x_axis, 'Total_Basket_and_Basket_Tokens', 'Days', 'Quantity(Tokens and GBP)', 'Total Basket Value', 'Basket Tokens Mintedx10',)
 
 debt_ceiling = output_pandas['DebtCeiling'].values
 xrp_debt_ceiling = output_pandas['XRPDebtCeiling'].values
@@ -142,8 +142,8 @@ link_exchange_rates = output_pandas['LINKExchangeRate'].values
 ltc_exchange_rates = output_pandas['LTCExchangeRate'].values
 usdt_exchange_rates = output_pandas['USDTExchangeRate'].values
 
-graph_seven(basket_price, xrp_exchange_rates, btc_exchange_rates, eth_exchange_rates, link_exchange_rates, ltc_exchange_rates, usdt_exchange_rates, x_axis, 'Exchange_Rates',
-           'Days','GBP', 'BSKT', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
+graph_seven(xrp_exchange_rates*5000, btc_exchange_rates, eth_exchange_rates*10, link_exchange_rates*1000, ltc_exchange_rates*50, usdt_exchange_rates*10000,
+            basket_price*1000, x_axis, 'Exchange_Rates', 'Days','GBP', 'A-XRPx5000', 'W-BTC', 'ETHx10', 'LINKx1000', 'P-LTCx50', 'USDTx10000', 'BSKTx1000')
 
 xrp_sfs = output_pandas['XRPSF'].values
 btc_sfs = output_pandas['BTCSF'].values
@@ -191,4 +191,4 @@ graph_two(buyer_quants, seller_quants, x_axis, 'Supply_Demand', 'Days', 'GBP', '
 
 successful_sales = output_pandas['SuccessfulSaleCounts']
 
-graph_two(successful_sales, user_size*100, x_axis, 'Sales_VS_Users', 'Days', 'Amount', 'Successfull Sales', 'Userbase Population Size')
+graph_two(successful_sales, user_size/5, x_axis, 'Sales_VS_Users', 'Days', 'Amount', 'Successfull Sales', 'Userbase Population Size')

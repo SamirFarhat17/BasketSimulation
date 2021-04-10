@@ -48,8 +48,9 @@ public class Governor {
 
 
     public static void changeBSR(double targetPrice, double basketPrice, BsrOracle bsrOracle, double bsr) {
-        if (count == 31) {
+        if (count == 31 || count == 16) {
             bsrOracle.setBsr(bsr);
+            if(count == 31)count = 0;
         }
     }
 
@@ -120,7 +121,7 @@ public class Governor {
 
     public static void updateDebtCeilings(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,CollateralOracle linkOracle, CollateralOracle ltcOracle,
                                                   CollateralOracle usdtOracle, ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase) {
-        if(count == 28) {
+        if(count == 31) {
             for (CollateralOracle collateralOracle : collateralOracles) {
                 if(collateralOracle.getCollateralType().equals("A-XRP") && vaultManagerOracle.getLockedXRP() > 0.75 * xrpOracle.getDebtCeiling()) {
                     xrpOracle.setDebtCeiling(vaultManagerOracle.getLockedXRP() + (vaultManagerOracle.getLockedXRP() * Math.random()));
@@ -155,7 +156,7 @@ public class Governor {
                                           CollateralOracle usdtOracle, ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase) {
         double currentLocked;
         double currentCeiling;
-        if(count == 28) {
+        if(count == 31) {
             for(CollateralOracle collateralOracle : collateralOracles) {
                 if(collateralOracle.getCollateralType().equals("A-XRP")) {
                     currentLocked = vaultManagerOracle.getLockedXRP();
@@ -198,7 +199,8 @@ public class Governor {
 
     public static double[] supplyDemand(VaultManagerOracle vaultManagerOracle , Keeper keeper, CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle, double[] targeting,
                                         CollateralOracle linkOracle, CollateralOracle ltcOracle, CollateralOracle usdtOracle, BsrOracle bsrOracle, double targetValue, double buySell) {
-        if(count == 28) {
+        Random ran = new Random();
+        if(count == 31) {
             int c = 0;
             double averageColat = (xrpOracle.getStabilityFee() / xrpOracle.getLiquidationRatio() + btcOracle.getStabilityFee() / btcOracle.getLiquidationRatio() +
                     ethOracle.getStabilityFee() / ethOracle.getLiquidationRatio() + linkOracle.getStabilityFee() / linkOracle.getLiquidationRatio() +
@@ -206,21 +208,19 @@ public class Governor {
             double vaultSystem = vaultManagerOracle.getMintedBasket() / (vaultManagerOracle.getLockedXRP() + vaultManagerOracle.getLockedBTC() + vaultManagerOracle.getLockedETH() +
                     vaultManagerOracle.getLockedLINK() + vaultManagerOracle.getLockedLTC() + vaultManagerOracle.getLockedUSDT()) * buySell;
 
-
             // System.out.println("Nums" + averageColat + " " + vaultSystem + " " + buySell + " " + keeper.getPercentTrading());
             double curr = targetValue;
             while(curr - (averageColat * 20 + vaultSystem + buySell + keeper.getPercentTrading() / 20) > 0) {
                 c++;
                 curr = curr - (averageColat * 20 + vaultSystem + buySell + keeper.getPercentTrading() / 20);
             }
+
             targeting[0] = (targetValue - curr)/2;
             targeting[1] = curr + (targeting[0]*2);
-            System.out.println("Target: " + targetValue + " vs " + curr);
-            System.out.println("bsr: " + targeting[0] + "target theory: " + targeting[1]);
+
+            User.targeting = .03 + targeting[1] - Math.abs((targeting[1] * ran.nextGaussian()/ThreadLocalRandom.current().nextInt(150, 300 + 1)));
         }
-
-        User.targeting = targeting[1];
-
+        User.targeting = .03 + targeting[1] - Math.abs((targeting[1] * ran.nextGaussian()/ThreadLocalRandom.current().nextInt(150, 300 + 1)));
         return targeting;
     }
 

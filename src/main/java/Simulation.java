@@ -117,7 +117,7 @@ public class Simulation {
         
         System.out.println("Initializing keeper and users...");
         // Keeper Initial
-        Keeper keeper = new Keeper("Keeper", Keeper.initialKeeper/vaultTotalBasket, keeperSeed);
+        Keeper keeper = new Keeper("Keeper", keeperSeed, keeperSeed*4);
 
         // Users Initial
         ArrayList<User> buyers = new ArrayList<>();
@@ -239,7 +239,6 @@ public class Simulation {
         bsrTrack.add(bsrSeed);
         bsrTarget[0] = bsrOracle.getBsr();
         bsrTarget[1] = cpiOracle.getCpi()/10;
-        System.out.println("Initial: " + bsrTarget[0] + " " + bsrTarget[1]);
 
         // Supply and Demand Stats
         double[] supplyDemand = new double[5];
@@ -317,8 +316,7 @@ public class Simulation {
         writer.println("User creation and interest generation");
         User.generateNewUsers(userBase, userSeed, collateralSeed, basketPrice, vaultManagerOracle);
         User.generateUserCollaterals(userBase, collateralSeed);
-        supplyDemand = User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice,
-                cpiOracle.getCpi()/10, collateralSeed, colatOracles, vaultManagerOracle);
+        supplyDemand = User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice, collateralSeed, colatOracles, vaultManagerOracle);
         keeper.generateKeeperWants(date);
 
         supplyDemand[4] = User.marketTrades(basketPrice, userBase, buyers, sellers, emergencyOracle);
@@ -527,7 +525,7 @@ public class Simulation {
             int index = 0;
 
             for(int i = 0; i < basketMinted.size()-1; i++) {
-                if(index == 7) index = 0;
+                if(index == 3) index = 0;
                 sb.append(cpis.get(i));
                 sb.append(',');
                 sb.append(basketPrices.get(i-index));
