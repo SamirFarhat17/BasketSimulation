@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
+import static json.DataExtraction.checks;
 
 
 public class Simulation {
@@ -28,6 +28,7 @@ public class Simulation {
     private double userSeed;
     private double keeperSeed;
     private double collateralSeed;
+    private static double[] bsrTarget = new double[2];
 
     public static void main(String[] args) throws IOException, CsvException {
 
@@ -36,6 +37,8 @@ public class Simulation {
             System.out.println("Incorrect or missing run.sh configurations");
             System.exit(0);
         }
+
+        for(String arg : args) System.out.println(arg);
 
         System.out.println("Gathering dates for sim...");
         // Datasets
@@ -60,7 +63,7 @@ public class Simulation {
         // Initialize Oracles
         CPIOracle cpiOracle = new CPIOracle("CPIOracle", "Active", date, cpiValue);
         BsrOracle bsrOracle = new BsrOracle("BSROracle", "Active", bsrSeed);
-        EmergencyOracle emergencyOracle = new EmergencyOracle("EmergencyOracle", "Active", "Healthy");
+        EmergencyOracle emergencyOracle = new EmergencyOracle("EmergencyOracle", "Active", "Healthy", 0);
 
         
         System.out.println("Initializing vault oracles...");
@@ -114,7 +117,7 @@ public class Simulation {
         
         System.out.println("Initializing keeper and users...");
         // Keeper Initial
-        Keeper keeper = new Keeper("Keeper", Keeper.initialKeeper, keeperSeed);
+        Keeper keeper = new Keeper("Keeper", Keeper.initialKeeper/vaultTotalBasket, keeperSeed);
 
         // Users Initial
         ArrayList<User> buyers = new ArrayList<>();
@@ -186,8 +189,8 @@ public class Simulation {
         userPopulations.add(userBaseSize);
         ArrayList<Double> keeperTradeVolumes = new ArrayList<>();
         keeperTradeVolumes.add(keeper.getPercentTrading());
-        ArrayList<Integer> keeperPercentageHoldings = new ArrayList<>();
-        keeperPercentageHoldings.add(keeperSeed);
+        ArrayList<Double> keeperPercentageHoldings = new ArrayList<>();
+        keeperPercentageHoldings.add((double) keeperSeed);
 
         // Basket target
         ArrayList<Double> targetPrices = new ArrayList<>();
@@ -231,48 +234,57 @@ public class Simulation {
         ArrayList<Double> stabilityFeesLTC = new ArrayList<>();
         ArrayList<Double> stabilityFeesUSDT = new ArrayList<>();
 
-        // Auctions
-        int flipAuctionCount = 0;
-        int flopAuctionCount = 0;
-
         // BSR
         ArrayList<Double> bsrTrack = new ArrayList<>();
         bsrTrack.add(bsrSeed);
+        bsrTarget[0] = bsrOracle.getBsr();
+        bsrTarget[1] = cpiOracle.getCpi()/10;
+        System.out.println("Initial: " + bsrTarget[0] + " " + bsrTarget[1]);
 
+        // Supply and Demand Stats
+        double[] supplyDemand = new double[5];
+        ArrayList<Double> buyerNums = new ArrayList<>();
+        ArrayList<Double> buyerQuants = new ArrayList<>();
+        ArrayList<Double> sellerNums = new ArrayList<>();
+        ArrayList<Double> sellerQuants = new ArrayList<>();
+        ArrayList<Double> successfullSalesCount = new ArrayList<>();
 
         System.out.println("Going into day loops...");
         String previousDate = date;
         while(days > 0) {
             date = dates.get(1827-days);
+            // System.out.println(date);
 
-            basketValue = runSimDay(date, basketValue, previousDate, userSeed, collateralSeed, collateralOracles, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
+            supplyDemand = runSimDay(date, basketValue, previousDate, userSeed, collateralSeed, collateralOracles, supplyDemand, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
                     btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, buyers, sellers, totalDebtCeiling, writer);
+            basketValue = supplyDemand[4];
 
-            updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes, keeperPercentageHoldings, cpis, cpiOracle,
-                    targetPrices, lockedXRP, lockedBTC, lockedETH, lockedLINK,  lockedLTC, lockedUSDT, totalDebtCeilings, collateralOracles, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK,
-                    debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC,
-                    liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT,
-                    bsrOracle, bsrTrack, writer);
+            updateTrackingStatistics(vaultManagerOracle, basketMinted, basketTokensMinted, basketValue, basketPrices, userBase, userPopulations, keeper, keeperTradeVolumes,
+                    keeperPercentageHoldings, cpis, cpiOracle, targetPrices, lockedXRP, lockedBTC, lockedETH, lockedLINK,  lockedLTC, lockedUSDT, totalDebtCeilings, collateralOracles,
+                    emergencyOracle, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC,
+                    exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK,
+                    liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT,
+                    bsrOracle, bsrTrack,  supplyDemand, buyerNums, buyerQuants, sellerNums, sellerQuants, successfullSalesCount);
 
             previousDate = date;
             days--;
         }
 
         writer.close();
-        generateFinalCSV(basketMinted, basketTokensMinted, basketPrices, userBase, userPopulations, keeperTradeVolumes, keeperPercentageHoldings, cpis, targetPrices, totalDebtCeilings, collateralOracles,
-                lockedXRP, lockedBTC, lockedETH, lockedLINK,  lockedLTC, lockedUSDT, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH, debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP,
-                exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT, liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK,
-                liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC, stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT, bsrTrack, args);
+        generateFinalCSV(basketMinted, basketTokensMinted, basketPrices, userBase, userPopulations, keeperTradeVolumes, keeperPercentageHoldings, cpis, targetPrices, totalDebtCeilings,
+                successfullSalesCount, collateralOracles, lockedXRP, lockedBTC, lockedETH, lockedLINK,  lockedLTC, lockedUSDT, debtCeilingsXRP, debtCeilingsBTC, debtCeilingsETH,
+                debtCeilingsLINK, debtCeilingsLTC, debtCeilingsUSDT, exchangeRatesXRP, exchangeRatesBTC, exchangeRatesETH, exchangeRatesLINK, exchangeRatesLTC, exchangeRatesUSDT,
+                liquidationRatiosXRP, liquidationRatiosBTC, liquidationRatiosETH, liquidationRatiosLINK, liquidationRatiosLTC, liquidationRatiosUSDT, stabilityFeesXRP, stabilityFeesBTC,
+                stabilityFeesETH, stabilityFeesLINK, stabilityFeesLTC, stabilityFeesUSDT, bsrTrack, args, supplyDemand, buyerNums, buyerQuants, sellerNums, sellerQuants);
     }
 
 
 
-    private static double runSimDay(String date, double basketPrice, String previousDate, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles,
+    private static double[] runSimDay(String date, double basketPrice, String previousDate, double userSeed, double collateralSeed, ArrayList<CollateralOracle> colatOracles, double[] supplyDemand,
                                     BsrOracle bsrOracle, BufferOracle bufferOracle, CPIOracle cpiOracle, EmergencyOracle emergencyOracle, CollateralOracle xrpOracle, CollateralOracle btcOracle,
                                     CollateralOracle ethOracle, CollateralOracle linkOracle,  CollateralOracle ltcOracle, CollateralOracle usdtOracle, VaultManagerOracle vaultManagerOracle,
                                     Keeper keeper, ArrayList<User> userBase, ArrayList<User> buyers, ArrayList<User> sellers, double totalDebtCeiling, PrintWriter writer) throws IOException
     {
-        System.out.println(date);
         writer.println("___________________________________________________________________________________________________________\n" + date + "\nUpdating basic oracles" );
         bsrOracle.updateOracle(date);
         bufferOracle.updateOracle(date, totalDebtCeiling);
@@ -281,7 +293,6 @@ public class Simulation {
 
         colatOracles.clear();
 
-        //System.out.println("Updating collateral oracles");
         writer.println("Updating collateral oracles");
         xrpOracle.updateOracle(date);
         colatOracles.add(xrpOracle);
@@ -296,32 +307,32 @@ public class Simulation {
         usdtOracle.updateOracle(date);
         colatOracles.add(usdtOracle);
 
-        //System.out.println("Update vault manager");
         writer.println("Update vault manager");
-        vaultManagerOracle.updateVaults(previousDate, date, vaultManagerOracle.getActiveVaults(), basketPrice, xrpOracle.getFullExchange(), btcOracle.getFullExchange(), ethOracle.getFullExchange(),
-                                        linkOracle.getFullExchange(), ltcOracle.getFullExchange(), usdtOracle.getFullExchange());
+        vaultManagerOracle.updateVaults(previousDate, date, vaultManagerOracle.getActiveVaults(), basketPrice,
+                xrpOracle.getFullExchange(), btcOracle.getFullExchange(), ethOracle.getFullExchange(),
+                linkOracle.getFullExchange(), ltcOracle.getFullExchange(), usdtOracle.getFullExchange());
         vaultManagerOracle.updateOracle(date);
         vaultManagerOracle.checkLiquidations(userBase, vaultManagerOracle.getActiveVaults(), colatOracles, basketPrice);
 
-        //System.out.println("User creation and interest generation");
         writer.println("User creation and interest generation");
         User.generateNewUsers(userBase, userSeed, collateralSeed, basketPrice, vaultManagerOracle);
         User.generateUserCollaterals(userBase, collateralSeed);
-        User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice, cpiOracle.getCpi()/10, collateralSeed, colatOracles, vaultManagerOracle);
+        supplyDemand = User.generateUserWants(userBase, buyers, sellers, userSeed, basketPrice,
+                cpiOracle.getCpi()/10, collateralSeed, colatOracles, vaultManagerOracle);
         keeper.generateKeeperWants(date);
 
-        basketPrice = User.marketTrades(basketPrice, userBase, buyers, sellers);
-        //System.out.println("Basket Price: " + basketPrice);
+        supplyDemand[4] = User.marketTrades(basketPrice, userBase, buyers, sellers, emergencyOracle);
+        basketPrice = supplyDemand[4];
         writer.println("Basket Price: " + basketPrice);
 
-        //System.out.println("Governorship work\n");
         writer.println("Governorship work\n");
-        Governor.updateDebtCeilings(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
-        Governor.updateStabilityFees(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
-        Governor.updateLiquidationRatios(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, userBase);
-        Governor.changeBSR(cpiOracle.getCpi()/10, basketPrice,bsrOracle);
+        Governor.setParameters(xrpOracle, btcOracle, ethOracle, linkOracle, ltcOracle, usdtOracle, colatOracles, vaultManagerOracle, keeper, supplyDemand[1],
+                supplyDemand[3], cpiOracle.getCpi()/10);
+        bsrTarget = Governor.supplyDemand(vaultManagerOracle , keeper, xrpOracle, btcOracle, ethOracle, bsrTarget,
+                linkOracle, ltcOracle, usdtOracle, bsrOracle, cpiOracle.getCpi()/10, supplyDemand[1]/supplyDemand[3]);
+        Governor.changeBSR(cpiOracle.getCpi()/10, basketPrice, bsrOracle);
 
-        return basketPrice;
+        return supplyDemand;
     }
 
 
@@ -329,10 +340,10 @@ public class Simulation {
 
     private static void updateTrackingStatistics(VaultManagerOracle vaultManagerOracle, ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted,
                                                  double basketPrice, ArrayList<Double> basketPrices, ArrayList<User> userBase, ArrayList<Integer> userPopulations,
-                                                 Keeper keeper, ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> cpis,
+                                                 Keeper keeper, ArrayList<Double> keeperTradeVolumes, ArrayList<Double> keeperPercentageHoldings, ArrayList<Double> cpis,
                                                  CPIOracle cpiOracle, ArrayList<Double> targetPrices, ArrayList<Double> lockedXRP, ArrayList<Double> lockedBTC,
                                                  ArrayList<Double> lockedETH, ArrayList<Double> lockedLINK, ArrayList<Double> lockedLTC, ArrayList<Double> lockedUSDT,
-                                                 ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles,
+                                                 ArrayList<Double> totalDebtCeilings, ArrayList<CollateralOracle> collateralOracles, EmergencyOracle emergencyOracle,
                                                  ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC, ArrayList<Double> debtCeilingETH,
                                                  ArrayList<Double> debtCeilingLINK, ArrayList<Double> debtCeilingLTC, ArrayList<Double> debtCeilingUSDT,
                                                  ArrayList<Double> exchangeRateXRP, ArrayList<Double> exchangeRateBTC, ArrayList<Double> exchangeRateETH,
@@ -341,7 +352,8 @@ public class Simulation {
                                                  ArrayList<Double> liquidationRatiosLINK, ArrayList<Double> liquidationRatiosLTC, ArrayList<Double> liquidationRatiosUSDT,
                                                  ArrayList<Double> stabilityFeesXRP, ArrayList<Double> stabilityFeesBTC, ArrayList<Double> stabilityFeesETH,
                                                  ArrayList<Double> stabilityFeesLINK, ArrayList<Double> stabilityFeesLTC, ArrayList<Double> stabilityFeesUSDT,
-                                                 BsrOracle bsrOracle, ArrayList<Double> bsrTrack, PrintWriter writer)
+                                                 BsrOracle bsrOracle, ArrayList<Double> bsrTrack, double[] supplyDemand, ArrayList<Double> buyerNums,
+                                                 ArrayList<Double> buyerQuants, ArrayList<Double> sellerNums, ArrayList<Double> sellerQuants, ArrayList<Double> successfullSales)
     {
         basketMinted.add(vaultManagerOracle.getMintedBasket());
         // System.out.println("Basket tokens: " + vaultManagerOracle.getMintedBasketTokens());
@@ -349,9 +361,15 @@ public class Simulation {
         basketPrices.add(basketPrice);
         userPopulations.add(userBase.size());
         keeperTradeVolumes.add(keeper.getPercentTrading());
-        keeperPercentageHoldings.add((int) Math.round(keeper.getKeeperBskt()/vaultManagerOracle.getMintedBasket()));
+        keeperPercentageHoldings.add(keeper.getKeeperBskt());
         targetPrices.add(cpiOracle.getCpi()/10);
         cpis.add(cpiOracle.getCpi());
+
+        buyerNums.add(supplyDemand[0]);
+        buyerQuants.add(supplyDemand[1]);
+        sellerNums.add(supplyDemand[2]);
+        sellerQuants.add(supplyDemand[3]);
+        successfullSales.add(emergencyOracle.getSales());
 
         lockedXRP.add(vaultManagerOracle.getLockedXRP());
         lockedBTC.add(vaultManagerOracle.getLockedBTC());
@@ -367,7 +385,7 @@ public class Simulation {
         debtCeilingLTC.add(collateralOracles.get(4).getDebtCeiling());
         debtCeilingUSDT.add(collateralOracles.get(5).getDebtCeiling());
         totalDebtCeilings.add(collateralOracles.get(0).getDebtCeiling() + collateralOracles.get(1).getDebtCeiling() + collateralOracles.get(2).getDebtCeiling() +
-                                collateralOracles.get(3).getDebtCeiling() + collateralOracles.get(4).getDebtCeiling() + collateralOracles.get(5).getDebtCeiling());
+                              collateralOracles.get(3).getDebtCeiling() + collateralOracles.get(4).getDebtCeiling() + collateralOracles.get(5).getDebtCeiling());
 
         exchangeRateXRP.add(collateralOracles.get(0).getExchangeRate());
         exchangeRateBTC.add(collateralOracles.get(1).getExchangeRate());
@@ -396,8 +414,8 @@ public class Simulation {
 
     private static void generateFinalCSV(ArrayList<Double> basketMinted, ArrayList<Double> basketTokensMinted,
                                          ArrayList<Double> basketPrices, ArrayList<User> userBase, ArrayList<Integer> userPopulations,
-                                         ArrayList<Double> keeperTradeVolumes, ArrayList<Integer> keeperPercentageHoldings, ArrayList<Double> cpis,
-                                         ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings,
+                                         ArrayList<Double> keeperTradeVolumes, ArrayList<Double> keeperPercentageHoldings, ArrayList<Double> cpis,
+                                         ArrayList<Double> targetPrices, ArrayList<Double> totalDebtCeilings, ArrayList<Double> successfulSales,
                                          ArrayList<CollateralOracle> collateralOracles, ArrayList<Double> lockedXRP, ArrayList<Double> lockedBTC,
                                          ArrayList<Double> lockedETH, ArrayList<Double> lockedLINK, ArrayList<Double> lockedLTC, ArrayList<Double> lockedUSDT,
                                          ArrayList<Double> debtCeilingXRP, ArrayList<Double> debtCeilingBTC, ArrayList<Double> debtCeilingETH,
@@ -408,7 +426,8 @@ public class Simulation {
                                          ArrayList<Double> liquidationRatiosLINK, ArrayList<Double> liquidationRatiosLTC, ArrayList<Double> liquidationRatiosUSDT,
                                          ArrayList<Double> stabilityFeesXRP, ArrayList<Double> stabilityFeesBTC, ArrayList<Double> stabilityFeesETH,
                                          ArrayList<Double> stabilityFeesLINK, ArrayList<Double> stabilityFeesLTC, ArrayList<Double> stabilityFeesUSDT,
-                                         ArrayList<Double> bsrTrack, String[] args)
+                                         ArrayList<Double> bsrTrack, String[] args, double[] supplyDemand, ArrayList<Double> buyerNums,
+                                         ArrayList<Double> buyerQuants, ArrayList<Double> sellerNums, ArrayList<Double> sellerQuants)
     {
         try (PrintWriter writer = new PrintWriter(new File("/home/samir/Documents/Year4/Dissertation/BasketSimulation/Scripting/Simulation-Raw/"
                 + args[0] + "_" + args[1] + "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5]+ ".csv"))) {
@@ -423,6 +442,16 @@ public class Simulation {
             sb.append("BasketMinted");
             sb.append(',');
             sb.append("BasketTokensMinted");
+            sb.append(',');
+            sb.append("BuyerNums");
+            sb.append(',');
+            sb.append("BuyerQuants");
+            sb.append(',');
+            sb.append("SellerNums");
+            sb.append(',');
+            sb.append("SellerQuants");
+            sb.append(',');
+            sb.append("SuccessfulSaleCounts");
             sb.append(',');
             sb.append("DebtCeiling");
             sb.append(',');
@@ -495,16 +524,29 @@ public class Simulation {
             sb.append("KeeperTradePercentage");
             sb.append('\n');
 
+            int index = 0;
+
             for(int i = 0; i < basketMinted.size()-1; i++) {
+                if(index == 7) index = 0;
                 sb.append(cpis.get(i));
                 sb.append(',');
-                sb.append(basketPrices.get(i));
+                sb.append(basketPrices.get(i-index));
                 sb.append(',');
                 sb.append(targetPrices.get(i));
                 sb.append(',');
                 sb.append(basketMinted.get(i));
                 sb.append(',');
                 sb.append(basketTokensMinted.get(i));
+                sb.append(',');
+                sb.append(buyerNums.get(i));
+                sb.append(',');
+                sb.append(buyerQuants.get(i));
+                sb.append(',');
+                sb.append(sellerNums.get(i));
+                sb.append(',');
+                sb.append(sellerQuants.get(i));
+                sb.append(',');
+                sb.append(successfulSales.get(i));
                 sb.append(',');
                 sb.append(totalDebtCeilings.get(i));
                 sb.append(',');
@@ -558,9 +600,9 @@ public class Simulation {
                 sb.append(',');
                 sb.append(exchangeRateLTC.get(i));
                 sb.append(',');
-                sb.append(lockedUSDT.get(i));
+                sb.append(checks(lockedUSDT.get(i)));
                 sb.append(',');
-                sb.append(debtCeilingUSDT.get(i));
+                sb.append(checks(debtCeilingUSDT.get(i)));
                 sb.append(',');
                 sb.append(liquidationRatiosUSDT.get(i));
                 sb.append(',');
@@ -576,6 +618,7 @@ public class Simulation {
                 sb.append(',');
                 sb.append(keeperTradeVolumes.get(i));
                 sb.append('\n');
+                index++;
             }
 
             writer.write(sb.toString());

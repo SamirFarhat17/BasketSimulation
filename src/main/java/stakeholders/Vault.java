@@ -107,7 +107,6 @@ public class Vault {
         if(colatType.equals("LINK")) vaultManagerOracle.setLockedLINK(vaultManagerOracle.getLockedLINK() - colatAmount);
         if(colatType.equals("P-LTC")) vaultManagerOracle.setLockedLTC(vaultManagerOracle.getLockedLTC() - colatAmount);
         if(colatType.equals("USDT")) vaultManagerOracle.setLockedUSDT(vaultManagerOracle.getLockedUSDT() - colatAmount);
-
     }
 
 }

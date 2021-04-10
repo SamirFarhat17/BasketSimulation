@@ -68,4 +68,9 @@ public class DataExtraction {
         return sb.toString();
     }
 
+    public static double checks(double d) {
+        if (d < 0) return d *-1;
+        else return d;
+    }
+
 }

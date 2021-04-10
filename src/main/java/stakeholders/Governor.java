@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Governor {
 
@@ -46,8 +47,7 @@ public class Governor {
     }
 
     public static void changeBSR(double targetPrice, double basketPrice, BsrOracle bsrOracle) {
-        count++;
-        if (count == 30) {
+        if (count == 31) {
             count = 0;
             if(basketPrice > targetPrice) {
                 bsrOracle.setBsr(3.5 + Math.random() * (7 - 3.5));
@@ -57,6 +57,73 @@ public class Governor {
             }
         }
     }
+
+
+    public static void setParameters(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle, CollateralOracle linkOracle, CollateralOracle ltcOracle, CollateralOracle usdtOracle,
+                                     ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle,  Keeper keeper, double buys, double sales, double targetPrice) {
+        User.targeting = 0;
+
+        count++;
+
+        double currentLocked;
+        double currentRatio;
+
+        if(count == 31) {
+            for(CollateralOracle collateralOracle : collateralOracles) {
+                if(collateralOracle.getCollateralType().equals("A-XRP")) {
+                    currentLocked = vaultManagerOracle.getLockedXRP();
+                    currentRatio = xrpOracle.getLiquidationRatio()/xrpOracle.getStabilityFee();
+                    xrpOracle.setLiquidationRatio(125 + Math.random() * (150 - 125));
+                    xrpOracle.setStabilityFee(xrpOracle.getLiquidationRatio()/currentRatio);
+                    xrpOracle.setDebtCeiling(currentLocked * (1.4 + Math.random() * (1.8 - 1.4)));
+                    continue;
+                }
+
+                if(collateralOracle.getCollateralType().equals("W-BTC")) {
+                    currentLocked = vaultManagerOracle.getLockedBTC();
+                    currentRatio = btcOracle.getLiquidationRatio()/btcOracle.getStabilityFee();
+                    btcOracle.setLiquidationRatio(130 + Math.random() * (160 - 130));
+                    btcOracle.setStabilityFee(btcOracle.getLiquidationRatio()/currentRatio);
+                    btcOracle.setDebtCeiling(currentLocked * (1.8 + Math.random() * (2.4 - 1.8)));
+                    continue;
+                }
+
+                if (collateralOracle.getCollateralType().equals("ETH")) {
+                    currentLocked = vaultManagerOracle.getLockedETH();
+                    currentRatio = ethOracle.getLiquidationRatio()/ethOracle.getStabilityFee();
+                    ethOracle.setLiquidationRatio(105 + Math.random() * (125 - 105));
+                    ethOracle.setStabilityFee(ethOracle.getLiquidationRatio()/currentRatio);
+                    ethOracle.setDebtCeiling(currentLocked * (2 + Math.random() * (3.5 - 2)));
+                    continue;
+                }
+
+                if(collateralOracle.getCollateralType().equals("LINK")) {
+                    currentLocked = vaultManagerOracle.getLockedLINK();
+                    currentRatio = linkOracle.getLiquidationRatio()/linkOracle.getStabilityFee();
+                    linkOracle.setLiquidationRatio(110 + Math.random() * (135 - 110));
+                    linkOracle.setStabilityFee(linkOracle.getLiquidationRatio()/currentRatio);
+                    linkOracle.setDebtCeiling(currentLocked * (1.3 + Math.random() * (1.6 - 1.3)));
+                    continue;
+                }
+
+                if(collateralOracle.getCollateralType().equals("P-LTC")) {
+                    currentLocked = vaultManagerOracle.getLockedLTC();
+                    currentRatio = ltcOracle.getLiquidationRatio()/ltcOracle.getStabilityFee();
+                    ltcOracle.setLiquidationRatio(160 + Math.random() * (160 - 130));
+                    ltcOracle.setStabilityFee(ltcOracle.getLiquidationRatio()/currentRatio);
+                    ltcOracle.setDebtCeiling(currentLocked * (1.4 + Math.random() * (1.8 - 1.4)));
+                }
+
+                if(collateralOracle.getCollateralType().equals("USDT")) {
+                    currentLocked = vaultManagerOracle.getLockedUSDT();
+                    usdtOracle.setDebtCeiling(currentLocked * (1.4 + Math.random() * (1.8 - 1.4)));
+                }
+            }
+            keeper.setPercentTrading(45 + Math.random() * (85 - 45));
+            keeper.setKeeperBskt(9 + Math.random() * (16 - 9));
+        }
+    }
+
 
     public static void updateDebtCeilings(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,CollateralOracle linkOracle, CollateralOracle ltcOracle,
                                                   CollateralOracle usdtOracle, ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase) {
@@ -136,11 +203,38 @@ public class Governor {
     }
 
 
+    public static double[] supplyDemand(VaultManagerOracle vaultManagerOracle , Keeper keeper, CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle, double[] targeting,
+                                        CollateralOracle linkOracle, CollateralOracle ltcOracle, CollateralOracle usdtOracle, BsrOracle bsrOracle, double targetValue, double buySell) {
+        if(count == 28) {
+            int c = 0;
+            double averageColat = (xrpOracle.getStabilityFee() / xrpOracle.getLiquidationRatio() + btcOracle.getStabilityFee() / btcOracle.getLiquidationRatio() +
+                    ethOracle.getStabilityFee() / ethOracle.getLiquidationRatio() + linkOracle.getStabilityFee() / linkOracle.getLiquidationRatio() +
+                    ltcOracle.getStabilityFee() / ltcOracle.getLiquidationRatio() + usdtOracle.getStabilityFee() / usdtOracle.getLiquidationRatio()) / 6;
+            double vaultSystem = vaultManagerOracle.getMintedBasket() / (vaultManagerOracle.getLockedXRP() + vaultManagerOracle.getLockedBTC() + vaultManagerOracle.getLockedETH() +
+                    vaultManagerOracle.getLockedLINK() + vaultManagerOracle.getLockedLTC() + vaultManagerOracle.getLockedUSDT()) * buySell;
+
+
+            // System.out.println("Nums" + averageColat + " " + vaultSystem + " " + buySell + " " + keeper.getPercentTrading());
+            double curr = targetValue;
+            while(curr - (averageColat * 20 + vaultSystem + buySell + keeper.getPercentTrading() / 20) > 0) {
+                c++;
+                curr = curr - (averageColat * 20 + vaultSystem + buySell + keeper.getPercentTrading() / 20);
+            }
+            targeting[0] = (targetValue - curr)/2;
+            targeting[1] = curr - (averageColat * 20 + vaultSystem + buySell + keeper.getPercentTrading() / 20) * c + (targeting[0]*2);
+            System.out.println("Target: " + targetValue + " vs " + curr);
+            System.out.println("bsr: " + targeting[0] + "target theory: " + targeting[1]);
+        }
+
+        return targeting;
+    }
+
     public static void updateLiquidationRatios(CollateralOracle xrpOracle, CollateralOracle btcOracle, CollateralOracle ethOracle,CollateralOracle linkOracle, CollateralOracle ltcOracle,
                                            CollateralOracle usdtOracle, ArrayList<CollateralOracle> collateralOracles, VaultManagerOracle vaultManagerOracle, ArrayList<User> userBase) {
         double currentLocked;
         double currentCeiling;
-        if(count == 28) {
+        count++;
+        if(count == 31) {
             for(CollateralOracle collateralOracle : collateralOracles) {
                 if(collateralOracle.getCollateralType().equals("A-XRP")) {
                     currentLocked = vaultManagerOracle.getLockedXRP();
@@ -179,5 +273,6 @@ public class Governor {
             }
         }
     }
+
 
 }
