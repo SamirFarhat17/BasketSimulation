@@ -132,7 +132,7 @@ link_debt_ceiling = output_pandas['LINKDebtCeiling'].values
 ltc_debt_ceiling = output_pandas['LTCDebtCeiling'].values
 usdt_debt_ceiling = output_pandas['USDTDebtCeiling'].values
 
-graph_six(xrp_debt_ceiling/100, btc_debt_ceiling, eth_debt_ceiling, link_debt_ceiling, ltc_debt_ceiling/100, usdt_debt_ceiling,
+graph_six(xrp_debt_ceiling/100, btc_debt_ceiling/10, eth_debt_ceiling/10, link_debt_ceiling, ltc_debt_ceiling/100, usdt_debt_ceiling,
           x_axis, 'Debt_Ceilings', 'Days', 'GBP', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 xrp_exchange_rates = output_pandas['XRPExchangeRate'].values
@@ -175,7 +175,7 @@ locked_link = output_pandas['LockedLINK'].values
 locked_ltc = output_pandas['LockedLTC'].values
 locked_usdt = output_pandas['LockedUSDT'].values
 
-graph_six(locked_xrp/100, locked_btc, locked_eth, locked_link, locked_ltc/100, locked_usdt, x_axis, 'Collaterals_Locked_Vaults', 'Days', 'GBP', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
+graph_six(locked_xrp/100, locked_btc/10, locked_eth/10, locked_link, locked_ltc/100, locked_usdt, x_axis, 'Collaterals_Locked_Vaults', 'Days', 'GBP', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 bsr = output_pandas['BSR'].values
 
@@ -191,4 +191,4 @@ graph_two(buyer_quants, seller_quants, x_axis, 'Supply_Demand', 'Days', 'GBP', '
 
 successful_sales = output_pandas['SuccessfulSaleCounts']
 
-graph_two(successful_sales, user_size, x_axis, 'Sales_VS_Users', 'Days', 'Amount', 'Successfull Sales', 'Userbase Population Size')
+graph_two(successful_sales, user_size*100, x_axis, 'Sales_VS_Users', 'Days', 'Amount', 'Successfull Sales', 'Userbase Population Size')
