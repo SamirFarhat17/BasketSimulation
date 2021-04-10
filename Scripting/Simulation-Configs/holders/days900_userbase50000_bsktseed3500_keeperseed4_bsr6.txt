@@ -1,7 +1,0 @@
-"CPI":100
-"Days in Sim":900
-"User-base Size":50000
-"User Generation Seed":3500
-"Keeper generation Seed":4
-"Collateral Generation Seed":12500.0
-"BSR Generation Seed":6

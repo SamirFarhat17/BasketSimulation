@@ -120,7 +120,7 @@ basket_minted = output_pandas['BasketMinted'].values
 basket_tokens_minted = output_pandas['BasketTokensMinted'].values
 user_size = output_pandas['UserBaseSize'].values
 
-graph_two(user_size, basket_tokens_minted/100, x_axis, 'Userbase Size vs Tokens Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/100')
+graph_two(user_size, basket_tokens_minted/100, x_axis, 'Userbase_Size_vs_Tokens_Minted', 'Days', 'Amount(Tokens and Users)', 'Userbase Population Size', 'Basket Tokens Minted/100')
 
 graph_two(basket_minted, basket_tokens_minted, x_axis, 'Total_Basket_and_Basket_Tokens', 'Days', 'Quantity(Tokens and GBP)', 'Total Basket Value', 'Basket Tokens Minted',)
 
@@ -178,4 +178,17 @@ locked_usdt = output_pandas['LockedUSDT'].values
 graph_six(locked_xrp, locked_btc, locked_eth, locked_link, locked_ltc, locked_usdt, x_axis, 'Collaterals_Locked_Vaults', 'Days', 'GBP', 'A-XRP', 'W-BTC', 'ETH', 'LINK', 'P-LTC', 'USDT')
 
 bsr = output_pandas['BSR'].values
+
 graph_one(bsr, x_axis, 'BSR', 'Days', '%')
+
+buyer_num = output_pandas['BuyerNums'].values
+buyer_quants = output_pandas['BuyerQuants'].values
+seller_num = output_pandas['SellerNums'].values
+seller_quants = output_pandas['SellerQuants'].values
+
+graph_two(buyer_num, seller_num, x_axis, 'Sellers_Buyers', 'Days', 'Number of People', 'Buyers', 'Sellers')
+graph_two(buyer_quants, seller_quants, x_axis, 'Supply_Demand', 'Days', 'GBP', 'Buys', 'Sells')
+
+successful_sales = output_pandas['SuccessfulSaleCounts']
+
+graph_two(successful_sales, user_size, x_axis, 'Sales_VS_Users', 'Days', 'Amount', 'Successfull Sales', 'Userbase Population Size')
