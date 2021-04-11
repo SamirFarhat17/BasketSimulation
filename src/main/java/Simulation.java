@@ -252,7 +252,7 @@ public class Simulation {
         String previousDate = date;
         while(days > 0) {
             date = dates.get(1827-days);
-            System.out.println(date);
+            //System.out.println(date);
 
             supplyDemand = runSimDay(date, basketValue, previousDate, userSeed, collateralSeed, collateralOracles, supplyDemand, bsrOracle, bufferOracle, cpiOracle, emergencyOracle, xrpOracle,
                     btcOracle,  ethOracle,  linkOracle, ltcOracle, usdtOracle, vaultManagerOracle, keeper, userBase, buyers, sellers, totalDebtCeiling, writer);
