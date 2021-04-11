@@ -12,9 +12,9 @@ string7 = '"BSR Generation Seed":'
 
 dates = {"1827", "900"}
 
-user_base_size = {"500", "1000", "5000", "10000"}
+user_base_size = {"2000", "4000", "7500", "10000"}
 
-basket_holdings = {"500", "750", "1000"}
+basket_holdings = {"1800", "2750", "3500"}
 
 savings_rate = {"0", "3", "6", }
 
@@ -31,6 +31,6 @@ for date in dates:
                     outF.write(string3 + user + "\n")
                     outF.write(string4 + basket + "\n")
                     outF.write(string5 + holding + "\n")
-                    outF.write(string6 + str(int((int(user)/4))) + "\n")
+                    outF.write(string6 + str(int((int(user)/2))) + "\n")
                     outF.write(string7 + rate + "\n")
                     outF.close()

@@ -38,12 +38,6 @@ public class Simulation {
             System.exit(0);
         }
 
-        for(String arg : args) System.out.println(arg);
-
-        System.out.println("Gathering dates for sim...");
-        // Datasets
-        ArrayList<String> dates = DataExtraction.makeDates();
-
         // Initialise arguments
         double cpiValue = Double.parseDouble(args[0]);
         int days = Integer.parseInt(args[1]);
@@ -55,8 +49,20 @@ public class Simulation {
 
         double basketValue = cpiValue/10;
         double basketTargetValue = basketValue;
-        String date = dates.get(1827-days);
         double totalBasket = Governor.getInitialBasket();
+
+
+
+        System.out.println("days: " + days);
+        System.out.println("userbase: " + userBaseSize);
+        System.out.println("BSKT seed: " + userSeed);
+        System.out.println("Keeper seed: " + keeperSeed);
+        System.out.println("bsr: " + bsrSeed);
+
+        System.out.println("Gathering dates for sim...");
+        // Datasets
+        ArrayList<String> dates = DataExtraction.makeDates();
+        String date = dates.get(1827-days);
 
         System.out.println("Initializing basic oracles...");
         
